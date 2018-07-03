@@ -1,0 +1,15 @@
+﻿{
+  propertyEditors: [
+    {
+      alias: "TexteditorDataType",
+      name: "Text Editor",
+      isParameterEditor: true,
+      editor: {
+        view: "~/App_Plugins/MacroDataTypes/texteditor.html"
+      }
+    }
+  ],
+  javascript: [
+    "~/App_Plugins/MacroDataTypes/texteditor.controller.js"
+  ]
+}

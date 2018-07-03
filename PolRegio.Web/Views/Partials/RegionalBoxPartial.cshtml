@@ -1,0 +1,36 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Article.RegionalOfferBoxViewModel>
+
+@using (Ajax.BeginForm("RenderRegionalArticleListBoxes", "PolRegioArticle", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-boxes-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "checkIfShowLoadMoreButton();listHeightFix();filterAjaxForm();loaderHide();;selectStylish();footerSticky();"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.HiddenFor(q => q.DisplayCount)
+    <input type="hidden" id="allBoxesCount" value="@Model.AllNewsCount" />
+
+    <div class="hpm-list--top hpm-list--region row">
+        <div class="col col-sm-12">
+                <div class=" row ">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-sm-offset-4 vcenter reg-select">
+                    <span class="reg-select__label">@Umbraco.GetDictionaryValue("News.Placeholder.Region"):</span>
+                        @Html.DropDownListFor(q => q.SelectedRegionId, Model.RegionFilter.Select(a => new SelectListItem
+                   {
+                       Text = a.DisplayText,
+                       Value = a.Id.ToString()
+                   }), new { @class = "form-control js-submit js-stylish", data_live_search = "true" })
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <ul class="row hpm-js-boxes-container hpm-boxes-container hpm-list--ul">
+        @Html.Partial("Controls/ArticleBoxesList", Model.ArticleList)
+    </ul>
+}
+

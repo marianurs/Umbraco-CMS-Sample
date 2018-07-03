@@ -1,0 +1,54 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.BipPage.BIPPageViewModel>
+
+@using (Ajax.BeginForm("SearchBipItems", "PolRegioBIP", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-boxes-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "filterAjaxForm();loaderHide();"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    <div class="row">
+        <div class="col-xs-12">
+            <section class="hpm-bip__title hpm-bip__title--border">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img src="/images/svg/bip.svg">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>@Umbraco.GetDictionaryValue("BIP.Placeholder.Search")</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(q => q.SearchText, new { @class = "form-control ", id = "hpm-search--input" })
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn hpm-btn full-btn">@Umbraco.GetDictionaryValue("BIP.Button.Search") <i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </section>
+            <section class="hpm-bip__content">
+                @foreach (var item in Model.ItemList)
+                {
+                    <div class="hpm-bip__element">
+                        <div class="hpm-bip__element__title">
+                            <a href="@item.Url">@item.Title</a>
+                        </div>
+                        <div class="hpm-bip__element__content ">
+                            @item.Description
+                        </div>
+                        <div class="hpm-bip__element__date">
+                            @string.Format(" {0:dd.MM.yyyy}", item.CreateDate)
+                        </div>
+                    </div>
+                }
+            </section>
+        </div>
+    </div>
+}

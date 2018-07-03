@@ -1,0 +1,24 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Offers.OffersPageViewModel>
+
+<section class="hpm-section hpm-list hpm-offers hpm-offers-homepage">
+    <div class="container">
+
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Model.OffersPageName</h1>
+            </div>
+        </div>
+        <ul class="row hpm-boxes-container hpm-list--offers hpm-boxex-container--pao">
+
+            @foreach (var item in Model.OffersBox)
+            {
+                <li class="col-xs-6 col-md-3 js-list-item hpm-list--item  @item.pageCategory">
+                    <a class="hpm-list--content" href="@item.Link">
+                        <img src="/images/svg/ico_offer_@(item.pageCategory).svg" class="img-svg" alt="icon" />
+                        <span>@item.offersPageName</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</section>

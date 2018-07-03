@@ -1,0 +1,251 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Account.ProfileViewModel>
+    @using System.Linq
+    @using (Ajax.BeginForm("SubmitProfileForm", "PolRegioAccount", null, new AjaxOptions
+    {
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-bipform-container",
+    OnBegin = "loaderShow();triggereditbuttons();",
+    OnComplete = "filterAjaxForm();loaderHide();bipFormScroll(); triggereditbuttons();"
+    
+    }, new { id = "boxesForm" }))
+    {
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.AntiForgeryToken()
+    <div class="hpm-reg__form row">
+        <div class="col-xs-12">
+            <div class="bg-white">
+                @if (Model.Response != null && Model.Response.ShouldDisplayMessage)
+                {
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-@(Model.Response.IsError ? " warning":"success") alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <!-- @Html.Raw(Model.Response.Message) -->
+                            @Umbraco.GetDictionaryValue("Register.Placeholder.Success")
+                        </div>
+                    </div>
+                </div>
+                <script>
+                clearForm('@(Model.Response.IsError ? "False" : "True")', true);
+                </script>
+                }
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="hpm-reg__form__element col-sm-12 col-md-12">
+                                <div class="inputsorfields header">
+                                    <h1>@Model.UserName @Model.UserSurname<h1>
+                                    <h2>@Model.UserEmail</h2>
+                                </div>
+                                <div class="inputsorfields">
+                                    <!--  <h2>@Umbraco.GetDictionaryValue("Profile.Placeholder.Yourinfo") </h2> -->
+                                    <div class="hiddeninput">
+                                        <div class="hpm-reg__form__element ">
+                                            <h2>* @Umbraco.GetDictionaryValue("Register.Placeholder.Name")</h2>
+                                            @Html.TextBoxFor(q => q.UserName, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Name") })
+                                            @Html.ValidationMessageFor(q => q.UserName, Umbraco.GetDictionaryValue("Register.Placeholder.Name.Error"))
+                                        </div>
+                                        <div class="hpm-reg__form__element ">
+                                            <h2>* @Umbraco.GetDictionaryValue("Register.Placeholder.Surname")</h2>
+                                            @Html.TextBoxFor(q => q.UserSurname, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Surname") })
+                                            @Html.ValidationMessageFor(q => q.UserSurname, Umbraco.GetDictionaryValue("Register.Placeholder.Surname.Error"))
+                                        </div>
+                                    </div>
+                                    <!-- <div class="shownvalue row">
+                                        <div class="col-xs-6"> -->
+                                            <!-- <span class="minwidth"> @Umbraco.GetDictionaryValue("Register.Placeholder.Name") :</span> -->
+                                            <!-- <h1>@Model.UserName @Model.UserSurname<h1> -->
+                                            <!-- <br /> -->
+                                            <!-- <span class="minwidth">@Umbraco.GetDictionaryValue("Register.Placeholder.Surname") :</span>  -->
+                                            <!-- <h2>@Model.UserEmail</h2> -->
+                                            <!-- <br /> -->
+                                            <!-- <span class="minwidth">@Umbraco.GetDictionaryValue("Register.Placeholder.UserEmail") :</span> @Model.UserEmail -->
+                                        <!-- </div>
+                                        
+                                    </div> -->
+                                </div>
+                                <div class="inputsorfields">
+                                    
+                                    <div class="hiddeninput">
+                                        <h2>@Umbraco.GetDictionaryValue("Register.Placeholder.UserPhone")</h2>
+                                        <div class="hpm-reg__form__element ">
+                                            @Html.TextBoxFor(q => q.UserPhone, new { @class = "form-control ", @type="number", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.UserPhone") })
+                                        </div>
+                                    </div>
+                                    <div class="shownvalue row">
+                                        <div class="col-xs-12">
+                                            <h2>@Umbraco.GetDictionaryValue("Register.Placeholder.UserPhone"): @Model.UserPhone</h2>
+                                        </div>
+                                        <!-- <div class="col-xs-6">
+                                            <div class="editbutton">@Umbraco.GetDictionaryValue("Profile.Placeholder.EditButton")</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="inputsorfields">
+                                    
+                                    <div class="hiddeninput">
+                                        <h2>* @Umbraco.GetDictionaryValue("Register.Placeholder.Password")</h2>
+                                        <div class="hpm-reg__form__element ">
+                                            @Html.PasswordFor(q => q.UserPassword, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.PasswordShort") })
+                                            @Html.ValidationMessageFor(q => q.UserPassword, Umbraco.GetDictionaryValue("Register.Placeholder.Password.Error"))
+                                        </div>
+                                        <div class="hpm-reg__form__element ">
+                                            @Html.PasswordFor(q => q.UserConfirmPassword, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Confirmpassword") })
+                                            @Html.ValidationMessageFor(q => q.UserConfirmPassword, Umbraco.GetDictionaryValue("Register.Placeholder.Confirmpassword.Error"))
+                                        </div>
+                                    </div>
+                                    <div class="shownvalue row">
+                                        <div class="col-xs-12">
+                                            <h2>@Umbraco.GetDictionaryValue("Register.Placeholder.Password"): ***********</h2>
+                                        </div>
+                                        <!--  <div class="col-xs-6">
+                                            <div class="editbutton">@Umbraco.GetDictionaryValue("Profile.Placeholder.EditButton")</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="inputsorfields">
+                                    <h2>@Umbraco.GetDictionaryValue("Register.Placeholder.UserEmail")</h2>
+                                    
+                                    <div class=" row">
+                                        <div class="col-xs-6">
+                                            @Model.UserEmail
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="inputsorfields">
+                                    
+                                    <div class="hiddeninput">
+                                        <h2>@Umbraco.GetDictionaryValue("Register.Placeholder.Region")</h2>
+                                        <p class=" pull-left">@Umbraco.GetDictionaryValue("Register.Placeholder.Selectinfo")</p>
+                                        <div class="hpm-reg__form__element col-sm-12 col-md-12 list-group-sm">
+                                            @Html.ListBoxFor(q => q.SelectedRegions, Model.RegionSelectList, new { @class = "list-group" })
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.SelectedRegions, Umbraco.GetDictionaryValue("Register.PlaceHolder.Region.Error"))
+
+                                    </div>
+                                    <div class="shownvalue row">
+                                        <div class="col-xs-12">
+                                            <h2>@Umbraco.GetDictionaryValue("Register.Placeholder.Region"): @foreach(var region in Model.RegionSelectList.Where(x => Model.SelectedRegions.Contains(x.Value)).Select(x => x.Text))
+                                            {
+                                            <span>@region</span>
+                                            }</h2>
+                                            
+                                        </div>
+                                        <!--      <div class="col-xs-6 pull-right">
+                                            <div class="editbutton">@Umbraco.GetDictionaryValue("Profile.Placeholder.EditButton")</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="inputsorfields">
+                                    <div class=" row">
+                                        <div class="col-xs-6 col-md-3 shownvalue">
+                                            <div class="editbutton">@Umbraco.GetDictionaryValue("Profile.Placeholder.EditButton")</div>
+                                        </div>
+                                        <div class="col-xs-6 col-md-3 hiddeninput pull-right">
+                                            <div class="hpm-reg__form__element ">
+                                                <div class="hpm-reg__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                                                    <input type="submit" class="btn center-block hpm-list--loadmore  full-btn editform" value="@Umbraco.GetDictionaryValue("Profile.Placeholder.Button")" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 shownvalue">
+                                <div class="editbutton agreements">Wyrażone zgody</div>
+                            </div>
+                            <div class="inputsorfields agreements">
+                                <div class="hiddeninput ">
+                                    <div class="hpm-reg__form__element col-sm-12 col-md-12">
+                                        <h2>@Umbraco.GetDictionaryValue("Profile.Placeholder.Preferences")</h2>
+                                        
+                                        @for (var i = 0; i < Model.Agreements.Count; i++)
+                                        {
+                                        if (Model.Agreements[i].Preference)
+                                        {
+                                        var agreementText = Model.Agreements[i].Required
+                                        ? "* " + Model.Agreements[i].Text
+                                        : Model.Agreements[i].Text;
+                                        <div class="row">
+                                            <div class="hpm-reg__form__element__checkbox col-sm-12">
+                                                @Html.HiddenFor(x => x.Agreements[i].Id)
+                                                @Html.HiddenFor(x => x.Agreements[i].Text)
+                                                @Html.HiddenFor(x => x.Agreements[i].Required)
+                                                @Html.CheckBoxFor(x => x.Agreements[i].Value)
+                                                @Html.LabelFor(x => x.Agreements[i].Value, agreementText)
+                                                @Html.ValidationMessageFor(x => x.Agreements[i].Value)
+                                                <div class="check"></div>
+                                            </div>
+                                        </div>
+                                        }
+                                        }
+                                    </div>
+                                    <div class="hpm-reg__form__element col-sm-12 col-md-12">
+                                        <!-- <h2>@Umbraco.GetDictionaryValue("Profile.Placeholder.Info") </h2>-->
+                                        
+                                        
+                                        <div class="row">
+                                            <div class="hpm-reg__form__element__title col-sm-12">
+                                                <h3>@Umbraco.GetDictionaryValue("Profile.Placeholder.Info")</h3>
+                                            </div>
+                                        </div>
+                                        @for (var i = 0; i < Model.Agreements.Count; i++)
+                                        {
+                                        if (!Model.Agreements[i].Preference)
+                                        {
+                                        var agreementText = Model.Agreements[i].Required
+                                        ? "* " + Model.Agreements[i].Text
+                                        : Model.Agreements[i].Text;
+                                        <div class="row">
+                                            <div class="hpm-reg__form__element__checkbox col-sm-12">
+                                                @Html.HiddenFor(x => x.Agreements[i].Id)
+                                                @Html.HiddenFor(x => x.Agreements[i].Text)
+                                                @Html.HiddenFor(x => x.Agreements[i].Required)
+                                                @Html.CheckBoxFor(x => x.Agreements[i].Value,new { @readonly = "readonly "})
+                                                @Html.LabelFor(x => x.Agreements[i], agreementText)
+                                                @Html.ValidationMessageFor(x => x.Agreements[i].Value)
+                                                <div class="check"></div>
+                                            </div>
+                                        </div>
+                                        }
+                                        }
+                                        <div class="row">
+                                            <div class="hpm-reg__form__element__title col-sm-12">
+                                                <p>@Umbraco.GetDictionaryValue("Register.Placeholder.SharingInformation")</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6 col-md-3 pull-right">
+                                                <div class="hpm-reg__form__element ">
+                                                    <div class="hpm-reg__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                                                        <input type="submit" class="btn center-block hpm-list--loadmore  full-btn editform" value="@Umbraco.GetDictionaryValue("Profile.Placeholder.Button")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            <!-- Agreements section -->
+                            </div>
+                            <div class="inputsorfields">
+                                            <div class="col-xs-12 col-md-6 ">
+                                                <div class="removebutton" onclick="accountaction.show()">Usuń konto</div>
+                                            </div>
+                                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+<script type="text/javascript">
+    if (typeof $ !== 'undefined') {
+        $('.list-group').listgroup();
+    }
+</script>

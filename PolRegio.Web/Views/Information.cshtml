@@ -1,0 +1,29 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Information>
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-list hpm-news">
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Model.Content.InformationTitle</h1>
+            </div>
+        </div>
+        <div id="hpm-section-boxes-container">
+            @Html.Action("RenderNewsPage", "PolRegioNews")
+        </div>
+        <div class="row txtcenter hpm-js-load-more">
+            <div class="col-xs-12 col-md-2 col-md-offset-5">
+                <a href="javascript:void(0)" onclick="loadMoreNews()" class="hpm-list--loadmore">@Umbraco.GetDictionaryValue("LoadMore.Button.Text") <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section bottomScripts{
+    <script type="text/javascript">
+        checkIfShowLoadMoreButton();
+    </script>
+}

@@ -1,0 +1,39 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+Layout = "Layout.cshtml";
+}
+<section class="hpm-section hpm-reg" id="hpm-reg" data-redirect='@Umbraco.GetDictionaryValue("Login.Placeholder.Redirect")'>
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Umbraco.GetDictionaryValue("Thankyou.Placeholder.Title")</h1>
+            </div>
+        </div>
+        <div class="hpm-reg__container hpm-reg__login">
+            <div class="row">
+                <div class="col-xs-12">
+
+
+                    <section id="hpm-section-bipform-container" class="hpm-bip__content">
+                      <div id="hpm-section-thankyou" class="">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h1>@Umbraco.GetDictionaryValue("Thankyou.Placeholder.Title.Info")</h1>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="hpm-bip__form__element__btn  rowhpm-js-load-more">
+                                        <a href="/"><div type="submit" class="btn center-block hpm-list--loadmore  full-btn" >@Umbraco.GetDictionaryValue("Thankyou.Placeholder.Button")</div></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!--       </article>
+                 -->
+            </div>
+          
+        </div>
+
+      
+</section>

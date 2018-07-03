@@ -1,0 +1,15 @@
+﻿{
+  propertyEditors: [
+    {
+      alias: "BipEditorDataType",
+      name: "Bip Editor",
+      isParameterEditor: true,
+      editor: {
+        view: "~/App_Plugins/BipArticleEmptyEditor/BipEmptyEditor.html"
+      }
+    }
+  ],
+  javascript: [
+    "~/App_Plugins/BipArticleEmptyEditor/BipEmptyEditor.controller.js"
+  ]
+}

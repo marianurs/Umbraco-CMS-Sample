@@ -1,0 +1,105 @@
+﻿@inherits UmbracoViewPage<IEnumerable<PolRegio.Domain.Models.Components.Contact.RegionContactBox>>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="hpm-accordion">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model.Select((value, i) => new { i, value }))
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading_@item.i">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.i" aria-expanded="false" aria-controls="collapse_@item.i" class="collapsed">
+                                        <span>@(item.i + 1).</span><span>@item.value.Name</span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse_@item.i" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@item.i" aria-expanded="false">
+                                <div class="panel-body">
+                                    <div class="text-center">
+                                        @item.value.Description
+
+                                        @if (!string.IsNullOrEmpty(item.value.Phone) || !string.IsNullOrEmpty(item.value.Fax))
+                                        {
+                                            <p>
+                                                @Umbraco.GetDictionaryValue("Office.Placeholder.Phone"): @item.value.Phone
+                                                @if (!string.IsNullOrEmpty(item.value.Fax))
+                                                { <text>,@Umbraco.GetDictionaryValue("Office.Placeholder.Fax"): @item.value.Fax </text>}
+                                            </p>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.value.Email))
+                                        {
+                                            <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Email"): @item.value.Email</p>
+                                        }
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(item.value.ApplicationPersonPhone) || !string.IsNullOrEmpty(item.value.ApplicationPersonEmail))
+                                    {
+                                        <div class="text-center">
+                                            <p><b>@Umbraco.GetDictionaryValue("Office.Placeholder.ApplicationPerson")</b></p>
+                                            @if (!string.IsNullOrEmpty(item.value.ApplicationPersonPhone))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Phone"): @item.value.ApplicationPersonPhone</p>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.value.ApplicationPersonEmail))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Email"): @item.value.ApplicationPersonEmail</p>
+                                            }
+                                            @item.value.ApplicationPersonAdditionalInfo
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.value.ComplaintPhone) || !string.IsNullOrEmpty(item.value.ComplaintEmail))
+                                    {
+                                        <div class="text-center">
+                                            <p><b>@Umbraco.GetDictionaryValue("Office.Placeholder.Complaint")</b></p>
+                                            @if (!string.IsNullOrEmpty(item.value.ComplaintPhone))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Phone"): @item.value.ComplaintPhone</p>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.value.ComplaintEmail))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Email"): @item.value.ComplaintEmail</p>
+                                            }
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(item.value.GroupTripsPhone) || !string.IsNullOrEmpty(item.value.GroupTripsEmail))
+                                    {
+                                        <div class="text-center">
+                                            <p><b>@Umbraco.GetDictionaryValue("Office.Placeholder.GroupTrips")</b></p>
+                                            @if (!string.IsNullOrEmpty(item.value.GroupTripsPhone))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Phone"): @item.value.GroupTripsPhone</p>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.value.GroupTripsEmail))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Email"): @item.value.GroupTripsEmail</p>
+                                            }
+                                        </div>
+                                    }
+                                    <div class="text-center">
+                                        @item.value.TrafficInformationTitle
+                                        @item.value.TrafficInformationText
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(item.value.MediaContactPhone) || !string.IsNullOrEmpty(item.value.MediaContactEmail))
+                                    {
+                                        <div class="text-center">
+                                            <p><b>@Umbraco.GetDictionaryValue("Office.Placeholder.MediaContact")</b></p>
+                                            @if (!string.IsNullOrEmpty(item.value.MediaContactPhone))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Phone"): @item.value.MediaContactPhone</p>
+                                            }
+                                            @if (!string.IsNullOrEmpty(item.value.MediaContactEmail))
+                                            {
+                                                <p>@Umbraco.GetDictionaryValue("Office.Placeholder.Email"): @item.value.MediaContactEmail</p>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

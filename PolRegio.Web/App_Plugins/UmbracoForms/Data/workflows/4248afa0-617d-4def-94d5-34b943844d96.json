@@ -1,0 +1,16 @@
+{
+  "id": "4248afa0-617d-4def-94d5-34b943844d96",
+  "name": "Send email to admin@hypermedia.pl",
+  "form": "587234e6-4cba-47e9-9a53-4bf8ad48c402",
+  "active": true,
+  "workflowTypeId": "e96badd7-05be-4978-b8d9-b3d733de70a5",
+  "executesOn": "Submitted",
+  "settings": {
+    "Email": "admin@hypermedia.pl",
+    "SenderEmail": "",
+    "Subject": "The Form '{form_name}' was submitted",
+    "Message": "The Form '{form_name} was submitted, this is the list of values it contained. You can turn this email off under workflows in Umbraco Forms.",
+    "Attachment": ""
+  },
+  "sortOrder": 1
+}

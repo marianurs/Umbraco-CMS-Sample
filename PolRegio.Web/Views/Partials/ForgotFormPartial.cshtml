@@ -1,0 +1,56 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Account.ForgotPassFormViewModel>
+
+@using (Ajax.BeginForm("SubmitForgotPassForm", "PolRegioAccount", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-bipform-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "loaderHide();",
+    OnSuccess = "registerfinished(data, status, xhr)"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.AntiForgeryToken()
+    <div class="hpm-reg__form row">
+        <div class="col-xs-12">
+            <div class="bg-white">
+                @if (Model.Response != null && Model.Response.IsError)
+                {
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                @Html.Raw(Model.Response.Message)
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        clearForm('@(Model.Response.IsError ? "False" : "True")', true);
+                    </script>
+                }
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <p>@Umbraco.GetDictionaryValue("Forgot.Placeholder.Info")</p>
+                            </div>
+                            <div class="hpm-reg__form__element col-sm-12 col-md-8">
+                                <h2> @Umbraco.GetDictionaryValue("Forgot.Placeholder.Email")</h2>
+                                @Html.TextBoxFor(q => q.Email, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Forgot.Placeholder.Email") })
+                                @Html.ValidationMessageFor(q => q.Email, Umbraco.GetDictionaryValue("Forgot.Placeholder.Email.Error"))
+                            </div>
+                            <div class="hpm-reg__form__element col-sm-12 col-md-4">
+                                <h2> &nbsp;</h2>
+                                <div class="hpm-reg__form__element__btn  rowhpm-js-load-more hpm-list--loadmore ">
+                                    <input type="submit" class="btn center-block hpm-list--loadmore  full-btn" value="@Umbraco.GetDictionaryValue("Forgot.Placeholder.Button.Submit")" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

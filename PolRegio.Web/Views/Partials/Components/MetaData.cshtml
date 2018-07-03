@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using PolRegio.Helpers.Enums
+<title>@Umbraco.Field("pageTitle")</title>
+@if (!string.IsNullOrEmpty(Umbraco.Field("metaDescription").ToString()))
+{
+    <meta name="description" content="@Umbraco.Field("metaDescription")">
+}
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="@Umbraco.TypedContent(UmbracoContext.Current.PageId).Url.Replace("http://", "https://")" />
+@if (!string.IsNullOrEmpty(Umbraco.Field("ogTitle").ToString()))
+{
+    <meta name="og:title" content="@Umbraco.Field("ogTitle")">
+}
+
+@if (!string.IsNullOrEmpty(Umbraco.Field("ogDescription").ToString()))
+{
+    <meta name="og:description" content="@Umbraco.Field("ogDescription")">
+}
+
+@if (!string.IsNullOrEmpty(Umbraco.Field("ogImage").ToString()))
+{
+    <meta name="og:image" content="//@UmbracoContext.Current.HttpContext.Request.Url.Host@Umbraco.Media(Umbraco.Field("ogImage").ToString()).Url">
+}

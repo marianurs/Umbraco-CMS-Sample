@@ -1,0 +1,128 @@
+﻿@using PolRegio.Helpers.Extensions
+@inherits UmbracoViewPage<PolRegio.Domain.Models.View.DisabilitiesSupport.DisabilitiesSupportViewModel>
+<section class="hpm-single-article">
+    <div class="container">
+        <div class="row">
+            <article>
+                <div class="col-xs-12">
+                    <section class="hpm-single-article-title">
+                        <h1>
+
+                            <span>@Model.ArticleContent.ArticleTitle</span>
+                            <!-- <span>&nbsp;-&nbsp;</span> -->
+                        </h1>
+                       
+                            <p class="hpm-single-article-date">@Model.ArticleContent.CreateDate.ToString("dd.MM.yyyy")</p>
+                       
+                    </section><!-- //end Art. Title -->
+                    @if (Model.CarouselImages != null && Model.CarouselImages.Count() > 0)
+                    {
+                        <section class="hpm-single-article-slider hpm-single-article-slider-js">
+                            <ul class="bxslider">
+                                @foreach (var item in Model.CarouselImages)
+                                {
+                                    <li>
+                                        <img src="@Umbraco.TypedMedia(item.ArticleCarouselImage).Url?width=963px&height=442px&mode=crop" alt="@item.ArticleCarouselName">
+                                        <div class="hpm-list--hr"></div>
+                                        <div class="hpm-slide-info">
+                                            <p class="hpm-slide-title">@item.ArticleCarouselName</p>
+                                            <p class="hpm-slide-description">@item.ArticleCarouselDesc</p>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </section><!-- //end Slider -->
+                    }
+
+                    <section class="hpm-single-article-content">
+                        @Model.ArticleContent.ArticleText
+
+                        @if (Model.ArticleContent.SocialShare)
+                        {
+                            <div class="hpm-social-share-buttons text-center">
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-3">
+                                        <a target="_blank" href="@string.Format("https://www.facebook.com/sharer/sharer.php?u={0}", UmbracoContext.Current.HttpContext.Request.Url)" class="btn hpm-btn-fb btn-icon-before"><div><i class="fa fa-facebook-official"></i><span>@Umbraco.GetDictionaryValue("Article.Placeholders.ShareFacebook")</span></div></a>
+                                    </div>
+                                    <div class="col-xs-6 col-md-3">
+                                        <a target="_blank" href="@string.Format("https://twitter.com/intent/tweet?text={0}&url={1}", Model.ArticleContent.ArticleTitle, UmbracoContext.Current.HttpContext.Request.Url)" class="btn hpm-btn-twitter btn-icon-before"><div><i class="fa fa-twitter"></i><span>@Umbraco.GetDictionaryValue("Article.Placeholders.ShareTwitter")</span></div></a>
+                                    </div>
+                                    <div class="col-md-offset-6"></div>
+                                </div>
+                            </div>
+                        }
+
+                    </section>
+
+                </div>
+            </article>
+            @if (Model.DownloadDocuments != null && Model.DownloadDocuments.Count() > 0)
+            {
+                <section class="hpm-single-article-download-file">
+                    <div>@Umbraco.GetDictionaryValue("Section.Article.Download")</div>
+                    @foreach (var item in Model.DownloadDocuments)
+                    {
+                        <div class="hpm-single-article-download-file-singleel">
+                            <div class="hpm-single-article-download-file-info">
+                                <a href="@Umbraco.TypedMedia(@item.DocumentUrl).Url" target="_blank" title="@item.DocumentName" class="hpm-single-article-download-file-title">@item.DocumentName</a>
+                                <p class="hpm-single-article-download-file-createdate">@(Umbraco.GetDictionaryValue("Article.Placeholders.AddDate") + String.Format(" {0:dd.MM.yyyy}", item.DocumentDate))</p>
+                            </div>
+                            <a href="@Umbraco.TypedMedia(@item.DocumentUrl).Url" download="@item.DocumentName.ToSafeFilenameString(allowDot:false)" title="Pobierz plik"><img src="/images/articles/global/icon-download.png" alt="Ikonka i dla artykułów informacyjnych" /></a>
+                        </div>
+                    }
+
+                </section><!-- //end Art. Download section -->
+            }
+            @*@if (Model.ArticleContent.SeeAllArticles)
+            {
+                <a class="hpm-button-view-all center-block text-center" href="@Model.pa.ParentUrl" title="Wybierz Enter, żeby zobaczyć wszystkie artykuły">@Umbraco.GetDictionaryValue("Article.Link.SeeAllArticles")&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            }*@
+        </div><!-- //end .row -->
+    </div><!-- //end .container -->
+</section>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="hpm-accordion">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @if (Model.AccordionItems != null && Model.AccordionItems.Count() > 0)
+                {
+                    foreach (var item in Model.AccordionItems.Select((value, i) => new { i, value }))
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading_@item.i">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.i" aria-expanded="false" aria-controls="collapse_@item.i" class="collapsed">
+                                        <span>@(item.i + 1).</span><span>@item.value.Title</span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse_@item.i" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@item.i" aria-expanded="false">
+                                <div class="panel-body">
+                                    @item.value.Description
+
+                                    @if (item.value.DownloadDocuments != null && item.value.DownloadDocuments.Count() > 0)
+                                    {
+                                        <section class="hpm-single-article-download-file">
+                                            <div class="no-padding">@Umbraco.GetDictionaryValue("Section.Accordion.Download")</div>
+                                            @foreach (var document in item.value.DownloadDocuments)
+                                            {
+                                                <div class="hpm-single-article-download-file-singleel no-margin">
+                                                    <div class="hpm-single-article-download-file-info">
+                                                        <a href="@Umbraco.TypedMedia(document.DocumentUrl).Url" target="_blank" title="@document.DocumentName" class="hpm-single-article-download-file-title">@document.DocumentName</a>
+                                                        <p class="hpm-single-article-download-file-createdate">@(Umbraco.GetDictionaryValue("Advertising.Placeholder.AddDate") + string.Format(" {0:dd.MM.yyyy}", document.DocumentDate))</p>
+                                                    </div>
+                                                    <a href="@Umbraco.TypedMedia(document.DocumentUrl).Url" download="@document.DocumentName.ToSafeFilenameString(allowDot:false)" title="Pobierz plik"><img src="/images/articles/global/icon-download.png" alt="Ikonka i dla artykułów informacyjnych" /></a>
+                                                </div>
+                                            }
+                                        </section>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div><!-- //end .hpm-accordion -->
+    </div><!-- //end .col -->
+</div>
+

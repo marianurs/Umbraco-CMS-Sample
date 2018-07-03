@@ -1,0 +1,8 @@
+﻿{
+  javascript: [
+    "~/App_Plugins/AdditionalSettings/backoffice/regiondbtree/edit.controller.js",
+    "~/App_Plugins/AdditionalSettings/backoffice/articletypedbtree/edit.controller.js",
+    "~/App_Plugins/AdditionalSettings/backoffice/administrativedbtree/edit.controller.js",
+    "~/App_Plugins/AdditionalSettings/additionalsettings.resource.js"
+  ]
+}

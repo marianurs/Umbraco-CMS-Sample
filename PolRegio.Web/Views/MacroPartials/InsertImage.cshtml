@@ -1,0 +1,39 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+@{  var mediaIds = (!String.IsNullOrEmpty(Model.MacroParameters["imageMacro"].ToString())) ? Model.MacroParameters["imageMacro"] : null;
+    var TitleId = Model.MacroParameters["titleMacro"];
+    var DescId = Model.MacroParameters["descriptionMacro"];
+    var UrlMacro = Model.MacroParameters["urlMacro"];
+    var UrlText = Model.MacroParameters["urlTextMarco"];
+    var openNewWindow = Model.MacroParameters["openNewWindow"];
+ }
+@if (mediaIds != null)
+{
+
+    var image = Umbraco.Media(mediaIds);
+    <div class="component-inside-article row">
+        <div class="col-md-4">
+        @if (!String.IsNullOrEmpty(UrlMacro.ToString()))
+        {
+            <a href="@UrlMacro" @(openNewWindow.ToString() == "1" ? "target=_blank" : "")>@Render(image)</a>
+        }
+        else
+        {
+            @Render(image)
+        }
+        </div>
+        <div class="col-md-8">
+            <h3>@TitleId</h3>
+            <p>@Html.Raw(DescId)</p>
+            @if(!String.IsNullOrEmpty(UrlMacro.ToString()))
+            {
+                <a href="@UrlMacro" @(openNewWindow.ToString() == "1" ? "target=_blank" : "")>@UrlText</a>
+            }
+        </div>
+     </div>
+}
+
+@helper Render(dynamic item)
+   {
+            <img src="@item.umbracoFile.src?width=210&height=160" alt="Ikonka przedstawiająca rower" width="210" height="160" />
+   }

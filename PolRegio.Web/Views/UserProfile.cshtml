@@ -1,0 +1,37 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-reg">
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Umbraco.GetDictionaryValue("Profile.Placeholder.Header")</h1>
+            </div>
+        </div>
+        <div class="hpm-reg__container ">
+            <div class="row">
+
+                <div class="col-xs-12">
+
+                    <div>
+                    <section id="hpm-section-bipform-container" class="hpm-reg__content">
+                        @Html.Action("RenderProfilePage", "PolRegioAccount")
+
+                        
+                    </section>
+                    <div class="overlay">
+                        <h1> @Umbraco.GetDictionaryValue("Profile.Placeholder.RemoveAccount")</h1>
+                        <div class="half"><div class="editbutton hpm-list--more" onclick="accountaction.hide()">@Umbraco.GetDictionaryValue("Profile.Placeholder.RemoveNo")</div></div>
+                        <div class="half">
+                        <div class="editbutton right" onclick="accountaction.execute()">@Umbraco.GetDictionaryValue("Profile.Placeholder.RemoveYes")</div>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>

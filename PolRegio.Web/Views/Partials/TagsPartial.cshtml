@@ -1,0 +1,32 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Tags.TagsViewModel>
+
+<section class="hpm-section hpm-bip">
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Model.TagText</h1>
+            </div>
+        </div>
+        <div class="hpm-bip__container">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <section class="hpm-bip__content">
+                        @foreach (var item in Model.NewsBoxesList)
+                        {
+                            <div class="hpm-bip__element">
+                                <div class="hpm-bip__element__title">
+                                    <a href="@item.TagUrl" target="_blank">@item.TagName</a>
+                                </div>
+                                <div class="hpm-bip__element__content ">
+                                    @Html.Raw(item.Tagdesc)
+                                </div>
+
+                            </div>
+                        }
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

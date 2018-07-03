@@ -1,0 +1,187 @@
+﻿@using System.Text.RegularExpressions
+@using PolRegio.Web.Helpers
+@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Layout.HeaderViewModel>
+    @if (Model.CookieInformation != null && Model.CookieInformation.EnableCookies)
+    {
+    <div class="hpm-popup-bg hpm-js-alertcont-cookies"></div>
+    <div class="hpm-alert-cookies hpm-js-alert-cookies text-center alert alert-warning fade in" role="alert" style="display: none; z-index:90000; border-radius:0;position:fixed;bottom:-1px; width:100%;left:0;margin-bottom:0;">
+        <div class="container">
+            <div>
+                @Model.CookieInformation.Text
+                <div>
+                    <button type="button" class="btn btn-primary hpm-popup-button center-block" data-dismiss="alert">@Umbraco.GetDictionaryValue("CookiesLinks.AcceptButton.Text")</button>
+                    <a href="@Umbraco.GetDictionaryValue("CookiesLinks.Politics.Url")" title="Aktywny link do: Polityka Prywatności.">@Umbraco.GetDictionaryValue("CookiesLinks.Politics.Text")</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    
+    @if (Model.Overlay != null)
+    {
+    <section class="hpm-list hpm-offers hpm-overlay closeall">
+        <div class="inner">
+            <div class="container">
+                <a href="" class="closeover">Zamknij x</a>
+                <a class="img" href="@Model.Overlay.ButtonUrl" @{if (Model.Overlay.ButtonIsNewTab)
+                    {<text>target="_blank"</text>}}>
+                    <picture>
+                        <source media="(min-width: 760px)"
+                        srcset="@MediaUrlHelper.GetMediaUrl(Model.Overlay.DesktopImageUrl) 760w,
+                        @MediaUrlHelper.GetMediaUrl(Model.Overlay.MobileImageUrl) 760w" sizes="100vw"/>
+                        <img src="@MediaUrlHelper.GetMediaUrl(Model.Overlay.MobileImageUrl)" alt="@Model.Overlay.ImageAlt"/>
+                    </picture>
+                </a>
+            </div>
+        </div>
+    </section>
+    }
+    <div class="top-bar">
+        <div class="hpm-accessibility-bar hpm-js-accessibility-bar darkgray-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 visible-md visible-lg">
+                        <p class="hpm-top--plaintext">@Umbraco.GetDictionaryValue("Layout.Placeholder.Language"):</p>
+                        @foreach (var lang in Model.Languages)
+                        {
+                        <a href="@lang.Url" title="" class="hpm-top--language @(lang.IsActive ? "actual-lang":"")"><img class="hpm-top--flag" src="@string.Format("/images/flags/{0}.svg#svgView(preserveAspectRatio(none))",lang.LanguageCode)" alt=""></a>
+                        }
+                    </div>
+                    <div class="col-sm-12 col-md-4 hpm-accessibility--info">
+                        <p class="hpm-top--plaintext">
+							@Umbraco.GetDictionaryValue("Layout.Placeholder.Helpline"): <b>@Model.HelplineNumber</b><br />
+							<span>@Umbraco.GetDictionaryValue("Layout.Placeholder.HelplinePrice")</span>
+						</p>
+                        <!-- Button trigger modal -->
+                        @*<button class="hpm-top--button hpm-top--button-big" data-toggle="modal" data-target="#myModal" title="Jesli otwierasz stronę na urządzeniu nie moblinym: wybierz enter, żeby rozwinąć informacje o koszcie połączenia, a następnie esc żeby zamknąć"><i class="fa fa-info-circle"></i></button>*@
+                        <!-- Modal -->
+                        @*<div class="modal hpm-helpline-modal js-hpm-helpline-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">X</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a class="close hpm-btn-close-modal-desktop" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                                        <h2 class="hpm-helpline-title">@Umbraco.GetDictionaryValue("Layout.Placeholder.Helpline")</h2>
+                                        @Model.HelplineTooltip
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="tel:@Regex.Replace(Model.HelplineNumber,"([^0-9])","")" title="Wybierz ENTER, żeby wykonać połączenie z infolinią" class="btn btn-primary hpm-popup-button center-block">@Umbraco.GetDictionaryValue("Layout.Placeholder.Call")</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                    <div class="col-md-2 visible-md visible-lg text-right">
+                        <button class="hpm-top--button js-font--up">A<sup>+</sup></button>
+                        <button class="hpm-top--button js-font--down">A<sup>-</sup></button>
+                        <button class="hpm-top--button js-font--contrast"><i class="fa fa-adjust"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="navigation">
+            <nav class="navbar navbar-default hpm-navbar">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header navbar-header--main">
+                        <button type="button" title="Wybierz enter, żeby rozwinać menu mobilne" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="visible-xs visible-sm">Menu</span>
+                        <!-- <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> -->
+                        </button>
+                        <div>
+                            <a class="navbar-brand" href="@Model.HomePageUrl" title="Link do strony głównej">
+                                <div>
+                                    <img src="/images/svg/polregio_logo.svg" alt="Logotyp POLREGIO" class="logo-horizontal" />
+                                    <img src="/images/svg/polregio_logo_triangle.svg" alt="Logotyp POLREGIO w na tle białego trójkata widoczny przed rozwinięciem menu, chowające się przy przewijaniu strony" class="logo-triangle" />
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-left">
+                            @foreach (var menuItem in Model.MenuItems)
+                            {
+                            <li class="dropdown">
+                                @if (menuItem.Url.HasUrl)
+                                {
+                                <a href="@menuItem.Url.Url" class="hpm-js-erase-cookie dropdown-toggle" title="Aktywny element: link do strony Wyszukaj połączeni Dla podróżnych. Wybierz enter, żeby rozwinąć." role="button" data-cookie="@(!string.IsNullOrEmpty(menuItem.Url.DataCookie) ? menuItem.Url.DataCookie : "")">@menuItem.Url.Text</a>
+                                }
+                                else
+                                {
+                                <a href="javascript:void(0)" class="hpm-js-erase-cookie dropdown-toggle" title="Aktywny element: link do strony Wyszukaj połączeni Dla podróżnych. Wybierz enter, żeby rozwinąć." data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" data-cookie="@(!string.IsNullOrEmpty(menuItem.Url.DataCookie) ? menuItem.Url.DataCookie : "")">@menuItem.Url.Text</a>
+                                }
+                                @if (menuItem.HasChildren)
+                                {
+                                <ul class="dropdown-menu hpm-js-subnav-list @(menuItem.SubMenuItems.Any(q=>q.HasChildren) ? "subnav-list" : "")">
+                                    @foreach (var subMenuItem in menuItem.SubMenuItems)
+                                    {
+                                    <li>
+                                        @if (subMenuItem.HasChildren)
+                                        {
+                                        <div title="Kategoria linków: Gdzie kupić bilet?">@subMenuItem.Url.Text</div>
+                                        foreach (var lastLevelMenu in subMenuItem.SubMenuItems)
+                                        {
+                                        <a href="@(lastLevelMenu.Url.HasUrl ? lastLevelMenu.Url.Url : "javascript:void(0)")" @(lastLevelMenu.Url.OpenInNewWindow == false ? "" : "target=_blank") title="Aktywny element: link do strony Internet" data-cookie="@(!string.IsNullOrEmpty(lastLevelMenu.Url.DataCookie) ? lastLevelMenu.Url.DataCookie : "")" class="hpm-js-erase-cookie">@lastLevelMenu.Url.Text <span class="arrow-link"></span></a>
+                                        }
+                                        }
+                                        else
+                                        {
+                                        if (subMenuItem.Url.HasUrl)
+                                        {
+                                        <a href="@subMenuItem.Url.Url" title="Aktywny element: link do strony Wyszukaj połączenie" data-cookie="@(!string.IsNullOrEmpty(subMenuItem.Url.DataCookie) ? subMenuItem.Url.DataCookie : "")" class="hpm-js-erase-cookie">@subMenuItem.Url.Text <span class="arrow-link"></span></a>
+                                        }
+                                        else
+                                        {
+                                        <div title="Kategoria linków: Gdzie kupić bilet?">@subMenuItem.Url.Text</div>
+                                        }
+                                        }
+                                    </li>
+                                    }
+                                </ul>
+                                }
+                            </li>
+                            }
+                            @if (Model.Languages != null)
+                            {
+                            <li class="dropdown visible-xs">
+                                <a href="#" title="Zmień język. Wybierz enter, żeby rozwinąć." class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Umbraco.GetDictionaryValue("Layout.Placeholder.ChangeLanguage") <span class="lang">(@Model.Languages.Where(q => q.IsActive).Select(q => q.LanguageCode.ToUpper()).FirstOrDefault())</span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var language in Model.Languages)
+                                    {
+                                    <li><a href="@language.Url" title="Wybierając element możesz zmienić język strony na Polski">@language.Text <span class="arrow-link"></span></a></li>
+                                    }
+                                </ul>
+                            </li>
+                            }
+                            <li class="visible-xs no-dropdown wcag-change-contrast hpm-js-wcag-change-contrast js-font--contrast" title="Wybierz enter, żeby zmienić kontrast strony"><span>Wersja o zwiększonym kontraście</span><i class="fa fa-adjust" aria-hidden="true"></i></li>
+                        </ul>
+                        </div><!-- /.navbar-collapse -->
+                        
+                        </div><!-- /.container-fluid -->
+                    </nav>
+                    
+                </div>
+            </div>
+            @if (Model.Alert != null)
+            {
+            <div id="topalert">
+                <div class="container">
+                    <div class="inner">
+                        <div class="h1container">
+                            <marquee behavior="scroll" direction="left"
+                            onmouseover="this.stop();"
+                            onmouseout="this.start();" height="32px" >
+                            <h1>@Model.Alert.Title</h1>
+                            </marquee>
+                            
+                        </div>
+                        <a class="button" href="@Model.Alert.ButtonUrl" @{if (Model.Alert.IsButtonNewTab){<text>target="_blank"</text>}}>@Model.Alert.ButtonTitle<span> > </span></a> <a class="closealert" href=""> Zamknij X</a>
+                    </div>
+                </div>
+            </div>
+            }

@@ -1,0 +1,8 @@
+﻿@inherits UmbracoViewPage<IEnumerable<PolRegio.Domain.Models.Components.Home.OfferBoxModel>>
+
+@foreach (var article in Model)
+{
+    <li class="col-sm-6 col-md-3 js-list-item">
+        @Html.Partial("Components/ArticleBox", article)
+    </li>
+}

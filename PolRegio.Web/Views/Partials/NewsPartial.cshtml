@@ -1,0 +1,72 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.News.NewsPageViewModel>
+
+@using (Ajax.BeginForm("RenderArticleBoxes", "PolRegioNews", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-boxes-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "checkIfShowLoadMoreButton();listHeightFix();filterAjaxForm();getSvg();loaderHide();selectStylish();footerSticky();"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.HiddenFor(q => q.DisplayCount)
+    <input type="hidden" id="allBoxesCount" value="@Model.AllNewsCount" />
+
+    <div class="hpm-list--top row">
+        <div class="col col-xs-12">
+            <div class="bg-white">
+                <div class="hpm-list--filters hpm-list--info row ">
+                    <div class="col-xs-12 col-sm-1 col-md-1 col-lg-offset-1 col-md-offset-1  vcenter">
+                        <h3>@Umbraco.GetDictionaryValue("News.Placeholder.Region"):</h3>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 vcenter">
+                        @Html.DropDownListFor(q => q.SelectedRegionId, Model.RegionFilter.Select(a => new SelectListItem
+                       {
+                           Text = a.DisplayText,
+                           Value = a.Id.ToString()
+                       }), new { @class = "form-control js-submit js-stylish", data_live_search = "true" })
+                    </div>
+                    <div class="col-xs-12 col-sm-1 col-md-1 vcenter">
+                        <h3>@Umbraco.GetDictionaryValue("News.Placeholder.Filter"):</h3>
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3 vcenter js-checkboxes-filter">
+
+                        @foreach (var item in Model.NewsTypeFilter.Select((value, i) => new { i, value }))
+                        {
+                            @Html.CheckBoxFor(q => Model.NewsTypeFilter[item.i].IsChecked, new { @class = "js-submit col-xs-4" })
+                            //@Html.LabelFor(q => Model.NewsTypeFilter[item.i].IsChecked, item.value.DisplayText)
+                            <label for="NewsTypeFilter_@(item.i)__IsChecked">
+                                <span>@item.value.DisplayText</span>
+                                <img src="/images/svg/ico_news_@(item.value.Id).svg" class="img-svg" alt="icon" />
+                                
+                            </label>
+                                @Html.HiddenFor(q => Model.NewsTypeFilter[item.i].Id)
+                                @Html.HiddenFor(x => Model.NewsTypeFilter[item.i].DisplayText)
+                        }
+                    </div>
+                </div>
+
+                @if (Model.RegionContact != null)
+                {
+                    <div class="hpm-list--contact row">
+                        <div class="col col-sm-12 col-md-10 col-md-offset-2">
+                            <h3>@Umbraco.GetDictionaryValue("News.Placeholder.Contact"): @Model.RegionContact.Name</h3>
+                        </div>
+                        <div class="col col-sm-6 col-md-4 col-md-offset-2">
+                            @Html.Raw(Model.RegionContact.TrafficInformationTitle)
+                        </div>
+                        <div class="col col-sm-6 col-md-4">
+                            @Model.RegionContact.TrafficInformationText
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <ul class="row hpm-js-boxes-container hpm-boxes-container hpm-list--ul">
+        @Html.Partial("Controls/NewsBoxesList", Model.NewsBoxesList)
+    </ul>
+}

@@ -1,0 +1,32 @@
+﻿@using PolRegio.Web.Helpers
+@inherits UmbracoViewPage<PolRegio.Domain.Models.Components.Home.OfferBoxModel>
+
+<div class="hpm-list--item">
+    <a href="@Model.BoxUrl">
+        @if (!string.IsNullOrEmpty(Model.ListImage))
+        {
+            <img src="@MediaUrlHelper.GetMediaUrl(Model.ListImage, 660, 460)"
+                 srcset="@MediaUrlHelper.GetMediaUrl(Model.ListImage, 750, 523) 750w, 
+                         @MediaUrlHelper.GetMediaUrl(Model.ListImage, 540, 377) 540w,
+                         @MediaUrlHelper.GetMediaUrl(Model.ListImage, 340, 236) 340w,
+                         @MediaUrlHelper.GetMediaUrl(Model.ListImage, 240, 167) 240w"
+                sizes="33.3vw" class="hpm-list--img" alt="@Model.ListArticleTitle"/>
+        }
+        else
+        {
+            <img src="/images/demo.png" class="hpm-list--img" alt="@Model.ListArticleTitle"/>
+        }
+    </a>
+    <div class="hpm-list--hr"></div>
+    <div class="hpm-list--content">
+        <h3 class="hpm-list--header">
+            <a href="@Model.BoxUrl">@Model.ListArticleTitle</a>
+        </h3>
+        @Model.ListShortDescArticle
+        </div>
+        <div class="row hpm-list-addons hidden-xs">
+            <div class="col-sm-6 col-sm-offset-6">
+                <a href="@Model.BoxUrl" class="hpm-list--more">@Umbraco.GetDictionaryValue("Home.Button.Offers") <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>

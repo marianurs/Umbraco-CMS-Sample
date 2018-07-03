@@ -1,0 +1,7 @@
+﻿{
+  javascript: [
+    '~/App_Plugins/FrontUsersManager/backoffice/frontusermanage/index.controller.js',
+    '~/App_Plugins/FrontUsersManager/backoffice/frontusermanage/edit.controller.js',
+    '~/App_Plugins/FrontUsersManager/FrontUsersManager.resource.js'
+  ]
+}

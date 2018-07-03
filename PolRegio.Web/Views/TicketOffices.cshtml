@@ -1,0 +1,36 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.TicketOffices>
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-list hpm-offers">
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Model.Content.PageMainTitle</h1>
+            </div>
+        </div>
+        <section class="hpm-ticketOffices">
+        <div class="row"><div class="col-xs-12">
+        <div class=" hpm-ticketOffices__maintxt">
+            @Model.Content.SectionDescription
+            </div>
+            </div></div>
+            <div id="hpm-section-boxes-container">
+                @Html.Action("RenderTicketOfficesPage", "PolRegioTicketOffices")
+            </div>
+        </section>
+        <div class="row txtcenter hpm-js-load-more">
+            <div class="col-xs-12 col-md-2 col-md-offset-5">
+                <a href="javascript:void(0)" onclick="loadMoreTicketOffices()" class="hpm-list--loadmore">@Umbraco.GetDictionaryValue("LoadMore.Button.Text") <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section bottomScripts{
+    <script type="text/javascript">
+        checkIfShowLoadMoreButton();
+    </script>
+}

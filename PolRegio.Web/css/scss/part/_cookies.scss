@@ -1,0 +1,140 @@
+.hpm-popup-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: $polreg-black;
+    opacity: 0.5;
+    display: none !important;
+}
+
+.hpm-alert-cookies {
+    background-color: $polreg-orange2;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    color: $polreg-white;
+    height: auto;
+    display: table;
+    position: relative;
+    border: 0;
+    .container {
+        display: table-cell;
+        vertical-align: middle;
+        @media (min-width: $grid-float-breakpoint) {
+            display: block;
+        }
+        > div {
+            position: relative;
+            &:before {
+                content: "";
+                width: 3em;
+                height: 3em;
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                background: url("../images/svg/new-icon/Cookiesy.svg") no-repeat center;
+                background-size: 100% auto;
+                visibility: hidden;
+                @media (min-width: $grid-float-breakpoint) {
+                    width: 5rem;
+                    height: 5rem;
+                    top: 50%;
+                    left: 0;
+                    margin-top: -2.5rem;
+                    margin-left: -8px;
+                    visibility: visible;
+                }
+            }
+            padding-top: 0;
+            max-width: 380px;
+            margin: 0 auto;
+            @media (min-width: $grid-float-breakpoint) {
+                display: table;
+                max-width: 100%;
+                width: 100%;
+            }
+            > * {
+                @media (min-width: $grid-float-breakpoint) {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+            }
+            div {
+                display: table;
+                margin: 0 auto;
+                * {
+                    display: block;
+                }
+                button,
+                a {
+                    display: table-cell;
+                    text-align: left;
+                    @media (min-width: $grid-float-breakpoint) {
+                        display: block;
+                        text-align: center;
+                    }
+                }
+                a {
+                    padding-left: 3rem;
+                    @media (min-width: $grid-float-breakpoint) {
+                        padding-left: 0;
+                    }
+                }
+            }
+            button+a {
+                padding-top: 1.9em;
+                @media (min-width: $grid-float-breakpoint) {
+                    padding-top: 1em;
+                }
+            }
+            p,
+            a {
+                color: inherit;
+            }
+            a {
+                text-decoration: underline;
+            }
+            p {
+                padding-bottom: 0;
+                line-height: 1.7;
+                @media (min-width: $grid-float-breakpoint) {
+                    font-size: 1em;
+                    text-align: left;
+                    padding: 1em 6% 1em 6%;
+                    line-height: 1.4;
+                }
+            }
+            > div {
+                @media (min-width: $grid-float-breakpoint) {
+                    padding-right: 16px;
+                }
+            }
+        }
+    }
+}
+
+.hpm-popup-button {
+    color: $polreg-orange2;
+    @include contrast-color($polreg-contrast-color);
+    background-color: $polreg-white;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    @include contrast-border(solid 1px $polreg-white);
+    border: none;
+    padding: 1em 2.1em;
+    font-size: 1.2em;
+    line-height: 1;
+    &+* {
+        padding-top: 1.9em;
+        @media (min-width: $grid-float-breakpoint) {
+            padding-top: 1em;
+        }
+    }
+}
+
+.hpm-cookies-no-accept {
+    overflow: hidden;
+    @media (min-width: $grid-float-breakpoint) {
+        overflow: visible;
+    }
+}
+

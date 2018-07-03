@@ -1,0 +1,76 @@
+.hpm-search--box {
+    margin: 1em 1em;
+    padding: 0;
+    padding-top: 1.7em;
+    @media (min-width: $screen-md) {
+        margin: 0 15.5% 1.7em 14.5%;
+        padding: 1.7em 0 0 0;
+    }
+    background: $polreg-white;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    #hpm-search--input {
+        margin-bottom: 1.3em;
+        @include contrast-border(1px solid $polreg-contrast-color);
+        @include contrast-color($polreg-contrast-color);
+        @include contrast-bgcolor($polreg-contrast-bg);
+        @media (min-width: $screen-md) {
+            margin-bottom: 0;
+        }
+    }
+    button.btn {
+        position: relative;
+        background: $polreg-red;
+        border: 0;
+        font-weight: normal;
+        @include contrast-border(1px solid $polreg-contrast-color);
+        @include contrast-color($polreg-contrast-color);
+        @include contrast-bgcolor($polreg-contrast-bg);
+        &:hover {
+            background: $polreg-red;
+            color: $polreg-white;
+        }
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 49px 33px;
+            border-color: transparent transparent $polreg-orange2 transparent;
+        }
+    }
+    .hpm-section--search {
+        margin-top: 1.7em;
+        table {
+            margin-bottom: 0;
+            border-top: 1px solid $polreg-gray2;
+            td {
+                border-top: none;
+                @include contrast-color($polreg-contrast-color);
+            }
+            p {
+                @include contrast-color($polreg-contrast-color);
+                margin: 1.2rem 0;
+                &.search-title {
+                    font-size: 1.05rem;
+                }
+                &.search-date {
+                    font-size: 0.9rem;
+                }
+            }
+            hr {
+                border-color: $polreg-gray;
+                margin: 0;
+            }
+        }
+    }
+}
+

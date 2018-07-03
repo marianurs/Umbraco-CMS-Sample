@@ -1,0 +1,22 @@
+﻿@model PolRegio.Domain.Models.View.SalesManago.SalesManagoSendArticleViewModel
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+</head>
+<body>
+    Witaj, proszę o wysłanie poniższego artykułu w mailingu:<br/><br/>
+    Do kogo?: @string.Join(", ",Model.Regions)<br /><br/>
+    Tytuł wiadomości: @Model.ArticleTitle<br /><br/>
+    Lead: @Raw(Model.ArticleLead)<br /><br/>
+    Zdjęcie: <a href="@Model.ImageUrl">@Model.ImageUrl</a><br/><br/>
+    <!--<img src="@Model.ImageUrl"/><br />-->
+    Link: @Model.ArticleLink<br /><br/>
+    Artykuł zgłosił @Model.RedactorMail. W razie wątpliwości prosimy o kontakt bezpośredni ze zlecającym.<br /><br/>
+    Komentarz: @Model.Comment<br /><br/>
+    Zlecenie zostało zapisane w systemie o godz. @Model.UpdateDate.ToString("d") r.<br /><br/>
+    Treść wygenerowana automatycznie, prosimy na nią nie odpowiadać.<br /><br/>
+</body>
+</html>

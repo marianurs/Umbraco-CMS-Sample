@@ -1,0 +1,149 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.BipPage.BIPFormViewModel>
+@using PolRegio.Helpers.Enums
+@using reCAPTCHA.MVC
+@using (Ajax.BeginForm("SubmitBipFom", "PolRegioBIP", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-bipform-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "filterAjaxForm();loaderHide();bipFormScroll();"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.AntiForgeryToken()
+    <div class="hpm-bip__form row">
+        <div class="col-xs-12">
+            <div class="bg-white">
+                @if (Model.SendResponse != null && Model.SendResponse.Display)
+                {
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-@(Model.SendResponse.IsError ? "warning":"success") alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                @Html.Raw(Model.SendResponse.Message)
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        clearForm('@(Model.SendResponse.IsError ? "False" : "True")');
+                    </script>
+                }
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserName, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Name") })
+                                @Html.ValidationMessageFor(q => q.UserName, Umbraco.GetDictionaryValue("Register.Placeholder.Name.Error"))
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserAddress, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Surname") })
+                                @Html.ValidationMessageFor(q => q.UserAddress, Umbraco.GetDictionaryValue("Register.Placeholder.Surname.Error"))
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserEmail, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.UserEmail") })
+                                @Html.ValidationMessageFor(q => q.UserEmail, Umbraco.GetDictionaryValue("Register.Placeholder.UserEmail.Error"))
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserEmail, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Password") })
+                                @Html.ValidationMessageFor(q => q.UserEmail, Umbraco.GetDictionaryValue("Register.Placeholder.Password.Error"))
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserEmail, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Confirmpassword") })
+                                @Html.ValidationMessageFor(q => q.UserEmail, Umbraco.GetDictionaryValue("Register.Placeholder.Confirmpassword.Error"))
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserPhone, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.UserPhone") })
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserPhone, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Register.Placeholder.Region") })
+                            </div>
+
+                            <div class="hpm-bip__form__element__checkbox col-sm-12">
+                                @Html.CheckBoxFor(q => q.AcceptProcessingPersonalData)
+                                @Html.LabelFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptEmails"))
+                                @Html.ValidationMessageFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptEmails.Error"))
+                                <div class="check"></div>
+                            </div>
+
+                            <div class="hpm-bip__form__element__checkbox col-sm-12">
+                                @Html.CheckBoxFor(q => q.AcceptProcessingPersonalData)
+                                @Html.LabelFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptNews"))
+                                @Html.ValidationMessageFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptNews.Error"))
+                                <div class="check"></div>
+                            </div>
+
+                            <div class="hpm-bip__form__element__checkbox col-sm-12">
+                                @Html.CheckBoxFor(q => q.AcceptProcessingPersonalData)
+                                @Html.LabelFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptNewsletter"))
+                                @Html.ValidationMessageFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptNewsletter.Error"))
+                                <div class="check"></div>
+                            </div>
+                            <div class="hpm-bip__form__element__checkbox col-sm-12">
+                                @Html.CheckBoxFor(q => q.AcceptProcessingPersonalData)
+                                @Html.LabelFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptTerms"))
+                                @Html.ValidationMessageFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptTerms.Error"))
+                                <div class="check"></div>
+                            </div>
+                            <div class="hpm-bip__form__element__checkbox col-sm-12">
+                                @Html.CheckBoxFor(q => q.AcceptProcessingPersonalData)
+                                @Html.LabelFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptData"))
+                                @Html.ValidationMessageFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("Register.Placeholder.AcceptData.Error"))
+                                <div class="check"></div>
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                <div class="hpm-bip__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                                    <button class="btn center-block hpm-list--loadmore  full-btn" value="@Umbraco.GetDictionaryValue("Register.Placeholder.Button.Facebook")" />
+                                </div>
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                <div class="hpm-bip__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                                    <button class="btn center-block hpm-list--loadmore  full-btn" value="@Umbraco.GetDictionaryValue("Register.Placeholder.Button.Google")" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="hpm-bip__form__element row">
+                    <div class="hpm-bip__form__element__title col-sm-12">
+                        <p>@Umbraco.GetDictionaryValue("Register.Placeholder.SharingInformation")</p>
+                    </div>
+
+                    <div class="hpm-bip__form__element__title col-sm-12">
+                        <p>@Umbraco.GetDictionaryValue("Register.Placeholder.Info")</p>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="hpm-bip__form__element row">
+
+
+            </div>
+
+            <div class="hpm-bip__form__element row">
+                <div class="col-xs-12 col-md-4">
+                    <div class="hpm-bip__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                        <input type="submit" class="btn center-block hpm-list--loadmore  full-btn" value="@Umbraco.GetDictionaryValue("Register.Placeholder.Button")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

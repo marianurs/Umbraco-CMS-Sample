@@ -1,0 +1,45 @@
+﻿<form name="serviceForm"
+      ng-controller="PolRegio.ArticleTypeEditController"
+      ng-show="loaded"
+      ng-submit="save(item)"
+      val-form-manager>
+    <umb-panel>
+        <umb-header>
+            <div class="span7">
+                <umb-content-name placeholder="@placeholders_entername"
+                                  ng-model="item.name" />
+            </div>
+            <div class="span5">
+                <div class="btn-toolbar pull-right umb-btn-toolbar">
+                    <umb-options-menu ng-show="currentNode"
+                                      current-node="currentNode"
+                                      current-section="{{currentSection}}">
+                    </umb-options-menu>
+                </div>
+            </div>
+        </umb-header>
+        <div class="umb-panel-body umb-scrollable row-fluid">
+            <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+                <div class="umb-pane">
+                    <umb-control-group label="Name" description="Article type name">
+                        <input type="text" class="umb-editor umb-textstring" ng-model="item.name" required />
+                    </umb-control-group>
+                    <umb-control-group label="IsEnabled" description="Article type enabled">
+                        <input type="checkbox" class="umb-editor umb-checkbox" ng-model="item.isenabled" />
+                    </umb-control-group>
+                    <umb-control-group label="Dictionarykey" description="Article type dictionary key to translate">
+                        <label ng-if="showEditDictionary()" class="umb-editor umb-textstring" ng-bind-template="articleType_{{item.name}}"></label>
+                        <label ng-if="showStaticDictionary()" class="umb-editor umb-textstring" ng-bind="item.dictionarykey"></label>
+                    </umb-control-group>
+                    <div class="umb-tab-buttons" detect-fold>
+                        <div class="btn-group">
+                            <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                                <localize key="buttons_save">Save</localize>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </umb-panel>
+</form>

@@ -1,0 +1,47 @@
+﻿@using PolRegio.Helpers.Extensions
+@inherits UmbracoViewPage<IEnumerable<PolRegio.Domain.Models.View.AccordionPage.AccordionViewModel>>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="hpm-accordion">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @if (Model != null && Model.Count() > 0)
+                {
+                    foreach (var item in Model.Select((value, i) => new { i, value }))
+                    {
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading_@item.i">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_@item.i" aria-expanded="false" aria-controls="collapse_@item.i" class="collapsed">
+                                        <span>@(item.i + 1).</span><span>@item.value.Title</span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse_@item.i" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_@item.i" aria-expanded="false">
+                                <div class="panel-body">
+                                    @item.value.Description
+
+                                    @if (item.value.DownloadDocuments != null && item.value.DownloadDocuments.Count() > 0)
+                                    {
+                                        <section class="hpm-single-article-download-file">
+                                            <div class="no-padding">@Umbraco.GetDictionaryValue("Section.Accordion.Download")</div>
+                                            @foreach (var document in item.value.DownloadDocuments)
+                                            {
+                                                <div class="hpm-single-article-download-file-singleel no-margin">
+                                                    <div class="hpm-single-article-download-file-info">
+                                                        <a href="@Umbraco.TypedMedia(document.DocumentUrl).Url" target="_blank" title="@document.DocumentName" class="hpm-single-article-download-file-title">@document.DocumentName</a>
+                                                        <p class="hpm-single-article-download-file-createdate">@(Umbraco.GetDictionaryValue("Advertising.Placeholder.AddDate") + string.Format(" {0:dd.MM.yyyy}", document.DocumentDate))</p>
+                                                    </div>
+                                                    <a href="@Umbraco.TypedMedia(document.DocumentUrl).Url" download="@document.DocumentName.ToSafeFilenameString(allowDot:false)" title="Pobierz plik"><img src="/images/articles/global/icon-download.png" alt="Ikonka i dla artykułów informacyjnych" /></a>
+                                                </div>
+                                            }
+                                        </section>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div><!-- //end .hpm-accordion -->
+    </div><!-- //end .col -->
+</div>

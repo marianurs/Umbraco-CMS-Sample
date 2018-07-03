@@ -1,0 +1,66 @@
+.top-bar {
+    @media (min-width: $grid-float-breakpoint) { 
+    	position: fixed;
+	    z-index: 999;
+	    top: 0;
+	    width: 100%;
+    }
+}
+
+
+
+    .hpm-accessibility-bar {
+
+        &.hpm-accessibility-bar--is-hidden {
+            height:0;
+            overflow: hidden;
+            padding: 0;
+        }
+        background: $polreg-darkgray2;
+        color: #fff;
+        padding: 15px 0;
+        font-size: 1.25rem;
+        text-align: center;
+        @media (min-width: $grid-float-breakpoint) {
+            font-size: 1.1rem;
+            text-align: left;
+        }
+
+        .hpm-accessibility--info {
+            text-align: center;
+            @media (min-width: $grid-float-breakpoint) {
+                text-align: right;
+            }
+        }
+        .hpm-top--plaintext {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+        .hpm-top--language {
+            .hpm-top--flag {
+                height: 16px;
+                width: 23px;
+                border: 2px solid transparent;
+            }
+            &:hover {
+                .hpm-top--flag {
+                    border-color: $polreg-lightgray;
+                }
+            }
+            &.actual-lang {
+                .hpm-top--flag {
+                    border-color: $polreg-orange;
+                }
+            }
+        }
+        .hpm-top--button {
+            background: transparent;
+            border: none;
+            font-size: 1.25rem;
+
+            &.hpm-top--button-big {
+                font-size: 1.6rem;
+            }
+        }
+    }

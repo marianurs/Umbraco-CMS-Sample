@@ -1,0 +1,20 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Error404>
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-error-404">
+    <div class="container">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Model.Content.ErrorTitle</h1>
+            </div>
+            <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+                <h2 class="txtcenter">@Model.Content.ErrorDescription</h2>
+            </div>
+            <div class="col-xs-12 text-center">
+                <a href="@Model.Content.Parent.Url" class="btn">Powrót na stronę główną!</a>
+            </div>
+        </div>
+    </div>
+</section>

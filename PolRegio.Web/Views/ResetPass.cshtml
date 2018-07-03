@@ -1,0 +1,28 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-reg" id="hpm-reg" data-redirect='@Umbraco.GetDictionaryValue("Reset.Placeholder.Redirect")'>
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Umbraco.GetDictionaryValue("Reset.Placeholder.Title")</h1>
+            </div>
+        </div>
+        <div class="hpm-reg__container hpm-reg__login">
+            <div class="row">
+
+                <div class="col-xs-12">
+
+
+                    <section id="hpm-section-bipform-container" class="hpm-reg__content">
+                        @Html.Action("RenderResetPassForm", "PolRegioAccount")
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

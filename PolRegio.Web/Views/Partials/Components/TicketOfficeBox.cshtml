@@ -1,0 +1,9 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.Components.Ticket.TicketOfficeBoxModel>
+
+<tr class="js-list-item">
+    <td><a href="@Model.BoxUrl">@Model.OfficeLocalization</a></td>
+    <td>@Model.OfficeAddress</td>
+    <td>@(string.IsNullOrEmpty(Model.OpenHours.ToString()) ? Html.Raw(string.Format("<p class=\"red-text\">{0}</p>",Umbraco.GetDictionaryValue("Ticket.Placeholder.Closed"))) : Model.OpenHours)</td>
+    <td>@(string.IsNullOrEmpty(Model.OpenHoursSaturday.ToString()) ? Html.Raw(string.Format("<p class=\"red-text\">{0}</p>", Umbraco.GetDictionaryValue("Ticket.Placeholder.Closed"))) : Model.OpenHoursSaturday)</td>
+    <td>@(string.IsNullOrEmpty(Model.OpenHoursSundayAndHolidays.ToString()) ? Html.Raw(string.Format("<p class=\"red-text\">{0}</p>", Umbraco.GetDictionaryValue("Ticket.Placeholder.Closed"))) : Model.OpenHoursSundayAndHolidays)</td>
+</tr>

@@ -1,0 +1,132 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.SearchTicket.SearchTicketFormView>
+@using (Ajax.BeginForm("SearchTicket", "PolRegioISS", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "searchTrains();loaderHide();"
+}, new { id = "hpm-search--form" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    <div class="row top">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-6">
+                    <h3>@Umbraco.GetDictionaryValue("Home.Placeholder.SearchConnections")</h3>
+                </div>
+                <div class="col-xs-6 orange">
+                    <h3><a class="showonmap" href="">@Umbraco.GetDictionaryValue("Home.Placeholder.CheckOnMap")</a></h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 center">
+            <h2>@Umbraco.GetDictionaryValue("Section.SearchTicket.Title") </h2>
+        </div>
+    </div>
+    if (Model.AnswerKeyResponse != null && Model.AnswerKeyResponse.IsError)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    @Umbraco.GetDictionaryValue(string.Format("ISS.Error.AnswerKey.{0}", Model.AnswerKeyResponse.ErrorCode))
+                </div>
+            </div>
+        </div>
+    }
+    <div class="formcontainer">
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                <div class="form-group">
+                    <!-- <label>@Umbraco.GetDictionaryValue(string.Format("Home.Placeholder.DepartureFrom"))<label> -->
+                    @Html.TextBoxFor(q => q.StartStation,  new Dictionary<string,Object>{{"class" ,"form-control js-stations"},{"id", "hpm-search--startstation"},{"placeholder", Umbraco.GetDictionaryValue("Home.Placeholder.DepartureFrom")},{"aria-label", Umbraco.GetDictionaryValue("Home.Placeholder.DepartureFrom")}, {"title",Umbraco.GetDictionaryValue("Home.Placeholder.DepartureFrom")}})
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12">
+                <div class="form-group">
+                    <!-- <label>@Umbraco.GetDictionaryValue(string.Format("Home.Placeholder.ArrivalTo"))<label> -->
+                    @Html.TextBoxFor(q => q.EndStation,  new Dictionary<string,Object>{{"class" ,"form-control js-stations"},{"id", "hpm-search--hpm-search-endstation"},{"placeholder", Umbraco.GetDictionaryValue("Home.Placeholder.ArrivalTo")},{"aria-label", Umbraco.GetDictionaryValue("Home.Placeholder.ArrivalTo")}, {"title",Umbraco.GetDictionaryValue("Home.Placeholder.ArrivalTo")}})
+
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group pickerInput">
+                     <!-- <label>@Umbraco.GetDictionaryValue(string.Format("Home.Placeholder.DateOfDeparture"))<label> -->
+                    <span class="pickerText">@Umbraco.GetDictionaryValue("Home.Placeholder.DateOfDeparture")</span>
+
+
+                    @Html.TextBoxFor(q => q.Date,  new Dictionary<string,Object>{{ "type","text"},{"class" ,"form-control js-datepicker"},{"id", "hpm-search--date"},{"aria-label", Umbraco.GetDictionaryValue("Home.Placeholder.DateOfDeparture")},{"readonly" , "readonly"}, {"title",Umbraco.GetDictionaryValue("Home.Placeholder.DateOfDeparture")}})
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="form-group pickerInput">
+                     <!-- <label>@Umbraco.GetDictionaryValue(string.Format("Home.Placeholder.HourOfDeparture"))<label> -->
+                    <span class="pickerText">@Umbraco.GetDictionaryValue("Home.Placeholder.HourOfDeparture")</span>
+                    <!-- @Html.TextBoxFor(q => q.Time, new { type = "text", @class = "form-control js-timepicker", id = "hpm-search--time", @readonly = "readonly" }) -->
+
+                    @Html.TextBoxFor(q => q.Time,  new Dictionary<string,Object>{{ "type","text"},{"class" ,"form-control js-timepicker"},{"id", "hpm-search--time"},{"aria-label", Umbraco.GetDictionaryValue("Home.Placeholder.HourOfDeparture")},{"readonly" , "readonly"}, {"title",Umbraco.GetDictionaryValue("Home.Placeholder.HourOfDeparture")}})
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12  pull-right">
+                <button class="btn hpm-btn full-btn" type="submit">@Umbraco.GetDictionaryValue("Home.Button.FindAndBuyTicket") <i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="serchTicketPopup-bg" tabindex="-1">
+            <div class="serchTicketPopup row">
+                <div class="popupticketclose" onclick="$('.serchTicketPopup-bg').hide();">@Umbraco.GetDictionaryValue("Home.Placeholder.NewWindow.Dismiss") X</div>
+                <div class="col-xs-12">
+                    <h2>@Umbraco.GetDictionaryValue("Home.Placeholder.NewWindow.Text")</h2>
+                </div>
+                <div class="row items">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="innerwrapper">
+                            <a href="@Model.PolRegioRedirectUrl" target="_blank" onclick="$('.serchTicketPopup-bg').hide();">
+                                <img src="/images/biletyregionalne.png"  alt="Logo bilety regionalne" />
+                                <p class="hpm-search--advanced">@Umbraco.GetDictionaryValue("Home.Placeholder.DirectedConnections")</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="innerwrapper">
+                            <a href="@Model.EPodroznikRedirectUrl" target="_blank" onclick="$('.serchTicketPopup-bg').hide();">
+                                <img src="/images/epodroznik.png" alt="Logo epodróżnik" />
+                                <p class="hpm-search--advanced"></p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="innerwrapper">
+                            <a href="@Model.KoleoRedirectUrl" target="_blank" onclick="$('.serchTicketPopup-bg').hide();">
+                                <img src="/images/koleo.png" alt="Logo koleo">
+                                <p class="hpm-search--advanced"></p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (!string.IsNullOrEmpty(Model.PolRegioRedirectUrl) ||
+                                                     !string.IsNullOrEmpty(Model.EPodroznikRedirectUrl) ||
+                                                     !string.IsNullOrEmpty(Model.KoleoRedirectUrl))
+{
+    <script type="text/javascript">
+        $('.serchTicketPopup-bg').show();
+        $('.serchTicketPopup-bg').focus();
+        // $('.serchTicketPopup-bg').on('blur', function(){
+        //    $('.serchTicketPopup-bg').hide();
+        // })
+        // var win = $('.linkToAnotherSite');
+        // win.attr('href', '@Model.PolRegioRedirectUrl');
+        // console.log('@Model.EPodroznikRedirectUrl');
+        // console.log('@Model.KoleoRedirectUrl');
+    </script>
+}

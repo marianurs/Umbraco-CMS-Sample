@@ -1,0 +1,63 @@
+﻿<form name="contentForm"
+      ng-controller="FrontUsersManager.FrontUsersManagerEditController"
+      ng-show="loaded"
+      ng-submit="update()"
+      val-form-manager>
+    <umb-panel>
+        <umb-header>
+            <div class="umb-headline-editor-wrapper span12 ng-scope">
+                <h1 class="ng-binding">{{node.UserName}} {{node.UserSurname}} ({{node.UserEmail}})</h1>
+            </div>
+        </umb-header>
+
+        <div class="umb-panel-body umb-scrollable row-fluid">
+            <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+                <div class="umb-pane">
+
+                    <umb-control-group label="Imię" description="">
+                        <input type="text" class="umb-editor umb-textstring" ng-model="node.UserName" required/>
+                    </umb-control-group>
+
+                    <umb-control-group label="Nazwisko" description="">
+                        <input type="text" class="umb-editor umb-textstring" ng-model="node.UserSurname" required/>
+                    </umb-control-group>
+
+                    <umb-control-group label="Email" description="">
+                        <input type="text" class="umb-editor umb-textstring" ng-model="node.UserEmail" required/>
+                    </umb-control-group>
+
+                    <umb-control-group label="Nr telefonu" description="">
+                        <input type="text" class="umb-editor umb-textstring" ng-model="node.UserPhone"/>
+                    </umb-control-group>
+
+                    <umb-control-group label="Regiony">
+                        <select ng-model="node.SelectedRegions" ng-options="region.id as region.name for region in regions" ng-attr-size={{regions.length}} multiple="multiple" class="umb-editor umb-textstring">
+                        </select>
+                    </umb-control-group>
+
+                    <umb-control-group ng-repeat="(key, value) in node.Agreements | filter: {Required: 'true'}" label="" description="{{value.Text}}">
+                        <input type="checkbox" class="umb-editor umb-textstring" ng-model="value.Value" disabled=""/>
+                    </umb-control-group>
+
+                    <umb-control-group ng-repeat="(key, value) in node.Agreements | filter: {Required: 'false'}" label="" description="{{value.Text}}">
+                        <input type="checkbox" class="umb-editor umb-textstring" ng-model="value.Value"/>
+                    </umb-control-group>
+
+                    <div class="umb-tab-buttons" detect-fold>
+                        <div class="btn-group">
+                            <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+                                Aktualizuj
+                            </button>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="button" class="btn btn-danger" ng-click="delete()">
+                                Usuń
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </umb-panel>
+</form>

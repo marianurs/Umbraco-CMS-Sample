@@ -1,0 +1,6 @@
+﻿@inherits UmbracoViewPage<IEnumerable<PolRegio.Domain.Models.Components.Ticket.TicketOfficeBoxModel>>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("Components/TicketOfficeBox", item)
+}

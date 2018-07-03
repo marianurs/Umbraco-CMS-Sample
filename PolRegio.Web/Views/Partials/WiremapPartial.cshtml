@@ -1,0 +1,61 @@
+﻿@using PolRegio.Helpers.Extensions
+@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Wiremaps.WiremapPageViewModel>
+<section class="hpm-section hpm-wiremap">
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Model.WiremapContent.PageMainTitle</h1>
+            </div>
+        </div>
+
+        <div class="row hpm-wiremap__content">
+            <div class="col-xs-12 hpm-wiremap__map">
+                <div class="hpm-wiremap__map__logo hidden-xs">
+                    <img src="/images/svg/polregio_logo_triangle.svg" alt="Logotyp POLREGIO w na tle białego trójkata widoczny przed rozwinięciem menu, chowające się przy przewijaniu strony" class="logo-triangle">
+                </div>
+                <div class="hpm-wiremap__map__img">
+                    <object type="image/svg+xml" data="@Umbraco.Media(Model.WiremapContent.Map).Url" id="map-svg">Your browser does not support SVG</object>
+
+                </div>
+                <ul class="hpm-wiremap__map__legend">
+
+                    <li class="hpm-wiremap__map__legend__label hpm-wiremap__map__legend__label--normal">Linie, po których kursują pociągi POLREGIO</li>
+                    <li class=" hpm-wiremap__map__legend__label hpm-wiremap__map__legend__label--season">Linie, po których kursują pociągi sezonowe POLREGIO</li>
+                </ul>
+                <div class="hpm-wiremap__map__buttons">
+                    <span class="hpm-wiremap__map__button hpm-wiremap__map__button--zoom-in"><i class="fa fa-plus"></i></span>
+                    <span class="hpm-wiremap__map__button hpm-wiremap__map__button--zoom-out"><i class="fa fa-minus"></i></span>
+
+                </div>
+            </div>
+        </div>
+        <div class="row hpm-wiremap__content">
+        <div class="hpm-wiremap__content__txt">
+            <h2>@Model.WiremapContent.SectionName</h2>
+
+
+            <div class="hpm-wiremap__content__txt--desc">
+                @Model.WiremapContent.WiremapText
+            </div>
+            </div>
+                <a href="@Model.WiremapContent.UrlRedirect" class="hpm-list--loadmore">@Model.WiremapContent.ButtonText</a>
+
+        </div>
+        @if (Model.DownloadDocuments != null && Model.DownloadDocuments.Count() > 0)
+        {
+            <section class="hpm-single-article-download-file">
+                <div>@Umbraco.GetDictionaryValue("Section.Article.Download")</div>
+                @foreach (var item in Model.DownloadDocuments)
+                {
+                    <div class="hpm-single-article-download-file-singleel">
+                        <div class="hpm-single-article-download-file-info">
+                            <a href="@Umbraco.TypedMedia(@item.DocumentUrl).Url" target="_blank" title="@item.DocumentName" class="hpm-single-article-download-file-title">@item.DocumentName</a>
+                            <p class="hpm-single-article-download-file-createdate">@(Umbraco.GetDictionaryValue("Article.Placeholders.AddDate") + String.Format(" {0:dd.MM.yyyy}", item.DocumentDate))</p>
+                        </div>
+                        <a href="@Umbraco.TypedMedia(@item.DocumentUrl).Url" download="@item.DocumentName.ToSafeFilenameString(allowDot:false)" title="Pobierz plik"><img src="/images/articles/global/icon-download.png" alt="Ikonka i dla artykułów informacyjnych" /></a>
+                    </div>
+                }
+            </section><!-- //end Art. Download section -->
+        }
+    </div>
+</section>

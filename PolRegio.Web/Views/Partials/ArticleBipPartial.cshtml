@@ -1,0 +1,59 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.BipPage.BIPArticleViewModel>
+<section class="hpm-section hpm-bip">
+    <div class="container">
+
+        <div class="hpm-bip__container">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <section class="hpm-bip__title">
+                        <div class="hpm-bip__title__date">@Model.Article.CreateDate</div>
+                        <img src="/images/svg/bip.svg">
+                        <h1>@Model.Article.ArticleTitle</h1>
+                    </section>
+                    <section class="hpm-bip__content">
+                        <div class="hpm-bip__element">
+                            <div class="hpm-bip__element__content ">
+                                @Model.Article.ArticleText
+                            </div>
+                        </div>
+                        <div class="hpm-bip__element">
+                            <div class="hpm-bip__element__content ">
+                                <p><b>@Umbraco.GetDictionaryValue("BIP.Placeholder.InformationAuthor"):</b> @Model.Article.AuthorBip</p>
+                                <p><b>@Umbraco.GetDictionaryValue("BIP.Placeholder.InformationEditor"):</b> @Model.Article.CreatorName</p>
+                                <p><b>@Umbraco.GetDictionaryValue("BIP.Placeholder.InformationCreateDate"):</b> @Model.Article.CreateDateBip.ToString("dd.MM.yyyy")</p>
+                                <p><b>@Umbraco.GetDictionaryValue("BIP.Placeholder.InformationSharingDate"):</b> @Model.Article.CreateDate.ToString("dd.MM.yyyy")</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div role="navigation">
+                        <nav class="navbar navbar-default hpm-navbar-footer">
+                            <ul class="nav navbar-nav">
+                                <div class="dropdown">
+
+                                    <div class="dropdown-toggle" onclick="$('.hpm-bip__container .dropdown').toggleClass('open')">@Umbraco.GetDictionaryValue("BIP.Placeholder.RecordChanges")</div>
+                                    <ul class="dropdown-menu">
+                                        @foreach (var item in Model.ArticleChanges)
+                                        {
+                                            <li><p>@item.ChangesDate.ToString("dd.MM.yyyy") - @item.UserName : @Html.Raw(@item.ChangeDescription).ToString().Replace("<p>", "").Replace("</p>", "") - @item.ChangeType</p> </li>
+                                        }
+                                    </ul>
+                                </div>
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 hpm-bip__back-all-article">
+                    <a href="@Model.Article.Parent.Url" class="">@Umbraco.GetDictionaryValue("BIP.Links.SeeAllBIPArticle")</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,9 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+	
+@{  
+ 	var Title = (!String.IsNullOrEmpty(Model.MacroParameters["articleTitleMarco"].ToString())) ? Model.MacroParameters["articleTitleMarco"] : null;
+ }
+@if(Title != null)
+{
+            <h2>@Html.Raw(Title)</h2>
+}

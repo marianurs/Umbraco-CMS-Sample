@@ -1,0 +1,75 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.TicketOffice>
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+<section class="hpm-single-article ticketOffice">
+    <div class="container">
+        <div class="row">
+            <article>
+                <div class="col-xs-12">
+                    <section class="hpm-single-article-title">
+                        <h1>
+                            @Model.Content.OfficeLocalization
+                        </h1>
+                    </section>
+                    <section class="hpm-single-article-details">
+                        <div class="hpm-single-article-details-partial"><b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.Address")</b><span>@Model.Content.OfficeAddress</span></div>
+
+                        <div class="hpm-single-article-details-partial"><b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.OpenHours")</b><span>@(string.IsNullOrEmpty(Model.Content.OpenHours.ToString()) ? Html.Raw(string.Format("<p class=\"red-text\">{0}</p>", Umbraco.GetDictionaryValue("Ticket.Placeholder.Closed"))) : Model.Content.OpenHours)</span></div>
+                        <div class="hpm-single-article-details-partial"><b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.OpenHoursSaturday")</b><span>@(string.IsNullOrEmpty(Model.Content.OpenHoursSaturday.ToString()) ? Html.Raw(string.Format("<p class=\"red-text\">{0}</p>", Umbraco.GetDictionaryValue("Ticket.Placeholder.Closed"))) : Model.Content.OpenHoursSaturday)</span></div>
+                        <div class="hpm-single-article-details-partial"><b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.OpenHoursSundayAndHolidays")</b><span>@(string.IsNullOrEmpty(Model.Content.OpenHoursSundayAndHolidays.ToString()) ? Html.Raw(string.Format("<p class=\"red-text\">{0}</p>", Umbraco.GetDictionaryValue("Ticket.Placeholder.Closed"))) : Model.Content.OpenHoursSundayAndHolidays)</span></div>
+                    </section>
+                    <section class="hpm-single-article-details">
+                        <p>
+                            <b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.TicketsForNationalRelations")</b>
+                            <span>
+                                @(Model.Content.TicketsForNationalRelations
+                                      ? Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.Yes")
+                                      : Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.No"))
+                            </span>
+                        </p>
+                        <p>
+                            <b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.TicketsForInternationalRelations")</b>
+                            <span>
+                                @(Model.Content.TicketsForInternationalRelations
+                                      ? Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.Yes")
+                                      : Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.No"))
+                            </span>
+                        </p>
+                        <p>
+                            <b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.TicketsWithSeatReservation")</b>
+                            <span>
+                                @(Model.Content.TicketsWithSeatReservation
+                                      ? Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.Yes")
+                                      : Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.No"))
+                            </span>
+                        </p>
+                        <p>
+                            <b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.CardPayment")</b>
+                            <span>
+                                @(Model.Content.CardPayment
+                                      ? Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.Yes")
+                                      : Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.No"))
+                            </span>
+                        </p>
+                        <p>
+                            <b>@Umbraco.GetDictionaryValue("Ticket.Placeholder.TicketMachine")</b>
+                            <span>
+                                @(Model.Content.TicketMachine
+                                      ? Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.Yes")
+                                      : Umbraco.GetDictionaryValue("Ticket.Placeholder.YesNo.No"))
+                            </span>
+                        </p>
+                    </section>
+                    @if (!string.IsNullOrWhiteSpace(Model.Content.Attention.ToString()))
+                    {
+                        <section class="hpm-single-article-details">
+                            @Model.Content.Attention
+                        </section>
+                    }
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

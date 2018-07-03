@@ -1,0 +1,19 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.BIP>
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-bip">
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Model.Content.MainPageTitle</h1>
+            </div>
+        </div>
+        <div id="hpm-section-boxes-container" class="hpm-bip__container">
+            @Html.Action("RenderMainPageBip", "PolRegioBIP")
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,38 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-reg" id="hpm-reg" data-redirect='@Umbraco.GetDictionaryValue("Login.Placeholder.Redirect")'>
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Umbraco.GetDictionaryValue("Register.Placeholder.Header")</h1>
+            </div>
+        </div>
+        <div class="hpm-bip__container ">
+            <div class="row">
+
+                <div class="col-xs-12">
+
+
+                    <section id="hpm-section-bipform-container" class="hpm-bip__content">
+                        @Html.Action("RenderSocialMediaForm", "PolRegioAccount")
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="row txtcenter hpm-js-load-more">
+            <div class="col-xs-12 col-md-2 col-md-offset-5">
+                @Umbraco.GetDictionaryValue("Register.Placeholder.Logintext") <a href="@Umbraco.GetDictionaryValue("Register.Placeholder.LoginURL")"> @Umbraco.GetDictionaryValue("Register.Placeholder.Loginlink")</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    setTimeout(function () {
+        getSocialData();
+
+    }, 1000)
+</script>

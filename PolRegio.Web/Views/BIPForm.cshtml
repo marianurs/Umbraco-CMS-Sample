@@ -1,0 +1,33 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.BIpform>
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-bip">
+    <div class="container">
+        
+        <div class="hpm-bip__container hpm-bip__container--border-top">
+            <div class="row">
+
+                <div class="col-xs-12">
+                    <section class="hpm-bip__title">
+                    <img src="/images/svg/bip.svg">
+                        <h1>@Model.Content.PageMainTitle</h1>
+                    </section>
+                    <section class="hpm-bip__content">
+                    <div class="hpm-bip__element">
+                                <div class="hpm-bip__element__content ">
+                        @Model.Content.PageMainDescription
+                         </div>
+    </div>
+                    </section>
+                    <section id="hpm-section-bipform-container" class="hpm-bip__content">
+                        @Html.Action("RenderBipFormPage", "PolRegioBIP")
+                    </section>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>

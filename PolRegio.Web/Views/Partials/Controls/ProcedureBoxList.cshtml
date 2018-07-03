@@ -1,0 +1,8 @@
+﻿@inherits UmbracoViewPage<IEnumerable<PolRegio.Domain.Models.Components.Advertising.AdvertisingBoxModel>>
+
+
+@foreach (var item in Model)
+{
+    @Html.Partial("Components/ProcedureBox", item)
+}
+

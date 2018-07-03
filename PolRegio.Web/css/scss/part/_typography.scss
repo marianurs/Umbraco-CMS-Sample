@@ -1,0 +1,126 @@
+html {
+    font-size: 12px;
+}
+
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
+body {
+	font-family: $font-regular;
+	zoom: 1;
+    font-size: 1rem!important;
+	@include contrast-bgcolor($polreg-contrast-bg);
+	@media (min-width: $grid-float-breakpoint){
+        //font-size: 1.27em;
+        padding-top: 8.1em; 
+	}
+	@media (min-width: 1360px){
+		//font-size: 1.2em; 
+	}
+	@media (min-width: 1480px){
+		//font-size: 1.3em;
+	}
+}
+span{
+	display: inline;
+}
+h1, h2, h3, h4, h5,h6{
+	@include contrast-color($polreg-contrast-color);
+	line-height: 1.4;
+	margin: 0 0 0.3em;
+}
+h1{
+    line-height: 1.2;
+}
+h2{
+    line-height: 1.6;
+}
+a{
+	@include contrast-color($polreg-contrast-color);
+	display: inline-block;
+	&:hover,
+	&:visited,
+	&:focus,
+	&:active{
+		@include contrast-color($polreg-contrast-color);
+	}
+}
+p{
+	color: $polreg-darkgray;
+	@include contrast-color($polreg-contrast-color);
+	line-height: 1.4;
+	font-size: 1rem; // coment by Marta: I was set this value there, becouse in bootstrap p has base-font font-size
+    margin: 0 0 1.2rem;
+}
+
+img{
+	width: 100%;
+	height: auto;
+}
+b, strong{
+	font-weight: 900;
+}
+i, em{
+	font-style: italic;
+	font-weight: inherit;
+}
+b>i{
+	font-weight: 900;
+}
+i>b{
+ 	font-style: bold;
+}
+
+em{
+	font-weight: inherit;
+}
+strong{
+	font-weight: 900;
+}
+
+footer .row:last-child,
+footer .row:first-child {
+   
+	@media (min-width: 1200px){
+	    max-width: 1420px; //1360+2x30px padding; 
+	}
+}
+
+.container {
+	width: 100% !important;
+	@media (min-width: 1200px){
+	    max-width: 1420px; //1360+2x30px padding; 
+	}
+ 
+}
+
+.btn {
+    font-family: $font-regular;
+    font-weight: 700;
+
+    &.hpm-btn {
+        background: $polreg-red;
+        @include contrast-bgcolor($polreg-contrast-bg); 
+        border-radius: 0;
+        border: 3px solid $polreg-red;
+        @include contrast-border(solid 3px $polreg-white);
+        color: #fff;
+        @include contrast-color($polreg-contrast-color); 
+        min-height: 48px;
+        font-size: 1.15em;
+
+        .fa {
+            margin-left: 10px;
+        }
+        &:hover {
+            background: #fff;
+            color: $polreg-red;
+        }
+        &:focus{
+         @include contrast-border(solid 6px $polreg-white);
+        }
+    }
+    &.full-btn {
+        width: 100%;
+    }
+}

@@ -1,0 +1,58 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Search.SearchViewModel>
+
+@using (Ajax.BeginForm("RenderArticleBoxes", "PolRegioSearch", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-boxes-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "checkIfShowLoadMoreButton();listHeightFix();filterAjaxForm();getSvg();loaderHide();selectStylish();"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.HiddenFor(q => q.DisplayCount)
+
+
+
+    <input type="hidden" id="allBoxesCount" value="@Model.AllNewsCount" />
+    <div class="hpm-search--box">
+        <div class="container">
+
+
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>Wpisz szukaną frazę:</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    @Html.TextBoxFor(q => q.SearchText, new { @class = "form-control ", id = "hpm-search--input" })
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn hpm-btn full-btn">@Umbraco.GetDictionaryValue("Notices.Button.Find") <i class="fa fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+
+
+            <div class="row hpm-section hpm-section--search">
+               
+               
+                    @if (Model.SearchItems != null)
+                {
+                        <table class="table">
+                            <tbody class="hpm-js-boxes-container">
+                                @Html.Partial("Controls/SearchList", Model)
+                            </tbody>
+                        </table>
+                    }
+                        
+            </div>
+        </div>
+    </div>
+
+}
+
+
+

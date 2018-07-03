@@ -1,0 +1,22 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.FormularzReklamacjiSkargIwnioskow>
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-single-article formforquestions">
+    <div class="content" ng-app="siwApp">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div ui-view="content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section bottomScripts{
+    <script src="/scripts/vendor.js"></script>
+    <script src="/scripts/application.js"></script>
+}

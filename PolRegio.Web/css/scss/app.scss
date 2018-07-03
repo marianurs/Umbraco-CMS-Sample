@@ -1,0 +1,41 @@
+@import "notosans-fontface";
+@import "font-awesome";
+
+@import "part/variables";
+@import "part/bootstrap-custom";
+@import "bootstrap";
+@import "bootstrap-datetimepicker-build"; 
+@import "bootstrap-select";
+
+// @import "part/typography";
+
+@import "part/mixins";
+@import "part/typography";
+@import "part/global";
+
+@import "part/mainmenu";
+@import "part/footer";
+
+@import "part/homepage--search";
+
+@import "part/footersocial";
+@import "part/accessibility-bar";
+@import "part/single-article";
+
+
+// @import "/bower_components/bxslider-4/jquery.bxslider.css";
+@import "part/bxslider-from-bower"; // .33 not working with bx slider from bower: this is fix
+@import "part/slider";
+@import "part/cookies";
+@import "part/accordion";
+@import "part/helpline-modal";
+@import "part/promotion-and-offers";
+@import "part/advertisting-of-sales";
+@import "part/wiremap";
+@import "part/bip";
+@import "part/search";
+@import "part/offers";
+@import "part/404";
+@import "part/reg";
+@import "part/test";
+@import "part/list-group";

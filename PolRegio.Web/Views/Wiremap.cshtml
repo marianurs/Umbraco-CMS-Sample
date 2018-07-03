@@ -1,0 +1,6 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+	Layout = "Layout.cshtml";
+}
+@Html.Action("RenderWiremapPage", "PolRegioWiremap")

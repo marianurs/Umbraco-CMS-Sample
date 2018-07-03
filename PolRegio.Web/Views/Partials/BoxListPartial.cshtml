@@ -1,0 +1,21 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Article.ArticleBoxViewModel>
+
+@using (Ajax.BeginForm("RenderArticleListBoxes", "PolRegioArticle", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-boxes-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "checkIfShowLoadMoreButton();listHeightFix();loaderHide();"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.HiddenFor(q => q.DisplayCount)
+    <input type="hidden" id="allBoxesCount" value="@Model.AllNewsCount" />
+
+    <ul class="row hpm-js-boxes-container  hpm-list--ul">
+        @Html.Partial("Controls/ArticleBoxesList", Model.ArticleList)
+    </ul>
+}
+

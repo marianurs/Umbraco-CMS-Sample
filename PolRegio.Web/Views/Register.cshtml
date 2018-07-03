@@ -1,0 +1,105 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = PolRegio.Domain.Models.UmbracoCreate;
+@{
+    Layout = "Layout.cshtml";
+}
+
+<section class="hpm-section hpm-reg" id="hpm-reg" data-redirect='@Umbraco.GetDictionaryValue("Register.Placeholder.Redirect")' data-redirectlogged="@Umbraco.GetDictionaryValue("Login.Placeholder.Redirect")">
+    <div class="container">
+        <div class="hpm-section--title row">
+            <div class="col-xs-12">
+                <h1 class="txtcenter">@Umbraco.GetDictionaryValue("Register.Placeholder.Header")</h1>
+            </div>
+        </div>
+        <div class="hpm-bip__container ">
+            <div class="row">
+
+                <div class="col-xs-12">
+
+
+                    <section id="hpm-section-bipform-container" class="hpm-bip__content">
+                        @Html.Action("RenderRegisterFormPage", "PolRegioAccount")
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="row txtcenter hpm-js-load-more">
+            <div class="col-xs-12 col-md-2 col-md-offset-5">
+                @Umbraco.GetDictionaryValue("Register.Placeholder.Logintext") <a href="@Umbraco.GetDictionaryValue("Register.Placeholder.LoginURL")"> @Umbraco.GetDictionaryValue("Register.Placeholder.Loginlink")</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section bottomScripts
+{
+    <script>
+        // function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        // var profile = googleUser.getBasicProfile();
+        // console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        // console.log('Full Name: ' + profile.getName());
+        // console.log('Given Name: ' + profile.getGivenName());
+        // console.log('Family Name: ' + profile.getFamilyName());
+        // console.log("Image URL: " + profile.getImageUrl());
+        // console.log("Email: " + profile.getEmail());
+        // // The ID token you need to pass to your backend:
+        // var id_token = googleUser.getAuthResponse().id_token;
+        // console.log("ID Token: " + id_token);
+        // };
+        window.onLoadCallbackGoogle = function () {
+            if(typeof gapi != "undefined"){
+                var googleUser = {};
+                var startApp = function () {
+                    gapi.load('auth2', function () {
+                        // Retrieve the singleton for the GoogleAuth library and set up the client.
+                        auth2 = gapi.auth2.init({
+                            client_id: '510105606794-p02fsit5liejrsba5jhu0mc09q6b99uv.apps.googleusercontent.com',
+                            cookiepolicy: 'single_host_origin',
+                            // Request scopes in addition to 'profile' and 'email'
+                            //scope: 'additional_scope'
+                        });
+                        attachSignin(document.getElementById('gplus'));
+                    });
+                };
+
+                function attachSignin(element) {
+                    console.log(element.id);
+                    auth2.attachClickHandler(element, {},
+                        function (googleUser) {
+                            console.log(googleUser)
+                            checksocial(googleUser)
+                            // document.getElementById('name').innerText = "Signed in: " +
+                            //     googleUser.getBasicProfile().getName();
+                        }, function (error) {
+                            //alert(JSON.stringify(error, undefined, 2));
+                        });
+                }
+
+                setTimeout(function () {
+                    startApp();
+                }, 100)
+            }
+
+        }
+
+
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '219805455090553',
+                cookie: true,
+                xfbml: true,
+                version: 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+        };
+    </script>
+}

@@ -1,0 +1,9 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.Components.Advertising.AdvertisingBoxModel>
+
+<tr class="js-list-item">
+    <td class="hidden-xs">@Model.NumberOfProceedings</td>
+    <td class="hpm-first-tablecol--mobile"><a href="@Model.BoxUrl">@Model.Name</a></td>
+    <td class="hidden-xs">@Model.AdministrativeKey</td>
+    <td class="hpm-last-tablecol--mobile">@Model.InitiationOfProceedingsDate.ToString("yyyy-MM-dd")</td>
+    <td class="hidden-xs">@Model.DateLimitForReceipt.ToString("yyyy-MM-dd")</td>
+</tr>

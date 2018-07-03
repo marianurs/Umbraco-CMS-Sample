@@ -1,0 +1,256 @@
+// style page-information.scss nie były podpiete do app.scss - zakomentowałam niżej, po sprawdzeniu przez Pawła, czy wszystko ok będzie można usunać plik
+
+// /*GLOBAL*/
+
+// a {
+//     color: $polreg-red;
+// }
+
+// .btn {
+//     font-family: $font-regular;
+//     font-weight: 700;
+//     &.hpm-btn {
+//         background: $polreg-red;
+//         border-radius: 0;
+//         border: 3px solid $polreg-red;
+//         color: #fff;
+//         min-height: 48px;
+
+//         .fa {
+//             margin-left: 10px;
+//         }
+               
+//         &:hover {
+//             background: #fff;
+//             color: $polreg-red;
+//         }       
+//     }
+//     &.full-btn {
+//         width: 100%;
+//     }
+// }
+
+
+// .txtright { 
+// 	   text-align: right;
+// }
+
+// .txtcenter {
+// 	   text-align: center;
+// }
+
+// .sm-txtright {
+//     @media only screen and (min-width: $screen-sm) { 
+// 	   text-align: right;
+//     }
+// }
+
+// .sm-txtcenter {
+//     @media only screen and (min-width: $screen-sm) { 
+// 	   text-align: center;
+//     }
+// }
+
+// /*SEARCH BOX - HOMEPAGE*/
+// .hpm-search {
+//     margin-bottom: 90px; 
+
+//     .hpm-search--bg {
+//         background: red;
+//     }
+
+//     padding: 0;
+//     @media (min-width: $grid-float-breakpoint) { 
+//         padding: 3.3em 0px;
+//     }
+
+//     input[type=text],input[type=date],input[type=time] {
+//         width: 100%;
+//         box-sizing: border-box;
+//         border: 1px solid $polreg-gray;
+//         font-family: $font-regular;
+//         box-shadow: none;
+//         border-radius: 0;
+//         height: 48px;
+//         line-height: 48px;
+//     }
+
+//     #hpm-search--form {
+//         background: #fff;
+//         background:
+//             linear-gradient(135deg, transparent 10px, #fff 0) top left,
+//             linear-gradient(225deg, transparent 10px, #fff 0) top right,
+//             linear-gradient(315deg, transparent 10px, #fff 0) bottom right,
+//             linear-gradient(45deg,  transparent 10px, #fff 0) bottom left;
+//         background-image:
+//             radial-gradient(circle at 0 50%, rgba(255,255,255,0) 10px, #fff 10px),
+//             radial-gradient(circle at 100% 50%, rgba(255,255,255,0) 10px, #fff 10px);
+//         background-size: 51% 100%;
+//         background-repeat: no-repeat;
+//         padding: 30px;
+
+//         h2 {
+//             font-size: 20px;
+//             margin-top: 0;  
+//             margin-bottom: 30px;
+//        }
+
+//         #hpm-search--advanced {
+//             line-height: 48px;
+//         }
+//     }
+// }
+
+// /*LIST BOX - HOMEPAGE AND OTHER PAGES*/
+// .hpm-list {
+//     margin-bottom: 90px; 
+//     h2 {
+//         text-align: center;
+//         font-size: 24px;
+//         font-weight: 400;
+//         margin-bottom: 45px;
+//         margin-top: 0;
+//     }
+//     .hpm-list--loadmore {
+//         background: $polreg-red;
+//         display: block;
+//         color: #fff;
+//         text-align: center;
+//         line-height: 35px;
+//         font-size: 120%;
+//         position: relative;
+//         &::after {
+//             content: '';
+//             display:block;
+//             position: absolute;
+//             bottom: 0;
+//             right: 0;
+//             width: 0;
+//             height: 0;
+//             border-style: solid;
+//             border-width: 0 0 35px 27px;
+//             border-color: transparent transparent $polreg-orange transparent;
+//         }
+//         .fa {
+//             margin-left: 5px;
+//         }
+//     }
+//     ul {
+//         list-style: none;
+//         padding-left: 0;
+//         margin-top: 0;
+//         margin-bottom: 0;
+//         li {
+//             margin-bottom: 15px;
+
+//             .hpm-list--item {
+//                 background: #fff;
+//             }
+//             .hpm-list--img {
+//                 width: 100%;
+//                 display: block;
+//             }
+//             .hpm-list--hr {
+//                 background: $polreg-red;
+//                 height: 9px;
+//                 position: relative;
+
+//                 &::after {
+//                     content: '';
+//                     display:block;
+//                     position: absolute;
+//                     top: 0;
+//                     right: 0;
+//                     width: 0;
+//                     height: 0;
+//                     border-style: solid;
+//                     border-width: 0 0 9px 6px;
+//                     border-color: transparent transparent $polreg-orange transparent;
+//                 }
+//             }
+//             .hpm-list--content {
+//                 padding: 15px 15px 0;
+//                 .hpm-list--header {
+//                     font-size: 16px;
+//                     font-weight: 400;
+//                     margin: 0 0 15px;
+//                     min-height: 24px;
+//                     a {
+//                         color: $polreg-red;
+//                     }
+//                 }
+//                 p {
+//                     padding: 0 0 15px;
+//                     margin: 0;
+//                 }
+//             }
+//             .hpm-list-addons {
+//                 .hpm-list--date {
+//                     color: $polreg-gray;
+//                     font-size: 12px;
+//                     padding-left: 20px;
+//                 }
+//                 .hpm-list--more {
+//                     background: $polreg-red;
+//                     display: block;
+//                     color: #fff;
+//                     text-align: center;
+//                     line-height: 35px;
+//                     position: relative;
+//                      &::after {
+//                         content: '';
+//                         display:block;
+//                         position: absolute;
+//                         bottom: 0;
+//                         right: 0;
+//                         width: 0;
+//                         height: 0;
+//                         border-style: solid;
+//                         border-width: 0 0 35px 27px;
+//                         border-color: transparent transparent $polreg-orange transparent;
+//                     }
+//                 }
+//             }
+//         }
+//     } 
+//     &.hpm-offers {
+//          .hpm-list--content {
+//                 .hpm-list--header {
+//                     color: $polreg-red;
+//                 }
+//             }
+//     }
+//     &.hpm-news {
+//           ul {
+//             li {
+//                 .hpm-list--hr {
+//                     background: $polreg-darkgray;
+//                 }
+//                 .hpm-list--content {
+//                     .hpm-list--header {
+//                         padding-left: 30px;
+//                         background-repeat: no-repeat;
+//                         background-position: left center;
+//                         &.news {
+//                              background-image: url('/images/ico_info.png');
+//                         }
+//                         &.difficulties{
+//                              background-image: url('/images/ico_warning.png');
+//                         }
+//                         &.changes {
+//                             background-image: url('/images/ico_time.png');
+//                         }
+//                         a {
+//                             color: $polreg-darkgray;
+//                         }
+//                     }
+//                 }
+//                 .hpm-list-addons {              
+//                     .hpm-list--more {
+//                         background: $polreg-darkgray;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }

@@ -1,0 +1,50 @@
+{
+  "name": "Pusty formularz",
+  "created": "2013-07-06T13:48:02.4886665+02:00",
+  "pages": [
+    {
+      "fieldSets": [
+        {
+          "caption": null,
+          "sortOrder": 0,
+          "id": "f7ce5a54-8dc5-406e-bb32-ae738ed08b93",
+          "page": "00000000-0000-0000-0000-000000000000",
+          "containers": [
+            {
+              "caption": null,
+              "width": 12,
+              "fields": []
+            }
+          ],
+          "condition": null
+        }
+      ],
+      "caption": null,
+      "sortOrder": 0,
+      "id": "00000000-0000-0000-0000-000000000000",
+      "form": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "id": "587234e6-4cba-47e9-9a53-4bf8ad48c402",
+  "fieldIndicationType": "MarkMandatoryFields",
+  "indicator": "*",
+  "showValidationSummary": false,
+  "hideFieldValidation": false,
+  "requiredErrorMessage": "#FiledMandatory",
+  "invalidErrorMessage": "#FiledInvalid",
+  "messageOnSubmit": "#MessageOnSubmit",
+  "goToPageOnSubmit": 0,
+  "xPathOnSubmit": null,
+  "manualApproval": false,
+  "storeRecordsLocally": true,
+  "cssClass": null,
+  "disableDefaultStylesheet": false,
+  "useClientDependency": false,
+  "workflows": [
+    "4248afa0-617d-4def-94d5-34b943844d96"
+  ],
+  "datasource": null,
+  "submitLabel": "#Submit",
+  "nextLabel": "#Next",
+  "prevLabel": "#Previous"
+}

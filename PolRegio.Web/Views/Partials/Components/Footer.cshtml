@@ -1,0 +1,91 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Layout.FooterViewModel>
+<footer class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<a class="hpm-footer-logo @(Umbraco.TypedContent(UmbracoContext.Current.PageId).Url == Model.HomePageUrl ? " js-top" : "")" href="@Model.HomePageUrl" title="Link do strony głównej">
+					<img src="/images/logotyp_footer_d.png" alt="Logotyp POLREGIO" />
+				</a>
+			</div>
+		</div><!-- //end .row -->
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-9 pull-right">
+				<div role="navigation">
+					<nav class="navbar navbar-default hpm-navbar-footer">
+						<ul class="nav navbar-nav">
+                            @foreach (var footerItem in Model.MenuItems)
+                            {
+					        <li class="dropdown">
+
+					          <div class="dropdown-toggle" data-toggle="dropdown" >@footerItem.Url.Text</div>
+					           @if (footerItem.HasChildren)
+                               {
+                                <ul class="dropdown-menu">
+                                    @foreach (var subMenuItem in footerItem.SubMenuItems)
+                                    {
+                                        <li><a href="@subMenuItem.Url.Url" @(subMenuItem.Url.OpenInNewWindow == false ? "" : "target=_blank") title="Aktywny element: link do strony @subMenuItem.Url.Text" data-cookie="@(!string.IsNullOrEmpty(subMenuItem.Url.DataCookie) ? subMenuItem.Url.DataCookie : "")" class="hpm-js-erase-cookie">@subMenuItem.Url.Text</a></li>
+                                    }
+                                </ul>
+                               }
+					        </li>
+                            }
+					    </ul>
+					</nav>
+				</div><!-- //end navigation -->
+			</div><!-- //end .col-->
+            <div class="col-xs-12 col-sm-12 col-md-3">
+                <!-- <div class="footer-left-col"> -->
+                <div class="hpm-footer-left-col-bottom-el">
+                    <div class="hpm-social">
+                        @foreach (var item in Model.SocialMediaItems)
+                        {
+                            <a href="@item.SocialUrl"  target="_blank" title="@item.SocialName.ToLower()" id="@item.SocialName.ToLower()">
+                                @if (item.SocialName.ToLower() == "facebook")
+                                {
+                                    <i class="fa fa-@item.SocialName.ToLower()-official" alt="@item.SocialName.ToLower()"></i>
+                                }
+                                else if (item.SocialName.ToLower() == "youtube")
+                                {
+                                    <i class="fa fa-@item.SocialName.ToLower()-play" alt="@item.SocialName.ToLower()"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-@item.SocialName.ToLower()" alt="@item.SocialName.ToLower()"></i>
+                                }
+                            </a>
+                        }
+                    </div><!-- //end .social -->
+                    <div class="hpm-special-link"><a href="@Model.BipUrl" class="hpm-footerlink-to-external-page" @(Model.BipUrlTarget == false ? "" : "target=_blank") title="Link do strony: Biuletyn Informacji Publicznej"><img src="/images/bip_logo_d.png" alt="Logotyp BIPU (Biuletynu Informacji Publicznej)" /></a></div><!-- //end .special-link -->
+                </div><!-- //end .foter-left -->
+            </div><!-- //end .col-->
+        </div><!-- //end .row -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 text-left">
+                <p class="hpm-webowner">@Umbraco.GetDictionaryValue("Copyright.PR")</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 text-right hpm-umbraco-info">
+                <p class="hpm-copyright" onclick="$('.hpm-umbraco-info__popup').show();">@Umbraco.GetDictionaryValue("Copyright.Umbraco")</p>
+                <div class="hpm-umbraco-info__popup">
+                    <span class="hpm-umbraco-info__popup__close" onclick="$('.hpm-umbraco-info__popup').hide();"><i class="fa fa-times" aria-hidden="true"></i>
+
+                </span>
+                <p class="hpm-umbraco-info__popup__content">@Umbraco.GetDictionaryValue("Copyright.Umbraco.InfoText")</p>                
+                </div>
+            </div>
+        </div><!-- //end .row -->
+    </div>
+</footer>
+<script type="text/javascript">
+    var _smid = "3t2jb7ad8bapnkc8";
+    @if (Model.SalesManagoContactId.HasValue)
+    {
+        <text>var _smclientid = "@Model.SalesManagoContactId";</text>
+    }
+    (function(w, r, a, sm, s ) {
+        w['SalesmanagoObject'] = r;
+        w[r] = w[r] || function () {( w[r].q = w[r].q || [] ).push(arguments)};
+        sm = document.createElement('script'); sm.type = 'text/javascript'; sm.async = true; sm.src = a;
+        s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(sm, s);
+    })(window, 'sm', ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.salesmanago.pl/static/sm.js');
+</script>

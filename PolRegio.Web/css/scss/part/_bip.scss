@@ -1,0 +1,437 @@
+.hpm-bip {
+    @include contrast-bgcolor($polreg-contrast-bg);
+    &__container {
+        @include contrast-color($polreg-contrast-color);
+        margin: 1rem 0 2rem;
+        padding: 0;
+        @media (min-width: $screen-md) {
+            margin: 9.5rem 15.5% 1.7rem 14.5%;
+            padding: 0;
+        }
+        &:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        &--border-top {
+            position: relative;
+            border-top: 1rem solid $polreg-red;
+            &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: -1rem;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 0 1rem 1rem;
+                border-color: transparent transparent $polreg-orange transparent;
+            }
+        }
+    }
+    &__title {
+        background: $polreg-white;
+        @include contrast-bgcolor($polreg-contrast-bg);
+        position: relative;
+        padding: 2rem 2rem 2rem;
+        @media only screen and (min-width: $screen-sm) {
+            padding: 4rem 5rem 2rem;
+        }
+        img {
+            width: 55%;
+            margin-bottom: 1rem;
+            @media only screen and (min-width: $screen-sm) {
+                width: 25%;
+            }
+        }
+        input {
+            margin-bottom: 1rem;
+            @include contrast-placeholder($polreg-contrast-color);
+            @include contrast-border(1px solid $polreg-contrast-color);
+            @include contrast-color($polreg-contrast-color);
+            @include contrast-bgcolor($polreg-contrast-bg);
+        }
+        button {
+            position: relative;
+            &:after {
+                content: "";
+                position: absolute;
+                top: -3px;
+                right: -3px;
+                display: block;
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 0 48px 34px;
+                border-color: transparent transparent $polreg-orange2 transparent;
+            }
+            &:hover {
+                background: $polreg-red !important;
+                color: $polreg-white !important;
+                @include contrast-placeholder($polreg-contrast-color);
+                @include contrast-border(3px solid $polreg-contrast-color);
+                @include contrast-color($polreg-contrast-color);
+                @include contrast-bgcolor($polreg-contrast-bg);
+            }
+        }
+        p {
+            font-size: 1.3333rem;
+        }
+        h1 {
+            font-size: 1.6rem;
+            line-height: 2rem;
+            margin-top: 2rem;
+        }
+        &--border {
+            border-bottom: 1px solid $polreg-gray;
+        }
+        &__date {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            @media only screen and (min-width: $screen-sm) {
+                top: 4rem;
+                right: 5rem;
+            }
+        }
+    }
+    &__content {
+        @include contrast-bgcolor($polreg-contrast-bg);
+        background: $polreg-white;
+        padding: 0 2rem;
+        @media only screen and (min-width: $screen-sm) {
+            padding: 0 5rem;
+        }
+    }
+    &__element {
+        padding: 2rem 0 2rem;
+        @media only screen and (min-width: $screen-sm) {
+            padding: 2rem 0;
+        }
+        border-bottom: 1px solid $polreg-gray2;
+        &:last-of-type {
+            border: 0;
+        }
+        &__title {
+            font-size: 1.3rem;
+            line-height: 2.1rem;
+        }
+        &__content {
+            font-size: 1rem;
+            line-height: 1.7rem;
+            margin: 0 0 1rem;
+        }
+        &__content p,
+        &__content em {
+            font-size: 1rem;
+            line-height: 1.7rem;
+            margin: 0;
+        }
+        &__date {
+            font-size: 1rem;
+            line-height: 2.1rem;
+        }
+    }
+    &__form {
+        padding: 1rem 0 2rem;
+        &__element {
+            position: relative;
+            margin-bottom: 2rem;
+            [type="text"],[type="password"],select,
+            textarea {
+                @include contrast-placeholder($polreg-contrast-color);
+                @include contrast-border(1px solid $polreg-contrast-color);
+                @include contrast-color($polreg-contrast-color);
+                @include contrast-bgcolor($polreg-contrast-bg);
+                height: 4rem;
+                font-size: 1rem;
+                color: $polreg-darkgray2;
+                border: 1px solid $polreg-darkgray;
+                &.input-validation-error {
+                    border: 1px solid $polreg-red;
+                }
+            }
+            textarea {
+                height: 12.5rem;
+            }
+            .field-validation-error {
+                position: relative;
+                top: 1rem;
+                display: inline-block;
+                width: 100%;
+                background: $polreg-red;
+                color: $polreg-white;
+                padding: 1rem;
+                font-size: 1rem;
+                text-align: center;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    top: -1rem;
+                    left: calc(50% - 0.5rem);
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 0 1rem 1rem 1rem;
+                    border-color: transparent transparent $polreg-red transparent;
+                    @media only screen and (min-width: $screen-sm) {
+                        top: -0.9rem;
+                    }
+                }
+            }
+            &__title,
+            &__title p {
+                font-size: 1rem;
+            }
+            &__radio {
+                min-height: 4rem;
+                [type="radio"] {
+                    position: absolute;
+                    visibility: hidden;
+                }
+                label {
+                    display: block;
+                    position: relative;
+                    font-size: 1rem;
+                    font-weight: normal;
+                    padding: 0 0 0 6.5rem;
+                    margin: 10px auto;
+                    min-height: 4rem;
+                    z-index: 9;
+                    cursor: pointer;
+                    z-index: 2;
+                }
+                .check {
+                    position: absolute;
+                    top: 0;
+                    left: 8px;
+                    width: 4rem;
+                    height: 4rem;
+                    border: 1px solid $polreg-darkgray2;
+                }
+                [type="radio"] {
+                    &.input-validation-error {
+                        &~ .check {
+                            border: 1px solid $polreg-red;
+                        }
+                    }
+                    &:checked {
+                        &~ .check {
+                            border: 2px solid $polreg-orange;
+                            background: url(../images/svg/radio-checked.svg) no-repeat center;
+                        }
+                    }
+                }
+                & + .field-validation-error {
+                    @media only screen and (min-width: $screen-sm) {
+                        width: auto;
+                        padding: 1rem 2rem;
+                    }
+                }
+            }
+            &__checkbox {
+                min-height: 4rem;
+                [type="checkbox"] {
+                    position: absolute;
+                    visibility: hidden;
+                }
+                .field-validation-error {
+                    @media only screen and (min-width: $screen-sm) {
+                        width: auto;
+                        padding: 1rem 2rem;
+                    }
+                }
+                label {
+                    display: block;
+                    position: relative;
+                    font-size: 1rem;
+                    font-weight: normal;
+                    padding: 0 0 0 6.5rem;
+                    margin: 10px auto;
+                    min-height: 4rem;
+                    z-index: 9;
+                    cursor: pointer;
+                    z-index: 2;
+                }
+                .check {
+                    position: absolute;
+                    top: 0;
+                    left: 8px;
+                    width: 4rem;
+                    height: 4rem;
+                    border: 1px solid $polreg-darkgray2;
+                }
+                [type="checkbox"] {
+                    &.input-validation-error {
+                        &~ .check {
+                            border: 1px solid $polreg-red;
+                        }
+                    }
+                    &:checked {
+                        &~ .check {
+                            border: 2px solid $polreg-orange;
+                            background: url(../images/svg/radio-checked.svg) no-repeat center;
+                        }
+                    }
+                }
+            }
+            &__btn {
+                input {
+                    @include contrast-placeholder($polreg-contrast-color);
+                    @include contrast-border(1px solid $polreg-contrast-color);
+                    @include contrast-color($polreg-contrast-color);
+                    @include contrast-bgcolor($polreg-contrast-bg);
+                }
+                &:after {
+                    border-width: 0 0 4rem 3rem;
+                }
+            }
+            .g-recaptcha {
+                & + .field-validation-error {
+                    @media only screen and (min-width: $screen-sm) {
+                        width: auto;
+                        padding: 1rem 2rem;
+                    }
+                }
+            }
+        }
+    }
+    &__back-all-article {
+        text-align: center;
+        @media only screen and (min-width: $screen-sm) {
+            text-align: right;
+        }
+        a {
+            padding: 2rem 1rem 2rem 0;
+            font-size: 1.3rem;
+            background: url(../images/arrow_menu_link.png) no-repeat right center;
+        }
+    }
+    .navbar {
+        border: 0;
+        background-color: transparent;
+        text-align: left;
+        min-height: 0;
+        margin: 1rem 0 0;
+        @media only screen and (min-width: $screen-sm) {
+            margin: 2rem 0 0;
+        }
+        .nav {
+            border: 0;
+            background-color: transparent;
+            @media only screen and (min-width: $screen-sm) {
+                margin: 0;
+            }
+            .dropdown {
+                border: 0;
+                background-color: transparent;
+                width: 100%;
+                .dropdown-toggle {
+                    @include contrast-placeholder($polreg-contrast-color);
+                    @include contrast-border(1px solid $polreg-contrast-color);
+                    @include contrast-color($polreg-contrast-color);
+                    @include contrast-bgcolor($polreg-contrast-bg);
+                    padding: 0.9em 1.2em 0.7em;
+                    font-size: 1.3rem;
+                    background-color: $polreg-white;
+                    color: $polreg-red;
+                    @media only screen and (min-width: $screen-sm) {
+                        display: block;
+                        position: static;
+                    }
+                    @media only screen and (min-width: $screen-md) {
+                        padding: 1rem 1.2em 0.9rem;
+                    }
+                    &:after {
+                        position: absolute;
+                        content: "+";
+                        display: block;
+                        width: 1em;
+                        height: 0.8em;
+                        color: $polreg-red;
+                        background-size: 100% auto;
+                        background-position: top center;
+                        right: 4.2%;
+                        top: 1.8rem;
+                        margin-top: -0.36em;
+                        border: 0;
+                        font-size: 2.1em;
+                        font-family: 'noto_regular';
+                        font-weight: 900;
+                        @media only screen and (min-width: $screen-sm) {
+                            top: 2.1rem;
+                        }
+                        @media only screen and (min-width: $screen-md) {
+                            top: 0.9rem;
+                        }
+                    }
+                    &:hover {
+                        background-color: $polreg-white;
+                        color: $polreg-red;
+                    }
+                }
+                .dropdown-menu {
+                    border: 0;
+                    @media only screen and (min-width: $screen-sm) {
+                        position: absolute;
+                        visibility: hidden;
+                    }
+                    li {
+                        @include contrast-placeholder($polreg-contrast-color);
+                        @include contrast-border(1px solid $polreg-contrast-color);
+                        @include contrast-color($polreg-contrast-color);
+                        @include contrast-bgcolor($polreg-contrast-bg);
+                        background-color: $polreg-white;
+                        @media only screen and (min-width: $screen-sm) {
+                            display: block;
+                            border: 1px solid $polreg-gray;
+                            border-top: 0;
+                        }
+                        p {
+                            padding: 0.9em 1.2em 0.7em;
+                            margin: 0;
+                            text-align: left;
+                        }
+                        &:before,
+                        &:after {
+                            display: none !important;
+                        }
+                    }
+                }
+                &.open {
+                    .dropdown-toggle {
+                        @media only screen and (min-width: $screen-sm) {
+                            display: block;
+                            position: static;
+                        }
+                        &:after {
+                            top: 1.8rem;
+                            color: $polreg-white;
+                            content: "--";
+                            letter-spacing: -0.065em;
+                            @media only screen and (min-width: $screen-sm) {
+                                top: 1.8rem;
+                            }
+                            @media only screen and (min-width: $screen-md) {
+                                top: 0.8rem;
+                            }
+                        }
+                    }
+                    .dropdown-menu {
+                        @media only screen and (min-width: $screen-sm) {
+                            position: static;
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.hpm-section--title {
+    & + .hpm-bip__container {
+        margin-top: 0;
+    }
+}
+

@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var videoUrl = (!String.IsNullOrEmpty(Model.MacroParameters["VideoUrl"].ToString())) ? Model.MacroParameters["VideoUrl"] : null;
+}
+@if (videoUrl != null)
+{
+    <div class="video-responsive">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="@videoUrl" allowfullscreen=""></iframe>
+        </div>
+    </div>
+}

@@ -1,0 +1,31 @@
+{
+  "name": "preg",
+  "private": true,
+  "main": "gulpfile.js",
+  "dependencies": {
+    "mobile-detect": "^1.3.5",
+    "notosans-fontface": "*",
+    "jquery": "~1.12.4",
+    "bootstrap-sass": "~3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "~4.17.43",
+    "bootstrap-select": "~1.12.1",
+    "font-awesome": "~4.7.0",
+    "jquery-ajax-unobtrusive": "~3.2.4",
+    "devbridge-autocomplete": "~1.2.27",
+    "bxslider-4": "~4.1.2",
+    "jquery.cookie": "~1.4.1",
+    "svg-pan-zoom": "^3.4.0",
+    "headroom.js": "https://unpkg.com/headroom.js@0.9.3/dist/headroom.js",
+    "jQuery.headroom.js": "https://unpkg.com/headroom.js@0.9.3/dist/jQuery.headroom.js",
+    "jquery-validation": "^1.16.0",
+    "jquery-validation-unobtrusive": "^3.2.6",
+    "listgroup.js": "^1.1.3"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

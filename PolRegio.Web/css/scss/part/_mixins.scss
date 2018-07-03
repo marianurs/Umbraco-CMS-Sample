@@ -1,0 +1,128 @@
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin border-icon($border-type, $border-size, $border-icon-color) {
+    border: $border-type $border-size $border-icon-color;
+}
+
+/* mixins for contrast */
+
+@mixin contrast-color($contrast-color) {
+    .hpm-change-contrast & {
+        color: $contrast-color !important;
+        @content;
+    }
+}
+@mixin contrast-bgcolor($contrast-bgcolor) {
+    .hpm-change-contrast & {
+        background-color: $contrast-bgcolor !important;
+        @content;
+    }
+}
+@mixin contrast-bordercolor($contrast-bordercolor) {
+    .hpm-change-contrast & {
+        border-color: $contrast-bordercolor !important;
+        @content;
+    }
+}
+@mixin contrast-border($contrast-border) {
+    .hpm-change-contrast & {
+        border: $contrast-border !important;
+        @content;
+    }
+}
+
+
+@mixin contrast-focus($contrast-border) {
+    .hpm-change-contrast &{
+        &:focus{
+        border: 4px solid $contrast-border !important;
+        @content;
+        }
+    }
+}
+@mixin contrast-borderleft($contrast-borderleft) {
+    .hpm-change-contrast & {
+        border-left: $contrast-borderleft !important;
+        @content;
+    }
+}
+@mixin contrast-borderright ($contrast-borderright) {
+    .hpm-change-contrast & {
+        border-right: $contrast-borderright !important;
+        @content;
+    }
+}
+@mixin contrast-borderbottom($contrast-borderbottom) {
+    .hpm-change-contrast & {
+        border-bottom: $contrast-borderbottom !important;
+        @content;
+    }
+}
+@mixin contrast-bordertop($contrast-bordertop) {
+    .hpm-change-contrast & {
+        border-top: $contrast-bordertop !important;
+        @content;
+    }
+}
+@mixin contrast-image($contrast-urlimage) {
+    .hpm-change-contrast & {
+        background-image: url($contrast-urlimage) !important;
+        @content;
+    }
+}
+@mixin contrast-rotateimage($contrast-transformimage) {
+    .hpm-change-contrast & {
+        transform: rotate($contrast-transformimage) !important;
+        @content;
+    }
+}
+@mixin contrast-placeholder($contrast-color) {
+    .hpm-change-contrast & {
+        &::-webkit-input-placeholder {
+            /* Chrome/Opera/Safari */
+            color: $contrast-color;
+        }
+        &::-moz-placeholder {
+            /* Firefox 19+ */
+            color: $contrast-color;
+        }
+        &:-ms-input-placeholder {
+            /* IE 10+ */
+            color: $contrast-color;
+        }
+        &:-moz-placeholder {
+            /* Firefox 18- */
+            color: $contrast-color;
+        }
+        @content;
+    }
+}
+@mixin contrast-svg($contrast-svgcolor) {
+    .hpm-change-contrast & {
+        fill: $contrast-svgcolor !important;
+        stroke: $contrast-svgcolor !important;
+        @content;
+    }
+}
+@mixin contrast-svgFill($contrast-svgcolor) {
+    .hpm-change-contrast & {
+        fill: $contrast-svgcolor !important;
+        @content;
+    }
+}
+@mixin contrast-svgStroke($contrast-svgcolor) {
+    .hpm-change-contrast & {
+        stroke: $contrast-svgcolor !important;
+        @content;
+    }
+}
+@mixin contrast-removebgimg() {
+    .hpm-change-contrast & {
+        background-image: none !important;
+        @content;
+    }
+}

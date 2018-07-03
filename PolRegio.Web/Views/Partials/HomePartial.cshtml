@@ -1,0 +1,281 @@
+﻿@using PolRegio.Web.Helpers
+@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Home.HomePageViewModel>
+    <aside class="hpm-search">
+        <div class="container">
+            <div class="slider">
+                <div class="search-wrapper">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-8 col-lg-8 norpad hpm-search--bg ">
+                            <div id="slickslide">
+                                @foreach (var slide in Model.SliderSlides)
+                                {
+                                    <div>
+                                        <img src="@MediaUrlHelper.GetMediaUrl(slide.Image)" alt="banner image" />
+                                        @if (!string.IsNullOrEmpty(slide.Link))
+                                        {
+                                            <a href="@slide.Link" style="white-space: pre-line;">@slide.Text</a>
+                                        }
+                                        else
+                                        {
+                                            <span style="white-space: pre-line;">@slide.Text</span>
+                                        }
+                                    </div>
+                                }
+                          </div>
+                            <!-- <div class="row">
+                                <h1 class="col-md-5 col-md-offset-6">@Model.HomePageFromDb.FirstLineTextImage<br />@Model.HomePageFromDb.SecondLineTextImage </h1>
+                            </div> --> 
+                            
+                        </div>
+                        <div class="col-xs-12 col-md-4 col-lg-4 nolpad">
+                            <div id="hpm-section-container">
+                                @Html.Partial("Controls/SearchTicket", Model.SearchTicketModel)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="routemaps">
+                    <!-- <div class="container">
+                        <div class="openclose">Zaplanuj podróż</div> -->
+                        <div class="row">
+                            <div class="col-xs-12 hpm-route-track">
+                                
+                                <div id="mapControl" class="hpm-route-track-search">
+                                    <div id="notfilled" class="open">
+                                        <div class="toprow row">
+                                            <div class="col-xs-12">
+                                                <h2>@Umbraco.GetDictionaryValue("Section.SearchTicket.MapTitle")<br />(BETA)</h2>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-11">
+                                                <input type="text" class="" id="fromLocation" placeholder="@Umbraco.GetDictionaryValue("Home.Placeholder.DepartureFrom")">
+                                                <div class="findme" onClick="getLocation()">
+                                                    
+                                                    <span class="info">@Umbraco.GetDictionaryValue("Home.Placeholder.SetMyLocation")</span></div><!-- Znajdź mnie -->
+                                                </div>
+                                                
+                                                <div class="col-xs-11">
+                                                    <input type="text" class=""  id="toLocation" placeholder="@Umbraco.GetDictionaryValue("Home.Placeholder.ArrivalTo")">
+                                                </div>
+                                                <div class="col-xs-1">
+                                                    <span onClick="googlemod.swapmap()" class="swap">&#x2195;</span>
+                                                </div>
+                                            </div>
+											<div id="noresults" class="col-xs-12">
+											    @Umbraco.GetDictionaryValue("Home.Placeholder.NoResults")
+											</div>
+											
+                                            <div class="row datafields">
+                                                <div class="col-xs-11 ">
+                                                    
+                                                <div class="col-xs-6">
+                                                    <!--<input type="text" id="departuredate" class="js-datepicker" placeholder="data wyjazdu"> class="js-datepicker"-->
+                                                    <div class="form-group pickerInput">
+                                                        <span class="pickerText">@Umbraco.GetDictionaryValue("Home.Placeholder.DateOfDeparture")</span>
+                                                        <input class="form-control js-datepicker" id="departuredate" name="departuredate" readonly="readonly" type="text" value="">
+                                                    </div>
+                                                </div><div class="col-xs-6">
+                                                <!--<input type="text"  id="departuretime" class="js-timepicker" placeholder="godzina wyjazdu">class="js-timepicker"-->
+                                                
+                                                <div class="form-group pickerInput">
+                                                    <span class="pickerText">@Umbraco.GetDictionaryValue("Home.Placeholder.HourOfDeparture")</span>
+                                                    <input class="form-control js-timepicker" id="departuretime" name="departuretime" readonly="readonly" type="text" value="">
+                                                </div>
+                                            
+                                            </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4">
+                                                <input type="checkbox" id="arrivedepart" name="arrivedepart"><label for="arrivedepart">
+                                                
+                                                <span class="icon"></span> <span class="showing">@Umbraco.GetDictionaryValue("Home.Placeholder.Arrival")</span> <span class="hiding">@Umbraco.GetDictionaryValue("Home.Placeholder.Departure")</span></label>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4">
+                                                <!--Podpowiadaj-->    <input type="checkbox" id="autocompletetype" name="autocompletetype" onClick="googlemod.changeautocomplete()" checked><label for="autocompletetype">
+                                                
+                                                <span class="icon"></span> <span class="showing">@Umbraco.GetDictionaryValue("Home.Placeholder.PredictAll")</span> <span class="hiding">@Umbraco.GetDictionaryValue("Home.Placeholder.PredictOnlyStations")</span></label>
+                                            </div>
+                                            <div class="col-xs-6 small-centered col-sm-4">
+                                                <!--Podpowiadaj-->    <input type="checkbox" id="showhidestations" name="showhidestations" onClick="googleservice.showhidestations()" checked><label for="showhidestations">
+                                                
+                                                <span class="icon"></span> <span class="showing">@Umbraco.GetDictionaryValue("Home.Placeholder.ShowStations")</span> <span class="hiding">@Umbraco.GetDictionaryValue("Home.Placeholder.HideStations")</span></label>
+                                            </div>
+                                            <!--  <div class="col-xs-4"><input type="checkbox" onClick="saveSearch()" id="savingsearch" name="savingsearch"><label for="savingsearch">
+                                            
+                                            <span> class="icon"></span> Zapisz</label></div> -->
+                                        </div>
+                                        <div class="row full">
+                                            <div class="col-xs-12">
+                                                <button class="btn hpm-btn" id="showroute" onClick="googlemod.calculateAndDisplayRoute()">@Umbraco.GetDictionaryValue("Home.Link.AdvancedSearch")</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="filled">
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <div class="col-xs-12">
+                                                <span>@Umbraco.GetDictionaryValue("Home.Placeholder.ShortFrom"):</span>
+                                                
+                                                <span id="chosenFrom"></span>
+                                                </div>
+                                                <div class="col-xs-12">
+                                                <span>@Umbraco.GetDictionaryValue("Home.Placeholder.ShortTo"):</span>
+                                                
+                                                <span id="chosenTo"></span>
+                                            </div>
+                                            </div>
+                                            <div class="col-xs-4 right">
+                                                <a href="" onClick="backtosearch(event)">@Umbraco.GetDictionaryValue("Home.Placeholder.Change")</a>
+                                            </div>
+                                        </div>
+                                        <!-- </div> -->
+                                    </div>
+                                </div>
+                                <div id="savemap">
+                                    <div class="row top">
+                                        <div class="col-xs-12">
+                                            <div class="row">
+                                                <div class="col-xs-6 orange">
+                                                    <h3><a class="showonmap" href="">@Umbraco.GetDictionaryValue("Home.Placeholder.SearchConnections")</a></h3>
+                                                </div>
+                                                <div class="col-xs-6 ">
+                                                    <h3>@Umbraco.GetDictionaryValue("Home.Placeholder.CheckOnMap")</h3>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <!-- <div id="getLocation" class="col-xs-6" onClick="getLocation()">
+                                            <button class="btn hpm-btn">Znajdź mnie</button>
+                                        </div>
+                                        <div class="col-xs-6"><button class="btn hpm-btn" id="saveurlbutton" onClick="googlemod.saveurl();">Skopiuj link</button><input type="text" id="saveurl" style="display:none"/></div> -->
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div id="map" ></div>
+                                <div id="directions" >
+                                    <div class="inner-directions">
+                                        <!-- <a href="" onClick="backtosearch(event)">Zmień</a> -->
+                                    </div>
+                                    <div id="inner-directions"></div>
+                                    <div class="next">@Umbraco.GetDictionaryValue("Home.Placeholder.Later")</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </aside>
+        @if (Model.OffersListDisplayOnHomePage != null && Model.OffersListDisplayOnHomePage.Count() > 0)
+        {
+        <section class="hpm-list hpm-offers">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>@Model.HomePageFromDb.FirstSectionName</h2>
+                    </div>
+                </div>
+                <ul class="row hpm-boxes-container  hpm-list--ul">
+                    @Html.Partial("Controls/ArticleBoxesList", Model.OffersListDisplayOnHomePage)
+                </ul>
+                <div class="row">
+                    <div class="col-xs-12 txtcenter sm-txtright">
+                        <a href="@Model.AllOffersUrl" class="hpm-seemore">@Umbraco.GetDictionaryValue("Home.Link.SeeAllOffers") <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        }
+        @if (Model.Baner != null)
+        {
+        <section class="hpm-list hpm-offers hpm-banner">
+            <div class="container">
+                <a href="@Model.Baner.ButtonUrl" @{if (Model.Baner.ButtonIsNewTab){<text>target="_blank"</text>}}>
+                    <picture>
+                        <source media="(min-width: 760px)"
+                        srcset="@MediaUrlHelper.GetMediaUrl(Model.Baner.DesktopImageUrl) 760w,
+                        @MediaUrlHelper.GetMediaUrl(Model.Baner.MobileImageUrl) 760w"
+                        sizes="33.3vw" />
+                        
+                        <img src="@MediaUrlHelper.GetMediaUrl(Model.Baner.MobileImageUrl)" alt="@Model.Baner.ImageAlt" />
+                    </picture>
+                </a>
+            </div>
+        </section>
+        }
+        @if (Model.NewsListDisplayOnHomePage != null && Model.NewsListDisplayOnHomePage.Count() > 0)
+        {
+        <section class="hpm-list hpm-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h2>@Model.HomePageFromDb.SecondSectionName</h2>
+                    </div>
+                </div>
+                <ul class="row hpm-boxes-container hpm-list--ul">
+                    @Html.Partial("Controls/NewsBoxesList", Model.NewsListDisplayOnHomePage)
+                </ul>
+                <div class="row">
+                    <div class="col-xs-12 txtcenter sm-txtright">
+                        <a href="@Model.AllNewsUrl" class="hpm-seemore">@Umbraco.GetDictionaryValue("Home.Link.SeeAllNews") <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        }
+<!-- <section>
+    <div class="container">
+        <div class="row">
+            
+        </div>
+    </div>
+</section> -->
+<script type="text/javascript" src="/scripts/markercluster.min.js"></script>
+<script type="text/javascript">
+
+function async(u, c) {
+  var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src =  u;
+  if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+  s.parentNode.insertBefore(o, s);
+}
+
+setTimeout(function(){
+async('/scripts/slick.min.js', function() { 
+    $('#slickslide').slick({
+          dots: true,
+          infinite: true,
+          speed: 700,
+          numbers: false,
+          slidesToShow: 1,
+          arrows:true,
+          adaptiveHeight: true,
+          autoplay: true,
+          autoplaySpeed: 10000,
+          responsive: [
+                {
+                  breakpoint: 760,
+                  settings: {
+                  dots: true,
+                  infinite: true,
+                  speed: 300,
+                  slidesToShow: 1,
+                  arrows:false,
+                  adaptiveHeight: true,
+                }
+              }]
+        });
+});
+    },0)
+
+</script>
+
+@section bottomScripts{
+   
+     
+}
+
+ 

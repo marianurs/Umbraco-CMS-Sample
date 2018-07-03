@@ -1,0 +1,68 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Account.ResetPassFormViewModel>
+
+@if (Model.TokenExpired)
+{
+    <p class="resetinfo">@Umbraco.GetDictionaryValue("Reset.Token.Expired")</p>
+}
+else
+{
+    using (Ajax.BeginForm("SubmitResetPassForm", "PolRegioAccount", null, new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "hpm-section-bipform-container",
+        OnBegin = "loaderShow();",
+        OnSuccess = "registerfinished(data, status, xhr)",
+    }, new { id = "boxesForm" }))
+    {
+        @Html.HiddenFor(q => q.CurrentPageCulture)
+        @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+        @Html.HiddenFor(q => q.Token)
+        @Html.AntiForgeryToken()
+        <div class="hpm-reg__form row">
+            <div class="col-xs-12">
+                <div class="bg-white">
+                    @if (Model.Response != null && Model.Response.IsError)
+                    {
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    @Html.Raw(Model.Response.Message)
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                        clearForm('@(Model.Response.IsError ? "False" : "True")', true );
+                        </script>
+                    }
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class=" col-sm-12 col-md-12">
+                                    <p>@Umbraco.GetDictionaryValue("Reset.Placeholder.Info")</p>
+                                </div>
+                                <div class="hpm-reg__form__element col-sm-12 col-md-4">
+                                    <h2>@Umbraco.GetDictionaryValue("Reset.Placeholder.Password")</h2>
+                                    <div class="UserPassword"> @Html.PasswordFor(q => q.Password, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Reset.Placeholder.Password") })<div id="showpassword"></div></div>
+                                    @Html.ValidationMessageFor(q => q.Password, Umbraco.GetDictionaryValue("Reset.Placeholder.Password.Error"))
+                                </div>
+                                <div class="hpm-reg__form__element col-sm-12 col-md-4">
+                                    <h2>@Umbraco.GetDictionaryValue("Reset.Placeholder.RepeatPassword")</h2>
+                                    @Html.PasswordFor(q => q.PasswordConfirm, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Reset.Placeholder.RepeatPassword") })
+                                    @Html.ValidationMessageFor(q => q.PasswordConfirm, Umbraco.GetDictionaryValue("Reset.Placeholder.RepeatPassword.Error"))
+                                </div>
+                                <div class="hpm-reg__form__element col-sm-12 col-md-4">
+                                    <h2>&nbsp;</h2>
+                                    <div class="hpm-reg__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                                        <input type="submit" class="btn center-block hpm-list--loadmore  full-btn" value="@Umbraco.GetDictionaryValue("Reset.Placeholder.Button.Submit")" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

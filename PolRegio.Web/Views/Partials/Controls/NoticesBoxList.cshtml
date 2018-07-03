@@ -1,0 +1,6 @@
+﻿@inherits UmbracoViewPage<IEnumerable<PolRegio.Domain.Models.Components.Notice.NoticeBoxModel>>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("Components/NoticeBox", item)
+}

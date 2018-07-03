@@ -1,0 +1,121 @@
+
+<!doctype html>
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>@Model.ArticleTitle</title>
+   <style>
+   a{
+    color:#e50000;
+    text-decoration:underline;
+    font-weight:700;
+   }
+   td,p{
+    color:#57636b;
+   }
+   p{
+    margin-bottom:37px;
+    width:100%;
+   }
+   </style>
+
+ </head>
+ Witaj, proszę o wysłanie poniższego artykułu w mailingu:<br/>
+    Do kogo?: @string.Join(", ",Model.Regions)<br />
+    Tytuł wiadomości: @Model.ArticleTitle<br />
+    Lead: @Raw(Model.ArticleLead)<br />
+    Zdjęcie: <img src="@Model.ImageUrl"/><br />
+    Link: @Model.ArticleLink<br />
+    Artykuł zgłosił @Model.RedactorMail. W razie wątpliwości prosimy o kontakt bezpośredni ze zlecającym.<br />
+    Komentarz: @Model.Comment<br />
+    Zlecenie zostało zapisane w systemie o godz. @Model.UpdateDate.ToString("d") r.<br />
+    Treść wygenerowana automatycznie, prosimy na nią nie odpowiadać.<br />
+ <body style="padding: 0;margin: 0; box-sizing:border-box; font-family: 'Calibri'; color:#57636b">
+  <div id="container" style=" width:100%; border-collapse: collapse;padding: 0;margin: 0; max-width:500px; margin:0 auto">
+   <table border="0" cellpadding="0" cellspacing="0" width="500" style="max-width:500px; padding-top:30px;">
+    <tr style="padding-bottom:20px; border-bottom:2px solid #dde0e1;">
+              <td> <table border="0" cellpadding="0" cellspacing="0" width="500" style="max-width:500px; padding-top:30px;     border-bottom: 1px solid #dde0e1;">
+                <tr>
+                <td style="width:150px" width="150">
+                    <img src="http://polregio-bbc.nowellon2.hypermedia.pl/images/Logo.png" />
+                </td>
+                <td width="350">
+                    <table border="0" cellpadding="0" cellspacing="0" width="350" style="text-align:right;">
+                        <tr><td style="font-size:16px; font-weight:700; color:#57636b; text-align:right;">Infolinia: <span style="color:#e50000">+ 48 703 20 20 20</span></td></tr>
+                        <tr><td style="font-size:13px; text-align:right;"><span>Opłata za min. połączenia 1,29 zł brutto.</span></td></tr>
+                    </table>
+                </td>
+            </tr>
+            </table>
+          </td>
+        
+      </tr>
+    <tr id="content">
+      <table border="0" cellpadding="0" cellspacing="0" width="500" style="max-width:500px; font-size:16px; text-align:justify;">
+       <tr>
+     <td><!-- Put content here-->
+      <h1 class="title" style="font-size:30px; font-weight:400; text-align:left;"><b>@Model.ArticleTitle</b></h1>
+        </td></tr>
+        <tr><td>
+                <img src="@Model.ImageUrl">
+        </td></tr>
+        <tr><td>
+     @Raw(Model.ArticleLead)
+
+   
+ </td>
+</tr>
+<tr>
+ <td class="button" align="center">
+ <a href="@Model.ArticleLink"> <span class="button" style="background:url(button.png) no-repeat #e50000; background-size: auto 100%; background-position: right top; display: inline-block; padding:14px 60px 16px 60px; color: #fff; font-size:18px; text-decoration:none;">Zobacz artykuł </span></a> 
+ </td>
+</tr>
+
+</table>
+</tr>
+<tr id="footer">
+<table border="0" cellpadding="0" cellspacing="0" width="500" style="max-width:500px; font-size:12px;     border-top: 1px solid #dde0e1;
+    padding-top: 25px;">
+                    <tr id="logos">
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0" width="500" style="max-width:500px; font-size:12px;">
+                                <tr>
+                                    <td width="130" style="width:130px"></td>
+                                    <td width="60" style="width:60px">
+                                        <a href="https://www.facebook.com/POLREGIO/"><img src="http://polregio-bbc.nowellon2.hypermedia.pl/images/Facebook.png" /></a>
+                                    </td>
+                                    <td width="60" style="width:60px">
+                                        <a href="https://www.instagram.com/polregio/"><img src="http://polregio-bbc.nowellon2.hypermedia.pl/images/Instagram.png" /></a>
+                                    </td>
+                                    <td width="60" style="width:60px">
+                                        <a href="https://www.youtube.com/user/PrzewozyRegionalnePL/videos"><img src="http://polregio-bbc.nowellon2.hypermedia.pl/images/Youtube.png" /></a>
+                                    </td>
+                                    <td width="60" style="width:60px">
+                                        <a href="https://twitter.com/POLREGIO_PL"><img src="http://polregio-bbc.nowellon2.hypermedia.pl/images/Twitter.png" /></a>
+                                    </td>
+                                    <td width="130" style="width:130px"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+  <tr>
+    <td>
+   <p style="text-align:justify;">
+    Administratorem danych są Przewozy Regionalne sp. z o.o., ul. Wileńska 14a 03-414 Warszawa. NIP 526-25-57-278. Regon 017319719. Nr KRS 0000031521 (wpis do Krajowego Rejestru Sądowego - Postanowienie z dnia 27 lipca 2001 roku Sądu Rejonowego dla m. st. Warszawy - XIII Wydziału Gospodarczego Krajowego Rejestru Sądowego).  Wysokość kapitału zakładowego 1 540 606 500,00 zł.
+   </p>
+   <p style="text-align:center;">"Przewozy Regionalne" sp. z o.o.</p>
+</td>
+</tr>
+<tr><td>
+Jeśli chcesz zrezygnować z powiadomień o zabezpieczeniach lub zmienić sposób ich otrzymywania, <a href="http://polregio.pl/pl/zaloguj">kliknij tutaj.</a>
+  <b>Dziękujemy!</b>
+ </td>
+</tr>
+
+  </table>
+ </tr>
+ </table>
+</div>
+</body>
+</html>

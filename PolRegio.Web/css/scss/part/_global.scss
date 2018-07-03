@@ -1,0 +1,313 @@
+/*GLOBAL from typography.scss */
+
+.hpm-accordion {
+    @include contrast-bgcolor($polreg-contrast-bg);
+}
+
+input#hpm-search--input {
+    width: 100%;
+    box-sizing: border-box;
+    color: $polreg-darkgray2;
+    border: 1px solid $polreg-gray;
+    font-family: $font-regular;
+    box-shadow: none;
+    border-radius: 0;
+    height: 48px;
+    // line-height: 48px;
+    line-height: 1;
+    font-size: 1.15em;
+    @include contrast-color($polreg-black);
+    &:-webkit-input-placeholder,
+    &::-moz-placeholder,
+    &:-moz-placeholder,
+    &:-ms-input-placeholder {
+        @include contrast-color($polreg-black);
+    }
+}
+
+.darkgray-bg {
+    background-color: $polreg-darkgray2 !important;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    * {
+        color: $polreg-white !important;
+        @include contrast-color($polreg-contrast-color);
+    }
+}
+
+.red-bg {
+    background-color: $polreg-red !important;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    * {
+        color: $polreg-white !important;
+        @include contrast-color($polreg-contrast-color);
+    }
+}
+
+.white-bg-01 {
+    background-color: $polreg-white !important;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    * {
+        color: $polreg-darkgray !important;
+        @include contrast-color($polreg-contrast-color);
+    }
+}
+
+.white-bg-01 {
+    background-color: $polreg-white;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    * {
+        color: $polreg-red !important;
+        @include contrast-color($polreg-contrast-color);
+    }
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.fa-adjust {
+    transform: rotate(180deg);
+}
+
+
+/*GLOBAL from homepage-search*/
+
+.autocomplete-suggestions {
+    border: 1px solid $polreg-lightgray;
+    background: #FFF;
+    overflow: auto;
+}
+
+.autocomplete-suggestion {
+    padding: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.autocomplete-selected {
+    background: $polreg-lightgray;
+}
+
+.autocomplete-suggestions strong {
+    font-weight: normal;
+    color: $polreg-red;
+}
+
+.autocomplete-group {
+    padding: 2px 5px;
+}
+
+.autocomplete-group strong {
+    display: block;
+    border-bottom: 1px solid #000;
+}
+
+.hpm-js-load-more {
+    margin-bottom: $grid-gutter-width;
+    // max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    @media only screen and (min-width: $screen-md) {
+        // max-width: 100%;
+    }
+}
+
+.txtright {
+    text-align: right;
+}
+
+.txtcenter {
+    text-align: center;
+}
+
+.sm-txtright {
+    @media only screen and (min-width: $screen-sm) {
+        text-align: right;
+    }
+}
+
+.sm-txtcenter {
+    @media only screen and (min-width: $screen-sm) {
+        text-align: center;
+    }
+}
+
+
+/* HR line with triangle */
+.hpm-list .hpm-list--item > a{
+    display:block;
+}
+
+.hpm-list .hpm-list--hr,
+.bxslider .hpm-list--hr {
+    background: $polreg-red;
+    height: 9px;
+    position: relative;
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 9px 6px;
+        border-color: transparent transparent $polreg-orange transparent;
+    }
+}
+
+
+/* See more and load more button */
+
+.hpm-list .hpm-seemore,
+.hpm-seemore {
+    font-size: 1rem;
+    margin: 20px 0 30px;
+}
+
+.hpm-list .hpm-list--loadmore,
+.hpm-list--loadmore {
+    &.editform{
+        background: $polreg-darkgray;
+    }
+    background: $polreg-red;
+    display: block;
+    color: #fff;
+    text-align: center;
+    line-height: 35px;
+    font-size: 1rem;
+    position: relative;
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 0 35px 27px;
+        border-color: transparent transparent $polreg-orange transparent;
+    }
+    .fa {
+        margin-left: 5px;
+    }
+}
+
+.content-title {
+    // the same as h2 in .hpm-list
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 32px;
+    margin-top: 0;
+    @media (min-width: $grid-float-breakpoint) {
+        font-size: 1.9rem;
+    }
+}
+
+.vcenter {
+    text-align: center;
+    margin-top: 10px;
+    @media (min-width: $screen-sm-min) {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+        margin-top: auto;
+        text-align: left;
+    }
+}
+
+.bootstrap-select {
+    .dropdown-toggle {
+        font-weight: 400;
+        color: $polreg-darkgray;
+        border: 1px solid $polreg-gray;
+    }
+    &.open {
+        .dropdown-toggle {
+            background: #fff;
+        }
+        .dropdown-menu {
+            li {
+                margin-bottom: 0;
+            }
+            a {
+                padding: $grid-gutter-width/2;
+            }
+        }
+    }
+}
+
+
+/* fix input in IE */
+
+input:-ms-input-placeholder {
+    line-height: 1 !important;
+}
+
+.bootstrap-select {
+    height: auto;
+    button {
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px solid $polreg-darkgray2;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border-radius: 0;
+        height: 51px;
+        padding: 0;
+        box-shadow: none !important;
+        touch-action: auto;
+        border-color: $polreg-darkgray2 !important;
+        > span {
+            display: inline-block;
+            font-size: 1.2rem;
+            line-height: 51px;
+            color: $polreg-darkgray2;
+            font-family: "Noto Sans", Arial, sans-serif;
+            &:first-child {
+                padding: 0 12px;
+                height: 51px;
+                font-weight: 700;
+                padding-bottom: 22px;
+            }
+        }
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: transparent !important;
+            box-shadow: none;
+            outline: 0 !important;
+            touch-action: auto;
+            span {
+                background-color: transparent !important;
+            }
+        }
+    }
+}
+
+.bootstrap-select.btn-group .dropdown-menu {
+    margin: 0;
+    padding: 0;
+    border-color: $polreg-gray;
+    li {
+        margin-bottom: 0;
+        height: 51px;
+        display: table;
+        width: 100%;
+        >a {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+}
+

@@ -1,0 +1,306 @@
+.hpm-advertistingOfSales,
+.hpm-notices,
+.hpm-ticketOffices {
+    padding-bottom: 40px;
+    margin: 0 auto;
+    @media (min-width: $screen-md) {
+        max-width: 68%;
+    }
+    .hpm-list--top {
+        margin-bottom: 10px;
+        @media (min-width: $screen-md) {
+            margin-bottom: 15px;
+        }
+    }
+    .bootstrap-select.btn-group .dropdown-menu {
+        margin: 0;
+        padding: 0;
+        border-color: $polreg-gray;
+        li {
+            margin-bottom: 0;
+            height: 51px;
+            display: table;
+            width: 100%;
+            >a {
+                @include contrast-color($polreg-contrast-color);
+                @include contrast-bgcolor($polreg-contrast-bg);
+                display: table-cell;
+                vertical-align: middle;
+                &:hover {
+                    @include contrast-border(1px solid $polreg-contrast-color);
+                }
+            }
+        }
+    }
+    &__maintxt {
+        @include contrast-bgcolor($polreg-contrast-bg);
+        background: $polreg-white;
+        padding: 2rem 1.5rem 2rem;
+        @media (min-width: $screen-md) {
+            padding: 4rem 4.5rem 0.1rem;
+        }
+        p {
+            font-size: 1.3rem;
+            &:last-of-type {
+                margin: 0;
+            }
+        }
+    }
+    .bootstrap-select {
+        height: auto;
+        button {
+            width: 100%;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 1px solid $polreg-darkgray2;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            border-radius: 0;
+            height: 51px;
+            padding: 0;
+            box-shadow: none !important;
+            touch-action: auto;
+            border-color: $polreg-darkgray2 !important;
+            @include contrast-color($polreg-contrast-color);
+            @include contrast-bgcolor($polreg-contrast-bg);
+            > span {
+                display: inline-block;
+                font-size: 14px;
+                line-height: 51px;
+                color: $polreg-darkgray2;
+                font-family: "Noto Sans", Arial, sans-serif;
+                @include contrast-border(1px solid $polreg-contrast-color);
+                @include contrast-color($polreg-contrast-color);
+                @include contrast-bgcolor($polreg-contrast-bg);
+                &:first-child {
+                    padding: 0 12px;
+                    height: 51px;
+                    font-weight: 700;
+                    padding-bottom: 22px;
+                }
+            }
+            &:hover,
+            &:focus,
+            &:active {
+                @include contrast-border(1px solid $polreg-contrast-color);
+                @include contrast-color($polreg-contrast-color);
+                @include contrast-bgcolor($polreg-contrast-bg);
+                background-color: transparent !important;
+                box-shadow: none;
+                outline: 0 !important;
+                touch-action: auto;
+                span {
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+    label {
+        color: $polreg-darkgray2;
+        font-size: 1.6rem;
+        font-weight: 100;
+        padding-bottom: 10px;
+        padding-top: 20px;
+        @include contrast-color($polreg-contrast-color);
+        @media (min-width: $screen-md) {
+            padding-top: 0;
+            padding-bottom: 22px;
+        }
+        +.row {
+            >div {
+                padding-left: 0;
+                padding-right: 0;
+                @media (min-width: $screen-md) {
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+            }
+        }
+    }
+    input {
+        &[type="text"],
+        &[type="date"],
+        &[type="time"] {
+            border-color: $polreg-darkgray2;
+            color: rgba($polreg-darkgray2, 0.66);
+            height: 51px;
+            line-height: 1;
+            @include contrast-placeholder($polreg-contrast-color);
+            @include contrast-border(1px solid $polreg-contrast-color);
+            @include contrast-color($polreg-contrast-color);
+            @include contrast-bgcolor($polreg-contrast-bg);
+        }
+    }
+    .js-datepicker {
+        position: relative;
+        &::-webkit-inner-spin-button {
+            display: none;
+        }
+        &::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+        &::-webkit-datetime-edit {}
+        background: url(../images/svg/ico_formcalendar.png) $polreg-white no-repeat top right;
+        background-position: 94% 10px;
+        background-size: auto 48%;
+        @media (min-width: $screen-xs) {
+            background-position: 97% 10px;
+        }
+        @media (min-width: $screen-md) {
+            background-position: 94% 10px;
+        }
+    }
+    input[name="EndDate"] {
+        margin-top: 20px;
+        @media (min-width: $screen-md) {
+            margin-top: 0;
+        }
+    }
+    input::-ms-clear {
+        display: none;
+        width: 0;
+        height: 0;
+    }
+    .hpm-list--adw-of-sales--filters {
+        @include contrast-bgcolor($polreg-contrast-bg);
+        padding: 0 15px;
+        @media (min-width: $screen-md) {
+            padding: 15px 25px;
+        }
+        @media (min-width: 1200px) {
+            padding: 15px 55px;
+        }
+        &:first-child {
+            padding-top: 5px;
+            @media (min-width: $screen-md) {
+                padding-top: 30px;
+            }
+        }
+        &:last-child {
+            padding-bottom: 20px;
+            @media (min-width: $screen-md) {
+                padding-bottom: 30px;
+            }
+        }
+        .hpm-list--loadmore {
+            margin: 2rem 0 0;
+            @media (min-width: $screen-md) {
+                margin: 0.25rem 0 0;
+            }
+        }
+        a {
+            margin-top: 1.4rem;
+            text-align: center;
+            width: 100%;
+            @media (min-width: $screen-md) {
+                text-align: left;
+            }
+        }
+    }
+    .hpm-list--adw-of-sales--list {
+        padding: 10px 23px;
+        overflow: auto;
+        @media (min-width: $screen-sm) {}
+        @media (min-width: $screen-md) {
+            padding: 15px 25px;
+        }
+        @media (min-width: 1200px) {
+            padding: 15px 55px;
+        }
+        background: $polreg-white;
+        @include contrast-bgcolor($polreg-contrast-bg);
+        table {
+            @include contrast-color($polreg-contrast-color);
+            @include contrast-bgcolor($polreg-contrast-bg);
+            margin-bottom: 0;
+            >thead>tr>th {
+                @include contrast-border(0 solid $polreg-contrast-color);
+                @include contrast-borderbottom(1px solid $polreg-contrast-color);
+                padding: 13px 25px;
+                vertical-align: bottom;
+                font-size: 1.1rem;
+                padding-left: 0;
+                @media (min-width: $screen-sm) {
+                    vertical-align: middle;
+                }
+                @media (min-width: $screen-md) {
+                    vertical-align: middle;
+                    font-size: 1.3rem;
+                }
+                &:first-child {
+                    width: 20%;
+                }
+            }
+            td {
+                @include contrast-border(0 solid $polreg-contrast-color);
+                @include contrast-borderbottom(1px solid $polreg-contrast-color);
+                padding: 20px;
+                font-size: 1.1rem;
+                padding-left: 0;
+                vertical-align: middle;
+                @media (min-width: $screen-md) {
+                    font-size: 1.3rem;
+                }
+                a {
+                    font-size: 1.1rem;
+                    @media (min-width: $screen-md) {
+                        font-size: 1.3rem;
+                    }
+                }
+            }
+            td:last-child,
+            th:last-child {
+                padding-right: 0;
+                @media (min-width: $screen-sm) {
+                    width: 12rem;
+                }
+            }
+            .hpm-first-tablecol--mobile {
+                width: 68%;
+                @media only screen and (min-width: $screen-sm) {
+                    width: auto;
+                }
+                @media (min-width: $screen-md) {
+                    width: auto;
+                }
+            }
+            .hpm-last-tablecol--mobile {
+                padding-right: 0;
+                @media (min-width: $screen-sm) {
+                    padding-right: 8px;
+                    width: 12rem;
+                }
+                @media (min-width: $screen-md) {
+                    padding-right: 8px;
+                    width: auto;
+                }
+            }
+        }
+    }
+    form {
+        .hpm-list--loadmore {
+            font-size: inherit;
+            font-weight: 100;
+            margin-top: 30px;
+            > input {
+                @include contrast-placeholder($polreg-contrast-color);
+                @include contrast-border(1px solid $polreg-contrast-color);
+                @include contrast-color($polreg-contrast-color);
+                @include contrast-bgcolor($polreg-contrast-bg);
+                font-size: 120%;
+                border: 0;
+            }
+            &:after {
+                border-width: 0 0 48px 36px;
+            }
+        }
+    }
+}
+
+a.hpm-list--loadmore {
+    @include contrast-placeholder($polreg-contrast-color);
+    @include contrast-border(1px solid $polreg-contrast-color);
+    @include contrast-color($polreg-contrast-color);
+    @include contrast-bgcolor($polreg-contrast-bg);
+}
+

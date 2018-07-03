@@ -1,0 +1,396 @@
+//* set custom padding footer *//
+.footer .container {
+    @media (max-width: $grid-float-breakpoint) {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    > .row > div > * {
+        @media (max-width: $grid-float-breakpoint) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+}
+
+footer {
+    &.footerSticky {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+    }
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 1.2em;
+    padding-bottom: 0;
+    position: relative;
+    background-color: $polreg-red;
+    @include contrast-bgcolor($polreg-contrast-bg);
+    @include contrast-bordertop(solid 1px $polreg-white);
+    @media (min-width: $grid-float-breakpoint) {
+        padding-top: 1em;
+        background-color: $polreg-red;
+        @include contrast-bgcolor(#000);
+        padding-top: 0;
+        padding-bottom: 0;
+        overflow: visible;
+    }
+    .row:first-child {
+        > div {
+            // background-color: $polreg-red;
+        }
+        @media (min-width: $grid-float-breakpoint) {
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+        }
+    }
+    .row:nth-child(2) {
+        @media (min-width: $grid-float-breakpoint) {
+            position: relative;
+        }
+        &:before {
+            @media (min-width: $grid-float-breakpoint) {
+                content: "";
+                display: block;
+                width: 100%;
+                // height: 17.7em;
+                height: 22em;
+                position: absolute;
+                background: $polreg-darkgray2;
+                @include contrast-bgcolor($polreg-contrast-bg);
+                left: -100%;
+                top: 0;
+            }
+        }
+        >div {
+            @media (min-width: $grid-float-breakpoint) {
+                height: 22em;
+                padding: 0;
+                padding-left: 8px;
+                padding-right: 8px;
+                // min-height: 17.7em;
+                min-height: 22em;
+            }
+            &:first-child {
+                @media (min-width: $grid-float-breakpoint) {
+                    position: relative;
+                    background-color: $polreg-red;
+                    @include contrast-bgcolor($polreg-contrast-bg);
+                }
+                &:before {
+                    @media (min-width: $grid-float-breakpoint) {
+                        content: "";
+                        display: block;
+                        //width: 14.1em;
+                        width: 17.1em;
+                        //height: 17.7em;
+                        height: 22em;
+                        position: absolute;
+                        background: url("../images/backgrounds/bg_footer_02_d.png") no-repeat;
+                        @include contrast-image("../images/backgrounds/bg_footer_02_contrast_d.png");
+                        background-size: 100% auto;
+                        // left: 0.4em;
+                        top: 0;
+                        left: 0;
+                        left: -54px;
+                        z-index: 200;
+                    }
+                }
+                &:after {
+                    @media (min-width: $grid-float-breakpoint) {
+                        content: "";
+                        display: block;
+                        width: 17.1em;
+                        height: 22em;
+                        position: absolute;
+                        background: $polreg-darkgray2;
+                        @include contrast-bgcolor($polreg-contrast-bg);
+                        left: -54px;
+                        top: 0;
+                    }
+                }
+            }
+            &.text-left,
+            &.text-right {
+                min-height: 0;
+            }
+            &:last-child {
+                @media (min-width: $grid-float-breakpoint) {
+                    background-color: $polreg-darkgray2;
+                    @include contrast-bgcolor($polreg-contrast-bg);
+                }
+            }
+        }
+    }
+    .row:last-child {
+        padding-bottom: 1.2em;
+        background-color: $polreg-darkgray2;
+        @include contrast-bgcolor(transparent);
+        position: relative;
+        @media (min-width: $grid-float-breakpoint) {
+            position: absolute;
+            background-color: transparent;
+            bottom: 0;
+            width: 100%;
+        }
+        > div {
+            text-align: center;
+            @media (min-width: $grid-float-breakpoint) {
+                &.text-left {
+                    text-align: left;
+                }
+                &.text-right {
+                    text-align: right;
+                }
+            }
+        }
+    }
+    //* footer menu *//
+    .hpm-navbar-footer {
+        padding: 0;
+        background-color: transparent;
+        border-bottom: 0;
+        @media (min-width: $grid-float-breakpoint) {
+            padding: 1.1em 0 0;
+            border-bottom: 0;
+            position: relative;
+            @include contrast-bgcolor(transparent);
+            background-color: transparent;
+            z-index: 200;
+        }
+    }
+    .hpm-navbar-footer .navbar-nav {
+        background-color: transparent;
+        // @include contrast-bgcolor(transparent);
+        border-top: 0;
+        @media (min-width: $grid-float-breakpoint) {
+            display: table;
+            table-layout: fixed;
+            width: 75%;
+            margin-left: 13.8em;
+            @include contrast-bgcolor(transparent);
+        }
+        &:before,
+        &:after {
+            @media (min-width: $grid-float-breakpoint) {
+                display: none;
+            }
+        }
+        .dropdown,
+        .dropdown.open {
+            margin-bottom: 3%;
+            background-color: transparent;
+            @media (min-width: $grid-float-breakpoint) {
+                margin-bottom: 0;
+                border-bottom: 0;
+                display: table-cell;
+                border-left: 0;
+                @include contrast-bgcolor(transparent);
+                padding-right: 7.8em;
+                padding-right: 0;
+                float: none;
+            }
+            > .dropdown-toggle {
+                font-size: 1.23em;
+                text-align: center;
+                padding: 0.9em 1.2em 0.7em;
+                border-bottom: 0;
+                // @include contrast-bordercolor($polreg-white);
+                @include contrast-border(solid 1px $polreg-white);
+                // border: solid 1px red;
+                background-color: $polreg-white;
+                position: relative;
+                @media (min-width: $grid-float-breakpoint) {
+                    cursor: default;
+                    padding: 0;
+                    display: block;
+                    text-align: left;
+                    background-color: transparent;
+                    color: $polreg-white;
+                    @include contrast-border(0);
+                    @include contrast-bgcolor(transparent);
+                    @include contrast-color($polreg-contrast-color);
+                    font-size: 1.4em;
+                    line-height: 1.8;
+                }
+                &:after {
+                    right: 1.2%;
+                    color: $polreg-red;
+                }
+                &:active,
+                &:focus,
+                &:hover {
+                    background-color: $polreg-gray;
+                    color: $polreg-red;
+                    &:after {
+                        color: $polreg-red;
+                    }
+                    @media (min-width: $grid-float-breakpoint) {
+                        color: $polreg-white;
+                        background-color: transparent;
+                    }
+                }
+            }
+            > .dropdown-menu {
+                @include contrast-borderleft(solid 1px $polreg-white);
+                @include contrast-borderright(solid 1px $polreg-white);
+                @media (min-width: $grid-float-breakpoint) {
+                    @include contrast-borderleft(0);
+                    @include contrast-borderright(0);
+                    min-width: 0;
+                    text-align: left;
+                    display: block;
+                    position: relative;
+                    background-color: transparent;
+                    width: 100%;
+                    border: 0;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                    margin: 0;
+                    border-radius: 0;
+                    -webkit-padding-start: 0;
+                    -webkit-background-clip: content-box;
+                    background-clip: content-box;
+                    border-top: 0;
+                    margin-top: -1px;
+                    padding: 0 0 2em;
+                }
+                li {
+                    @media (min-width: $grid-float-breakpoint) {
+                        display: block;
+                        vertical-align: middle;
+                        border-left: 0;
+                        border-bottom: 0;
+                    }
+                    &:focus,
+                    &:after,
+                    &:before {
+                        display: none;
+                    }
+                    a {
+                        @media (min-width: $grid-float-breakpoint) {
+                            font-size: 0.9em;
+                            line-height: 2.7em;
+                            padding: 0;
+                            color: $polreg-white;
+                            @include contrast-color($polreg-contrast-color);
+                        }
+                        &:active,
+                        &:focus,
+                        &:hover {
+                            @media (min-width: $grid-float-breakpoint) {
+                                color: $polreg-white;
+                                background-color: transparent;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .dropdown.open {
+            > .dropdown-toggle {
+                &:after {
+                    color: $polreg-white;
+                }
+                &:active,
+                &:focus,
+                &:hover {
+                    &:after {
+                        color: $polreg-white;
+                    }
+                }
+            }
+        }
+    }
+    .hpm-umbraco-info {
+        position: relative;
+        .hpm-copyright {
+            cursor: pointer;
+            position: relative;
+            z-index: 201;
+        }
+        &__popup {
+            z-index: 210;
+            display: none;
+            box-sizing: border-box;
+            position: fixed;
+            width: 94%;
+            top: 50%;
+            left: 3%;
+            transform: translateY(-50%);
+            background: $polreg-orange;
+            padding: 1.2rem !important;
+            text-align: right;
+            @media (min-width: $grid-float-breakpoint) {
+                position: absolute;
+                width: 94%;
+                top: inherit;
+                left: inherit;
+                bottom: 150%;
+                right: 1rem;
+                transform: none;
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    bottom: -1rem;
+                    right: 6rem;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 1rem 1rem 0 1rem;
+                    border-color: $polreg-orange transparent transparent transparent;
+                }
+            }
+            &__close {
+                font-size: 3rem;
+                color: $polreg-white;
+                opacity: 0.5;
+                cursor: pointer;
+                @media (min-width: $grid-float-breakpoint) {
+                    font-size: 2rem;
+                }
+            }
+            &__content {
+                font-weight: normal;
+                font-size: 1.333rem;
+                color: $polreg-white;
+                text-align: center;
+                @media (min-width: $grid-float-breakpoint) {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.hpm-copyright,
+.hpm-webowner {
+    color: $polreg-white;
+    opacity: 0.5;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    padding-top: 0.6em;
+    margin: 0;
+    font-size: 0.89em;
+    line-height: 1.2em;
+    @media (min-width: $grid-float-breakpoint) {
+        font-size: 0.97em;
+        padding-top: 0.4em;
+        margin: 0 0 0.4em;
+    }
+}
+
+.hpm-webowner {
+    font-size: 0.9em;
+    @media (min-width: $grid-float-breakpoint) {
+        font-size: 0.97em;
+        margin-right: 0;
+        margin-left: 8px;
+    }
+}
+

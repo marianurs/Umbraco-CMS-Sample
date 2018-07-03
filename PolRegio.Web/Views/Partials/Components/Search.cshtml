@@ -1,0 +1,14 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.Components.Search.SearchItem>
+
+<tr class="js-list-item">
+    <td>
+        <p class="search-title">
+            <b><a href="@Model.SearchUrl" target="_blank">@Model.SearchTitle</a></b>
+        </p>
+        
+        @Model.SearchBody
+
+        <p class="search-date">@Model.Date.ToString("dd.MM.yyyy HH:mm")</p>
+        <hr/>
+    </td>
+</tr>

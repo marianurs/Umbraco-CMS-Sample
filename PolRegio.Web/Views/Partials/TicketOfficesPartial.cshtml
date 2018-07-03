@@ -1,0 +1,52 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Tickets.TicketOfficesPageViewModel>
+
+    @using (Ajax.BeginForm("RenderTicketOfficesBoxes", "PolRegioTicketOffices", null, new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "hpm-section-boxes-container",
+        OnBegin = "loaderShow();",
+        OnComplete = "checkIfShowLoadMoreButton();filterAjaxForm();loaderHide();"
+    }, new { id = "boxesForm" }))
+    {
+        @Html.HiddenFor(q => q.CurrentPageCulture)
+        @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+        @Html.HiddenFor(q => q.DisplayCount)
+        <input type="hidden" id="allBoxesCount" value="@Model.AllNewsCount" />
+
+        <div class="hpm-list--top row">
+            <div class="col col-sm-12">
+                <div class="bg-white">
+                    <div class="hpm-list--filters hpm-list--adw-of-sales--filters row  ">
+                        <div class="col-sm-12 col-md-4">
+                            @Html.TextBoxFor(q => q.OfficeName, new { @class = "form-control", id = "hpm-search--name", placeholder = "" })
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="rowhpm-js-load-more  hpm-list--loadmore">
+                                <input type="submit" class="btn center-block   hpm-list--loadmore full-btn" value="@Umbraco.GetDictionaryValue("Ticket.Button.Search")" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col col-sm-12">
+                <div class="hpm-list--adw-of-sales--list">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>@Umbraco.GetDictionaryValue("Ticket.Placeholder.Localization")</th>
+                                <th>@Umbraco.GetDictionaryValue("Ticket.Placeholder.Address")</th>
+                                <th>@Umbraco.GetDictionaryValue("Ticket.Placeholder.OpenHours")</th>
+                                <th>@Umbraco.GetDictionaryValue("Ticket.Placeholder.OpenHoursSaturday")</th>
+                                <th>@Umbraco.GetDictionaryValue("Ticket.Placeholder.OpenHoursSundayAndHolidays")</th>
+                            </tr>
+                        </thead>
+                        <tbody class="hpm-js-boxes-container">
+                            @Html.Partial("Controls/TicketOfficesBoxList", Model.OfficesList)
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }

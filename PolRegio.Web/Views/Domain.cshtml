@@ -1,0 +1,30 @@
+﻿@using PolRegio.Services.Config
+@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+    Layout = null;
+
+    if (string.IsNullOrEmpty(UmbracoContext.HttpContext.Request.Url.AbsolutePath) || UmbracoContext.HttpContext.Request.Url.AbsolutePath == "/")
+    {
+        if (UmbracoContext.HttpContext.Request.Url.Host.Contains("cms."))
+        {
+            Response.RedirectPermanent("/umbraco");
+        }
+        else
+        {
+            var languageUrl = new Uri(Model.Content.Children.First().Url);
+
+            var configService = new ConfigService();
+            string isSslEnabled;
+            if (configService.Custom.TryGetValue("IsSSLEnabled", out isSslEnabled) && bool.Parse(isSslEnabled))
+            {
+                languageUrl = new UriBuilder(languageUrl)
+                {
+                    Scheme = Uri.UriSchemeHttps,
+                    Port = -1,
+                }.Uri;
+            }
+            Response.Cache.SetExpires(DateTime.Now);
+            Response.RedirectPermanent(languageUrl.AbsoluteUri);
+        }
+    }
+}

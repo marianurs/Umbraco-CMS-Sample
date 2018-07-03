@@ -1,0 +1,54 @@
+﻿<form name="contentForm"
+      ng-controller="FrontUsersManager.FrontUsersManagerIndexController"
+      ng-show="loaded"
+      val-form-manager>
+    <umb-panel>
+        <umb-header>
+            <div class="umb-headline-editor-wrapper span12 ng-scope">
+                <h1 class="ng-binding">Użytkownicy serwisu</h1>
+            </div>
+        </umb-header>
+
+        <div class="umb-panel-body umb-scrollable row-fluid">
+            <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+                <div class="umb-pane">
+                    
+                    <div class="umb-packages-search">
+                        <input class="-full-width-input" type="text" placeholder="Szukaj użytkowników" ng-model="node.query" ng-change="search()" no-dirty-check>
+                        {{query}}
+                    </div>
+                    
+                    <ul class="user-list">
+                        <li ng-repeat="user in node.users">
+                            <a href="#/users/frontusermanage/edit/{{user.Id}}">
+                                {{user.UserName}} {{user.UserSurname}} <br/>
+                                <span class="small">
+                                    {{user.UserEmail}}
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </umb-panel>
+</form>
+
+<style>
+    .user-list {
+        list-style: none;
+        margin: 0;
+    }
+
+    .user-list a {
+        margin: 5px 0;
+        display: block;
+        padding: 5px;
+        background: #f8f8f8;
+        text-decoration: none;
+
+    }
+    .small {
+        font-size: 80%;
+    }
+</style>

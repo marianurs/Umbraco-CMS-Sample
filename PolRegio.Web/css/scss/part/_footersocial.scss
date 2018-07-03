@@ -1,0 +1,108 @@
+.footer{
+	.hpm-social{
+    	display: block;
+    	width: 100%;
+    	padding: 1.5em 15px 2.5em;
+		@media (min-width: $grid-float-breakpoint) { 
+			padding: 0;
+	    	display: inline-block;
+	    	width: auto;
+	    	background-color: transparent;
+		}
+	    a{
+	    	width: $socialiconssize--mobile;
+		    height: $socialiconssize--mobile;
+		    margin-right: 1.6em;
+	    	display: inline-block;
+	    	border-radius: 50%;
+	    	background: $polreg-white;
+	    	text-align: center;
+	    	@media (min-width: $grid-float-breakpoint) { 
+		    	width: $socialiconssize;
+		    	height: $socialiconssize;
+		    	margin-right: 1.4em;
+	    	}
+		    i {
+		    	color: $polreg-red;
+		    	@include contrast-color($polreg-contrast-bg);
+		    	font-size: 1.4em;
+		    	margin-top: -0.3em;
+				line-height: $socialiconssize--mobile;
+		    	@media (min-width: $grid-float-breakpoint) { 
+					line-height: $socialiconssize;
+					color: $polreg-darkgray;
+		    	}
+		    }	
+	    } 
+	}
+	.hpm-special-link{
+		background-color: $polreg-darkgray2;
+		@include contrast-bgcolor($polreg-contrast-bg);
+		position:relative;
+		@media (min-width: $grid-float-breakpoint) { 
+			display: inline-block;
+		}
+		&:before{
+			content:"";
+			display: block;
+			position: absolute;
+			width: 250%;
+			height: 100%;
+			background-color: $polreg-darkgray2;
+			@include contrast-bgcolor($polreg-contrast-bg);
+			top: 0;
+			left: -100%;
+			@media (min-width: $grid-float-breakpoint) { 
+				display: none;
+			}
+		}
+		.hpm-footerlink-to-external-page{
+			display: inline-block;
+			width: 6.5em;
+			margin-bottom: 1em;
+	    	margin-top: 1.3em;
+	    	// z-index:200;
+	    	position: relative;
+			@media (min-width: $grid-float-breakpoint) { 
+	    		margin-top: 0;
+				margin-bottom: 0.7em;
+			}
+			img{
+				width: 100%;
+			}
+		}
+	}
+	.hpm-footer-left-col-bottom-el{
+		@media (max-width: 767px) { 
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+		}
+		bottom: 0;
+    	width: 100%;
+    	text-align: center;
+		@media (min-width: $grid-float-breakpoint) { 
+			position: absolute;
+			text-align: left;
+			bottom: 3.6em;;
+			width: 116%;
+			left: 15px;
+    	}
+	}
+	.hpm-footer-logo{
+		@media (min-width: $grid-float-breakpoint) { 
+			margin-left: 8px;
+		}
+		img{
+			width: 15em;
+		    height: auto;
+		    margin: 13% 0 10%;
+			display: block;
+			@media (min-width: $grid-float-breakpoint) { 
+				margin: 0;
+				margin-top: 1.6em;
+			    width: 18.4em;
+			    height: auto;
+			}
+		}
+	}
+}

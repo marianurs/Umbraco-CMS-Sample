@@ -1,0 +1,152 @@
+.hpm-wiremap {
+
+            @include contrast-bgcolor($polreg-contrast-bg);
+    &__content {
+        margin: 1rem 1rem;
+        padding: 1.5rem;
+        background: $polreg-white;
+            @include contrast-bgcolor($polreg-contrast-bg);
+        @media (min-width: $screen-md) {
+            padding: 3rem;
+            margin: 0 15.5% 0.85rem 14.5%;
+        }
+        &__txt {
+            text-align: center;
+            h2 {
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+                @media (min-width: $screen-sm) {
+                    font-size: 2.4rem;
+                    margin-bottom: 2rem;
+                }
+            }
+            &--desc {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+                @media (min-width: $screen-sm) {
+                    font-size: 1.6rem;
+                    margin-bottom: 3rem;
+                }
+                p {
+                    font-size: 1.2rem;
+                    @media (min-width: $screen-sm) {
+                        font-size: 1.6rem;
+                    }
+                }
+            }
+        }
+        .hpm-list--loadmore {
+            line-height: 5rem;
+            margin: 0 auto;
+            &:after {
+                border-width: 0 0 5rem 2.7rem;
+            }
+            @media (min-width: $screen-sm) {
+                max-width: 30rem;
+            }
+            &:hover {
+                text-decoration: none;
+                color: $polreg-white;
+            }
+        }
+    }
+    &__map {
+        overflow: auto;
+        &__logo {
+            position: absolute;
+            top: 2%;
+            right: 1%;
+            width: 7.25rem;
+            height: 4.25rem;
+        }
+        &__img {
+            text-align: center;
+            object {
+                width: 100%;
+                height: 70vw;
+            }
+            @media (min-width: $screen-md) {
+                object {
+                    height: 45vw;
+                }
+            }
+        }
+        &__buttons {
+            @media (min-width: $screen-sm) {
+                position: absolute;
+                bottom: 2%;
+                right: 1%;
+            }
+        }
+        &__button {
+            @include contrast-border(1px solid $polreg-contrast-color);
+            @include contrast-color($polreg-contrast-color);
+            @include contrast-bgcolor($polreg-contrast-bg);
+            display: block;
+            width: 49%;
+            float: left;
+            height: 4rem;
+            background-color: $polreg-red;
+            color: $polreg-white;
+            font-size: 2.5rem;
+            line-height: 4rem;
+            text-align: center;
+            cursor: pointer;
+
+            @media (min-width: $screen-sm) {
+                width: 4rem;
+                float: none;
+            }
+            &--zoom-in {}
+            &--zoom-out {
+                margin-left: 2%;
+                @media (min-width: $screen-sm) {
+                    margin-top: 0.2rem;
+                    margin-left: 0;
+                }
+            }
+        }
+        &__legend {
+            width: 25%;
+            min-width: 28rem;
+            padding: .5rem;
+            margin: 0;
+            background-color: $polreg-white;
+            list-style: none;
+            
+            @include contrast-color($polreg-contrast-color);
+            @include contrast-bgcolor($polreg-contrast-bg);
+            @media (min-width: $screen-sm) {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 1.5rem;
+            }
+            &__label {
+                position: relative;
+                padding-left: 45px;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: 8px;
+                    left: 0;
+                    display: inline-block;
+                    width: 40px;
+                    height: 5px;
+                    border-radius: 10px;
+                }
+                &--normal {
+                    &:before {
+                        background-color: $polreg-darkgray;
+                    }
+                }
+                &--season {
+                    &:before {
+                        background-color: $polreg-blue;
+                    }
+                }
+            }
+        }
+    }
+}
+

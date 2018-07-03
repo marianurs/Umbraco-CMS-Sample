@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@{
+	Layout = "Layout.cshtml";
+}
+
+@Html.Action("RenderHomePage", "PolRegioHome")
+
+@section bottomScripts{
+    <script type="text/javascript">
+        loadStations();
+    </script>
+}

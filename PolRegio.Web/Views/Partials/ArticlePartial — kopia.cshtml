@@ -1,0 +1,168 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Article.ArticlePageViewModel>
+
+<section class="single-article">
+    <div class="container">
+        <div class="row">
+            <article>
+                <div class="col-xs-12">
+                    <section class="single-article-title">
+                        <h1>
+                            @if (!string.IsNullOrEmpty(Model.ArticleRegion))
+                            {
+                                <div>
+                                <!-- <a href="#" title="Przejdż do artykułow z województwa @Model.ArticleRegion"> -->
+                                    @if (!string.IsNullOrEmpty(Model.ArticleType))
+                                    {
+                                        <img src="@string.Format("/images/articles/global/ico_{0}.png",Model.ArticleType.ToLower())" alt="Ikonka i dla artykułów informacyjnych" />
+                                    }
+                                    <span>@Model.ArticleRegion</span>
+                                <!-- </a> -->
+                                </div>
+
+                            }
+                            <span>@Model.ArticleContent.ArticleTitle</span>
+                            <!-- <span>&nbsp;-&nbsp;</span> -->
+                        </h1>
+                    @if (Model.ArticleDate.HasValue)
+                    {
+                        <p class="single-article-date">@Model.ArticleDate.Value.ToString("dd.MM.yyyy")</p>
+                    }
+                        
+                    </section><!-- //end Art. Title -->
+                    @if (Model.CarouselImages != null && Model.CarouselImages.Count() > 0)
+                    {
+                        <section class="single-article-slider">
+                            <ul class="bxslider">
+                                @foreach (var item in Model.CarouselImages)
+                                {
+                                    <li>
+                                        <img src="@Umbraco.TypedMedia(item.ArticleCarouselImage).Url?width=963px&height=442px" alt="@item.ArticleCarouselName">
+                                        <div class="hpm-list--hr"></div>
+                                        <div class="slide-info">
+                                            <p class="slide-title">@item.ArticleCarouselName</p>
+                                            <p class="slide-description">@item.ArticleCarouselDesc</p>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </section><!-- //end Slider -->
+                    }
+
+                    <section class="single-article-content">
+                        @Model.ArticleContent.ArticleText
+
+                        <div class="social-share-buttons text-center">
+                            <div class="row">
+                                <div class="col-xs-6 col-md-3">
+                                    <a target="_blank" href="@string.Format("https://www.facebook.com/sharer/sharer.php?u={0}", UmbracoContext.Current.HttpContext.Request.Url)" class="btn btn-polregio-fb btn-icon-before"><div><i class="fa fa-facebook-official"></i><span>@Umbraco.GetDictionaryValue("Article.Placeholders.ShareFacebook")</span></div></a>
+
+                                </div>
+                                <div class="col-xs-6 col-md-3">
+                                    <a target="_blank" href="@string.Format("https://twitter.com/intent/tweet?text={0}&url={1}", Model.ArticleContent.ArticleTitle, UmbracoContext.Current.HttpContext.Request.Url)" class="btn btn-polregio-twitter btn-icon-before"><div><i class="fa fa-twitter"></i><span>@Umbraco.GetDictionaryValue("Article.Placeholders.ShareTwitter")</span></div></a>
+                                </div>
+                                <div class="col-md-offset-6">
+                            </div>
+                        </div>
+                    </section>
+                    @if (Model.DownloadDocuments != null && Model.DownloadDocuments.Count() > 0)
+                    {
+                        <section class="single-article-download-file">
+                            <div>@Umbraco.GetDictionaryValue("Section.Article.Download")</div>
+                            @foreach (var item in Model.DownloadDocuments)
+                            {
+                                <div class="single-article-download-file-singleel">
+                                    <div class="single-article-download-file-info">
+                                        <a href="@Umbraco.TypedMedia(@item.ArticleDocument).Url" title="@item.ArticleDocumentName" class="single-article-download-file-title">@item.ArticleDocumentName</a>
+                                        <p class="single-article-download-file-createdate">@(Umbraco.GetDictionaryValue("Article.Placeholders.AddDate") + String.Format(" {0:dd.MM.yyyy}", item.ArticleDate))</p>
+                                    </div>
+                                    <a href="@Umbraco.TypedMedia(@item.ArticleDocument).Url" title="Pobierz plik"><img src="/images/articles/global/icon-download.png" alt="Ikonka i dla artykułów informacyjnych" /></a>
+                                </div>
+                            }
+
+                        </section><!-- //end Art. Download section -->
+                    }
+                    <a class="button-view-all center-block text-center" href="/pl/dla-podroznych/informacje" title="Wybierz Enter, żeby zobaczyć wszystkie artykuły">@Umbraco.GetDictionaryValue("Article.Link.SeeAllArticles")&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                </div>
+            </article>
+
+        </div><!-- //end .row -->
+    </div><!-- //end .container -->
+</section>
+
+
+
+@*<section class="single-article">
+        <div class="container">
+            <div class="row">
+                <article>
+                    <div class="col-xs-12">
+                        <section class="single-article-title">
+                            <h1>
+                                @if (!String.IsNullOrEmpty(Model.RegionFilter))
+                                {
+                                    <a href="#" title="Przejdż do artykułow z województwa @Model.RegionFilter">
+                                        <img src="/images/articles/global/icon-info.png" alt="Ikonka i dla artykułów informacyjnych" /><span>@Model.RegionFilter</span>
+                                    </a>
+                                }
+                                <span>@Model.ArticleTitle</span>
+                                <!-- <span>&nbsp;-&nbsp;</span> -->
+                            </h1>
+                            <p class="single-article-date">@String.Format("{0:dd.MM.yyyy}", Model.ArticleDate)</p>
+                        </section><!-- //end Art. Title -->
+                        @if (Model.CarouselImages != null && Model.CarouselImages.Count() > 0)
+                        {
+                            <section class="single-article-slider">
+                                <ul class="bxslider">
+                                    @foreach (var item in Model.CarouselImages)
+                                    {
+                                        <li>
+                                            <img src="@Umbraco.TypedMedia(item.ArticleCarouselImage).Url?width=963px&height=442px" alt="@item.ArticleCarouselName">
+                                            <div class="hpm-list--hr"></div>
+                                            <div class="slide-info">
+                                                <p class="slide-title">@item.ArticleCarouselName</p>
+                                                <p class="slide-description">@item.ArticleCarouselDesc</p>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </section><!-- //end Slider -->
+                        }
+
+                        <section class="single-article-content">
+                            @Html.Raw(Model.ArticleBody)
+                            <div class="social-share-buttons text-center">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <a href="@Model.ShareFacebookLink" class="btn btn-primary btn-icon-before"><div><i class="fa fa-facebook-official"></i><span>@Umbraco.GetDictionaryValue("Article.Placeholders.ShareFacebook")</span></div></a>
+
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a href="@Model.ShareTwitterLink" class="btn btn-info btn-icon-before"><div><i class="fa fa-twitter"></i><span>@Umbraco.GetDictionaryValue("Article.Placeholders.ShareTwitter")</span></div></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @if (Model.DownloadDocuments != null && Model.DownloadDocuments.Count() > 0)
+                        {
+                            <section class="single-article-download-file">
+                                <div>@Umbraco.GetDictionaryValue("Section.Article.Download")</div>
+                                @foreach (var item in Model.DownloadDocuments)
+                                {
+                                    <div class="single-article-download-file-singleel">
+                                        <div class="single-article-download-file-info">
+                                            <a href="@Umbraco.TypedMedia(@item.ArticleDocument).Url" title="@item.ArticleDocumentName" class="single-article-download-file-title">@item.ArticleDocumentName</a>
+                                            <p class="single-article-download-file-createdate">@(Umbraco.GetDictionaryValue("Article.Placeholders.AddDate") + String.Format(" {0:dd.MM.yyyy}", item.ArticleDate))</p>
+                                        </div>
+                                        <a href="@Umbraco.TypedMedia(@item.ArticleDocument).Url" title="Pobierz plik"><img src="/images/articles/global/icon-download.png" alt="Ikonka i dla artykułów informacyjnych" /></a>
+                                    </div>
+                                }
+
+                            </section><!-- //end Art. Download section -->
+                        }
+                        <a class="button-view-all center-block text-center" href="/pl/dla-podroznych/informacje" title="Wybierz Enter, żeby zobaczyć wszystkie artykuły">@Umbraco.GetDictionaryValue("Article.Link.SeeAllArticles")&nbsp;&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                    </div>
+                </article>
+
+            </div><!-- //end .row -->
+        </div><!-- //end .container -->
+    </section>*@

@@ -1,0 +1,90 @@
+.hpm-offers-homepage {
+    ul {
+        list-style: none;
+        padding: 0;
+        li {
+            list-style: none;
+            margin-bottom: $grid-gutter-width;
+            text-align: center;
+            a {
+                @media (min-width: $grid-float-breakpoint) {
+                    padding: 5.8rem 0;
+                }
+                display: block;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                position: relative;
+                min-height: 35px;
+                font-size: 1.2em;
+                font-weight: 700;
+                text-decoration: none;
+                padding: 1rem 0 2rem;
+                @include contrast-bgcolor($polreg-contrast-bg);
+                @include contrast-border(1px solid $polreg-contrast-color);
+                img {
+                    @media (min-width: $grid-float-breakpoint) {
+                        height: 130px;
+                    }
+                    height: 80px;
+                    margin-bottom: $grid-gutter-width;
+                }
+                svg {
+                    @media (min-width: $grid-float-breakpoint) {
+                        height: 130px;
+                    }
+                    height: 80px;
+                    margin-bottom: $grid-gutter-width;
+                    stroke: $polreg-red !important;
+                    @include contrast-svgStroke($polreg-contrast-color);
+                    * {
+                        stroke: $polreg-red !important;
+                        @include contrast-svgStroke($polreg-contrast-color);
+                    }
+                }
+                span {
+                    @media (min-width: $screen-sm) {
+                        font-size: 2rem;
+                        line-height: 2.5rem;
+                    }
+                    @media (min-width: $screen-md+1) {
+                        font-size: 2.5rem;
+                        line-height: 3rem;
+                    }
+                    font-size: 1.4rem;
+                    line-height: 1.7rem;
+                    display: block;
+                    padding: 0 0.3rem;
+                }
+                &:hover {
+                    color: #fff;
+                    background: $polreg-red;
+                    @include contrast-bgcolor($polreg-contrast-color);
+                    @include contrast-border(1px solid $polreg-contrast-color);
+                    @include contrast-color($polreg-contrast-bg);
+                    svg {
+                        stroke: #fff !important;
+                        @include contrast-svgStroke($polreg-contrast-bg);
+                        * {
+                            stroke: #fff !important;
+                            @include contrast-svgStroke($polreg-contrast-bg);
+                        }
+                    }
+                }
+                &::after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 0 0 35px 27px;
+                    border-color: transparent transparent $polreg-orange transparent;
+                }
+            }
+        }
+    }
+}
+

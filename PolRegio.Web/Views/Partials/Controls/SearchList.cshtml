@@ -1,0 +1,7 @@
+﻿
+@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Search.SearchViewModel>
+
+@foreach (var item in Model.SearchItems)
+{
+        @Html.Partial("Components/Search", item)
+}

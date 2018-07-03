@@ -1,0 +1,125 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.BipPage.BIPFormViewModel>
+@using PolRegio.Helpers.Enums
+@using reCAPTCHA.MVC
+@using (Ajax.BeginForm("SubmitBipFom", "PolRegioBIP", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-bipform-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "filterAjaxForm();loaderHide();bipFormScroll();"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.AntiForgeryToken()
+    <div class="hpm-bip__form row">
+        <div class="col-xs-12">
+            <div class="bg-white">
+                @if (Model.SendResponse != null && Model.SendResponse.Display)
+                {
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-@(Model.SendResponse.IsError ? "warning":"success") alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                @Html.Raw(Model.SendResponse.Message)
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        clearForm('@(Model.SendResponse.IsError ? "False" : "True")');
+                    </script>
+                }
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserName, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("BIP.Placeholder.UserName") })
+                                @Html.ValidationMessageFor(q => q.UserName, Umbraco.GetDictionaryValue("BIP.Placeholder.UserName.Error"))
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserAddress, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("BIP.Placeholder.UserAddress") })
+                                @Html.ValidationMessageFor(q => q.UserAddress, Umbraco.GetDictionaryValue("BIP.Placeholder.UserAddress.Error"))
+                            </div>
+                            <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                                @Html.TextBoxFor(q => q.UserEmail, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("BIP.Placeholder.UserEmail") })
+                                @Html.ValidationMessageFor(q => q.UserEmail, Umbraco.GetDictionaryValue("BIP.Placeholder.UserEmail.Error"))
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hpm-bip__form__element col-sm-12 col-md-4">
+
+                        @Html.TextBoxFor(q => q.UserPhone, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("BIP.Placeholder.UserPhone") })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="hpm-bip__form__element col-sm-12">
+
+                        @Html.TextAreaFor(q => q.UserDescription, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("BIP.Placeholder.UserDescription") })
+                        @Html.ValidationMessageFor(q => q.UserDescription, Umbraco.GetDictionaryValue("BIP.Placeholder.UserDescription.Error"))
+                    </div>
+                </div>
+                <div class="hpm-bip__form__element row">
+                    <div class="hpm-bip__form__element__title col-sm-12">
+                        <p>@Umbraco.GetDictionaryValue("BIP.Placeholder.SharingInformation")</p>
+                    </div>
+                    <div class="hpm-bip__form__element__radio col-sm-12">
+                        @Html.RadioButtonFor(q => q.SharingInformationType, BIPSharingInformationTypeEnum.WithAccesAtTheOffice, new { id = string.Format("radio-sharinginformationtype-{0}", BIPSharingInformationTypeEnum.WithAccesAtTheOffice) })
+                        <label for="@string.Format("radio-sharinginformationtype-{0}", BIPSharingInformationTypeEnum.WithAccesAtTheOffice)">@Html.Raw(Umbraco.GetDictionaryValue(string.Format("BIP.Placeholder.SharingInformation.{0}", BIPSharingInformationTypeEnum.WithAccesAtTheOffice)))</label>
+                        <div class="check"></div>
+                    </div>
+                    <div class="hpm-bip__form__element__radio col-sm-12">
+                        @Html.RadioButtonFor(q => q.SharingInformationType, BIPSharingInformationTypeEnum.WithCopying, new { id = string.Format("radio-sharinginformationtype-{0}", BIPSharingInformationTypeEnum.WithCopying) })
+                        <label for="@string.Format("radio-sharinginformationtype-{0}", BIPSharingInformationTypeEnum.WithCopying)">@Html.Raw(Umbraco.GetDictionaryValue(string.Format("BIP.Placeholder.SharingInformation.{0}", BIPSharingInformationTypeEnum.WithCopying)))</label>
+                        <div class="check"></div>
+                    </div>
+                    <div class="hpm-bip__form__element__radio col-sm-12">
+                        @Html.RadioButtonFor(q => q.SharingInformationType, BIPSharingInformationTypeEnum.WithComputerFiles, new { id = string.Format("radio-sharinginformationtype-{0}", BIPSharingInformationTypeEnum.WithComputerFiles) })
+                        <label for="@string.Format("radio-sharinginformationtype-{0}", BIPSharingInformationTypeEnum.WithComputerFiles)">@Html.Raw(Umbraco.GetDictionaryValue(string.Format("BIP.Placeholder.SharingInformation.{0}", BIPSharingInformationTypeEnum.WithComputerFiles)))</label>
+                        <div class="check"></div>
+                    </div>
+                    <div class="col-sm-12">
+                        @Html.ValidationMessageFor(q => q.SharingInformationType, Umbraco.GetDictionaryValue("BIP.Placeholder.SharingInformation.Error"))
+                    </div>
+                </div>
+                <div class="hpm-bip__form__element row">
+                    <div class="hpm-bip__form__element__title col-sm-12">
+                        <p>@Umbraco.GetDictionaryValue("BIP.Placeholder.MediaType")</p>
+                    </div>
+                    <div class="hpm-bip__form__element__radio col-sm-12">
+                        @Html.RadioButtonFor(q => q.MediaType, "CD-ROM", new { id = "radio-mediatype-CD-ROM" })
+                        <label for="radio-mediatype-CD-ROM">@Html.Raw(Umbraco.GetDictionaryValue("BIP.Placeholder.MediaType.CD-ROM"))</label>
+                        <div class="check"></div>
+                    </div>
+                </div>
+                <div class="hpm-bip__form__element row">
+                    <div class="hpm-bip__form__element__title  col-sm-12">
+                        <p>@Umbraco.GetDictionaryValue("BIP.Placeholder.ProcessingOfPersonalData")</p>
+                    </div>
+                    <div class="hpm-bip__form__element__checkbox col-sm-12">
+                        @Html.CheckBoxFor(q => q.AcceptProcessingPersonalData)
+                        @Html.LabelFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("BIP.Placeholder.ProcessingOfPersonalData.Text"))
+                        @Html.ValidationMessageFor(q => q.AcceptProcessingPersonalData, Umbraco.GetDictionaryValue("BIP.Placeholder.ProcessingOfPersonalData.Error"))
+                        <div class="check"></div>
+                    </div>
+                </div>
+                <div class="hpm-bip__form__element row">
+                    <div class="col-sm-12">
+                        @Html.Recaptcha()
+                        @Html.ValidationMessage("ReCaptcha", Umbraco.GetDictionaryValue("BIP.Placeholder.Captcha.Error"))
+                    </div>
+                </div>
+                <div class="hpm-bip__form__element row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="hpm-bip__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                            <input type="submit" class="btn center-block hpm-list--loadmore  full-btn" value="@Umbraco.GetDictionaryValue("BIP.Button.Submit")" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

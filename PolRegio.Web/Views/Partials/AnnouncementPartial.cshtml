@@ -1,0 +1,48 @@
+﻿@using PolRegio.Helpers.Extensions
+@inherits UmbracoViewPage<PolRegio.Domain.Models.View.AdvertisingOfSalesModel.AnnouncementOfTheSaleViewModel>
+
+<article>
+    <div class="col-xs-12">
+        <section class="hpm-single-article-title">
+            <h1>
+                @Model.NameOfProceedings
+            </h1>
+            @* <p class="hpm-single-article-date">@Model.CreateDate.ToString("dd.MM.yyyy")</b></p> *@
+        </section>
+        <section class="hpm-single-article-details">
+            <p><b>@Umbraco.GetDictionaryValue("Advertising.Placeholder.Number")</b><span>@Model.NumberOfProceedings</span></p>
+            <p><b>@Umbraco.GetDictionaryValue("Advertising.Placeholder.Name")</b><span>@Model.NameOfProceedings</span></p>
+            <p><b>@Umbraco.GetDictionaryValue("Advertising.Placeholder.Seller")</b><span>@Model.AdministrativeKey</span></p>
+            <p><b>@Umbraco.GetDictionaryValue("Advertising.Placeholder.InitiationOfProceedingsDate")</b><span>@Model.InitiationOfProceedingsDate.ToString("yyyy-MM-dd")</span></p>
+            <p><b>@Umbraco.GetDictionaryValue("Advertising.Placeholder.DateLimitForReceipt")</b><span>@Model.DateLimitForReceipt.ToString("yyyy-MM-dd")</span></p>
+            <p><b>@Umbraco.GetDictionaryValue("Advertising.Placeholder.Status")</b><span>@Umbraco.GetDictionaryValue(Model.StatusKey)</span></p>
+        </section>
+        @if (!string.IsNullOrEmpty(Model.AnnouncementText.ToString()))
+            {
+            <section class="hpm-single-article-content">
+                @Model.AnnouncementText
+            </section>
+        }
+
+
+    </div>
+</article>
+@if (Model.DownloadDocuments != null && Model.DownloadDocuments.Count() > 0)
+            {
+            <section class="hpm-single-article-download-file">
+                <div>@Umbraco.GetDictionaryValue("Section.Advertising.Download")</div>
+                @foreach (var item in Model.DownloadDocuments)
+                {
+                    <div class="hpm-single-article-download-file-singleel">
+                        <div class="hpm-single-article-download-file-info">
+                            <a href="@Umbraco.TypedMedia(item.DocumentUrl).Url" target="_blank" title="@item.DocumentName" class="hpm-single-article-download-file-title">@item.DocumentName</a>
+                            <p class="hpm-single-article-download-file-createdate">@(Umbraco.GetDictionaryValue("Advertising.Placeholder.AddDate") + String.Format(" {0:dd.MM.yyyy}", item.DocumentDate))</p>
+                        </div>
+                        <a href="@Umbraco.TypedMedia(item.DocumentUrl).Url" download="@item.DocumentName.ToSafeFilenameString(allowDot:false)" title="Pobierz plik"><img src="/images/articles/global/icon-download.png" alt="Ikonka i dla artykułów informacyjnych" /></a>
+                    </div>
+                }
+
+            </section>
+        }
+        <a class="hpm-button-view-all center-block text-center" href="@Model.ParentUrl" title="">@Umbraco.GetDictionaryValue("Announcement.Link.SeeAll")<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+

@@ -1,0 +1,80 @@
+﻿@inherits UmbracoViewPage<PolRegio.Domain.Models.View.Account.LoginFormViewModel>
+
+<script id="Response" type="application/json">
+    @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Response))
+</script>
+
+@using (Ajax.BeginForm("SubmitLoginForm", "PolRegioAccount", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "hpm-section-bipform-container",
+    OnBegin = "loaderShow();",
+    OnComplete = "loaderHide();bipFormScroll();showpassword();launchsocial()",
+    OnSuccess="registerfinished(data, status, xhr)"
+}, new { id = "boxesForm" }))
+{
+    @Html.HiddenFor(q => q.CurrentPageCulture)
+    @Html.HiddenFor(q => q.CurrentUmbracoPageId)
+    @Html.AntiForgeryToken()
+    <div class="hpm-reg__form row">
+        <div class="col-xs-12">
+            <div class="bg-white">
+                @if (Model.Response != null && Model.Response.IsError)
+                {
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="alert alert-warning" alert-dismissible fade in" rol role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                @Html.Raw(Model.Response.Message)
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        clearForm('@(Model.Response.IsError ? "False" : "True")', true);
+                    </script>
+                }
+                <div class="row">
+                    <div class="col-sm-12">    
+                        <div class="row">
+                            <div class="hpm-reg__form__element col-xs-12 col-sm-4">
+                                <h2>@Umbraco.GetDictionaryValue("Login.Placeholder.Email")</h2>
+                                @Html.TextBoxFor(q => q.UserEmail, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Login.Placeholder.Email") })
+                                @Html.ValidationMessageFor(q => q.UserEmail, Umbraco.GetDictionaryValue("Login.Placeholder.Email.Error"))
+                            </div>
+                            <div class="hpm-reg__form__element col-xs-12 col-sm-4">
+
+                                <h2>@Umbraco.GetDictionaryValue("Login.Placeholder.Password")</h2>
+                                <div class="UserPassword">@Html.PasswordFor(q => q.UserPassword, new { @class = "form-control ", placeholder = Umbraco.GetDictionaryValue("Login.Placeholder.Password") })<div id="showpassword"></div></div>
+                                @Html.ValidationMessageFor(q => q.UserPassword, Umbraco.GetDictionaryValue("Login.Placeholder.Password.Error"))
+                            </div>
+                            <div class="hpm-reg__form__element col-xs-12 col-sm-4">
+                                <h2> &nbsp;</h2>
+                                <div class="hpm-reg__form__element__btn  rowhpm-js-load-more hpm-list--loadmore">
+                                    <input type="submit" class="btn center-block hpm-list--loadmore  full-btn" value="@Umbraco.GetDictionaryValue("Login.Placeholder.Button.Submit")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div ><div class="loginrow"></div></div>
+                        <div class="row">
+                            <div class="hpm-reg__form__element col-xs-6 col-sm-4">
+                                <div class="hpm-reg__form__element__btn  rowhpm-js-load-more">
+                                    <button  class="facebook-login fb btn center-block  full-btn"  >@Umbraco.GetDictionaryValue("Login.Placeholder.Button.Facebook")</button>
+                                </div>
+                            </div>
+                            <div class="hpm-reg__form__element col-xs-6  col-sm-4">
+
+                                <div class="hpm-reg__form__element__btn  rowhpm-js-load-more">
+                                     <div  data-onsuccess="onSignIn" id="gplus" class="gplus btn center-block full-btn"  >@Umbraco.GetDictionaryValue("Login.Placeholder.Button.Google")</div>
+                                </div>
+                            </div>
+                            <div class="hpm-reg__form__element col-xs-12 col-sm-4">
+                                <h4><a href="/pl/konto/przypomnienie-hasla">@Umbraco.GetDictionaryValue("Login.Placeholder.Forgot")</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+}
